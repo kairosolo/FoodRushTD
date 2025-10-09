@@ -400,8 +400,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 115.5
-  m_fontSizeBase: 115.5
+  m_fontSize: 120
+  m_fontSizeBase: 120
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1023,6 +1023,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4054594973150492439}
     m_Modifications:
+    - target: {fileID: 336564746955667810, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 336564746955667810, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 336564746955667810, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3007407809595806313}
+    - target: {fileID: 336564746955667810, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 336564746955667810, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseSettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 336564746955667810, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 336564746955667810, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 625877457403863750, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

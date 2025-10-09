@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b461031bc52fb2f48bb35a4debf8717d, type: 3}
+  m_Name: SD_FryingStation
+  m_EditorClassIdentifier: Assembly-CSharp::StationData
+  stationName: Frying Station
+  placementCost: 100
+  stationPrefab: {fileID: 2922440456857387492, guid: 809084021de77464da71b5d9f9a1e5d9, type: 3}
+  availableProducts:
+  - {fileID: 11400000, guid: c2ce3a7495a19fd4295a6effdbd36024, type: 2}

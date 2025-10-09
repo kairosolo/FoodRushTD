@@ -70,7 +70,6 @@ public class AudioManagerEditor : Editor
         }
 
         EditorGUILayout.LabelField("Audio Mixers", EditorStyles.boldLabel);
-        // This is where the new master mixer field would be drawn if added to the editor script.
         EditorGUILayout.PropertyField(musicMixerProp);
         EditorGUILayout.PropertyField(sfxMixerProp);
 
