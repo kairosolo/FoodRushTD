@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="kplayerprefs">KPlayerPrefs</h1>
+<p><strong>A powerful, encrypted, multi-profile replacement for Unity's PlayerPrefs</strong></p>
+<h2 id="%E2%9C%A8-features">✨ Features</h2>
+<ul>
+<li>🎭 <strong>Multiple Profiles</strong> - Create unlimited player profiles with isolated data</li>
+<li>🔒 <strong>Automatic Encryption</strong> - AES-256 encryption protects your data</li>
+<li>🔑 <strong>Password Management</strong> - Secure password editing through the editor</li>
+<li>🎨 <strong>Advanced Data Types</strong> - Vector2/3, Color, DateTime support</li>
+<li>🛠️ <strong>Professional Editor</strong> - Comprehensive editor window for data management</li>
+<li>📦 <strong>Import/Export</strong> - Easy data backup and migration</li>
+<li>⚡ <strong>Drop-in Replacement</strong> - Same familiar API as PlayerPrefs</li>
+<li>📊 <strong>Performance Analytics</strong> - Built-in monitoring and optimization</li>
+</ul>
+<h2 id="%F0%9F%9A%80-quick-start">🚀 Quick Start</h2>
+<h3 id="1-install-kplayerprefs">1. Install KPlayerPrefs</h3>
+<p>Import the package into your Unity project.</p>
+<h3 id="2-replace-playerprefs-calls">2. Replace PlayerPrefs calls</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Add using statement</span>
+<span class="hljs-keyword">using</span> KairosoloSystems;
+
+<span class="hljs-comment">// OLD - Unity PlayerPrefs</span>
+PlayerPrefs.SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">5</span>);
+<span class="hljs-keyword">int</span> level = PlayerPrefs.GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);
+
+<span class="hljs-comment">// NEW - KPlayerPrefs Global Data</span>
+KPlayerPrefs.SetInt(<span class="hljs-string">"MasterVolume"</span>, <span class="hljs-number">80</span>);  <span class="hljs-comment">// Settings shared by all players</span>
+
+<span class="hljs-comment">// NEW - KPlayerPrefs Profile Data  </span>
+KPlayerPrefs.Profiles.SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">5</span>);  <span class="hljs-comment">// Player-specific progress</span>
+<span class="hljs-keyword">int</span> level = KPlayerPrefs.Profiles.GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);
+</div></code></pre>
+<h3 id="3-create-player-profiles">3. Create player profiles</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Create and switch to a profile</span>
+KPlayerPrefs.Profiles.Create(<span class="hljs-string">"Player1"</span>);
+KPlayerPrefs.Profiles.SetActive(<span class="hljs-string">"Player1"</span>);
+
+<span class="hljs-comment">// Save player data</span>
+KPlayerPrefs.Profiles.SetString(<span class="hljs-string">"PlayerName"</span>, <span class="hljs-string">"Hero"</span>);
+KPlayerPrefs.Profiles.SetVector3(<span class="hljs-string">"LastPosition"</span>, transform.position);
+KPlayerPrefs.Profiles.SetDateTime(<span class="hljs-string">"LastPlayed"</span>, System.DateTime.Now);
+</div></code></pre>
+<h2 id="%F0%9F%8E%AE-complete-example">🎮 Complete Example</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">using</span> UnityEngine;
+<span class="hljs-keyword">using</span> KairosoloSystems;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">GameManager</span> : <span class="hljs-title">MonoBehaviour</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// Global settings (shared across all profiles)</span>
+        KPlayerPrefs.SetFloat(<span class="hljs-string">"MasterVolume"</span>, <span class="hljs-number">0.8f</span>);
+        KPlayerPrefs.SetString(<span class="hljs-string">"Language"</span>, <span class="hljs-string">"English"</span>);
+        
+        <span class="hljs-comment">// Create player profile</span>
+        <span class="hljs-keyword">if</span> (!KPlayerPrefs.Profiles.Exists(<span class="hljs-string">"MainPlayer"</span>))
+        {
+            KPlayerPrefs.Profiles.Create(<span class="hljs-string">"MainPlayer"</span>);
+            KPlayerPrefs.Profiles.SetActive(<span class="hljs-string">"MainPlayer"</span>);
+            
+            <span class="hljs-comment">// Initial player data</span>
+            KPlayerPrefs.Profiles.SetString(<span class="hljs-string">"PlayerName"</span>, <span class="hljs-string">"New Player"</span>);
+            KPlayerPrefs.Profiles.SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);
+            KPlayerPrefs.Profiles.SetColor(<span class="hljs-string">"PlayerColor"</span>, Color.white);
+        }
+        
+        <span class="hljs-comment">// Load player progress</span>
+        <span class="hljs-keyword">string</span> name = KPlayerPrefs.Profiles.GetString(<span class="hljs-string">"PlayerName"</span>, <span class="hljs-string">"Unknown"</span>);
+        <span class="hljs-keyword">int</span> level = KPlayerPrefs.Profiles.GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);
+        
+        Debug.Log(<span class="hljs-string">$"Welcome back, <span class="hljs-subst">{name}</span>! You're level <span class="hljs-subst">{level}</span>"</span>);
+    }
+}
+</div></code></pre>
+<h2 id="%F0%9F%93%9A-documentation">📚 Documentation</h2>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><a href="Quick-Start-Guide.html">📖 Quick Start Guide</a></strong></td>
+<td>5-minute beginner-friendly introduction</td>
+</tr>
+<tr>
+<td><strong><a href="API-Reference.html">📋 API Reference</a></strong></td>
+<td>Complete method reference</td>
+</tr>
+<tr>
+<td><strong><a href="Migration-From-PlayerPrefs.html">🔄 Migration Guide</a></strong></td>
+<td>Step-by-step migration from PlayerPrefs</td>
+</tr>
+<tr>
+<td><strong><a href="Documentation.html">📘 Documentation</a></strong></td>
+<td>Advanced features and comprehensive examples</td>
+</tr>
+</tbody>
+</table>
+<h2 id="%F0%9F%8C%9F-key-advantages">🌟 Key Advantages</h2>
+<h3 id="vs-unity-playerprefs">vs Unity PlayerPrefs</h3>
+<table>
+<thead>
+<tr>
+<th>Unity PlayerPrefs</th>
+<th>KPlayerPrefs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>❌ Single data store</td>
+<td>✅ Multiple profiles</td>
+</tr>
+<tr>
+<td>❌ No encryption</td>
+<td>✅ AES-256 encryption</td>
+</tr>
+<tr>
+<td>❌ Basic types only</td>
+<td>✅ Vector3, Color, DateTime</td>
+</tr>
+<tr>
+<td>❌ No editor tools</td>
+<td>✅ Professional editor window</td>
+</tr>
+<tr>
+<td>❌ No backup/restore</td>
+<td>✅ Import/export functionality</td>
+</tr>
+</tbody>
+</table>
+<h3 id="advanced-data-types">Advanced Data Types</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Vectors for positions and coordinates</span>
+KPlayerPrefs.SetVector2(<span class="hljs-string">"ScreenResolution"</span>, <span class="hljs-keyword">new</span> Vector2(<span class="hljs-number">1920</span>, <span class="hljs-number">1080</span>));
+KPlayerPrefs.Profiles.SetVector3(<span class="hljs-string">"PlayerPosition"</span>, transform.position);
+
+<span class="hljs-comment">// Colors for customization</span>
+KPlayerPrefs.Profiles.SetColor(<span class="hljs-string">"PlayerColor"</span>, Color.red);
+
+<span class="hljs-comment">// DateTime for time tracking</span>
+KPlayerPrefs.Profiles.SetDateTime(<span class="hljs-string">"LastPlayed"</span>, System.DateTime.Now);
+</div></code></pre>
+<h3 id="multiple-profiles">Multiple Profiles</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Create different save slots</span>
+KPlayerPrefs.Profiles.Create(<span class="hljs-string">"SaveSlot1"</span>);
+KPlayerPrefs.Profiles.Create(<span class="hljs-string">"SaveSlot2"</span>);
+
+<span class="hljs-comment">// Direct access without switching active profile</span>
+KPlayerPrefs.Profiles.Profile(<span class="hljs-string">"SaveSlot1"</span>).SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">10</span>);
+KPlayerPrefs.Profiles.Profile(<span class="hljs-string">"SaveSlot2"</span>).SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">5</span>);
+</div></code></pre>
+<h2 id="%F0%9F%9B%A0%EF%B8%8F-editor-tools">🛠️ Editor Tools</h2>
+<p>Open <strong>Tools → Kairosolo → KPlayerPrefs Editor</strong> for:</p>
+<ul>
+<li>👀 <strong>Live Data Viewing</strong> - See all your data in real-time</li>
+<li>✏️ <strong>Direct Editing</strong> - Modify values without code</li>
+<li>👥 <strong>Profile Management</strong> - Create, delete, and switch profiles</li>
+<li>🔑 <strong>Password Management</strong> - Secure password editing and data protection</li>
+<li>📊 <strong>Performance Monitoring</strong> - Track save/load performance</li>
+<li>💾 <strong>Import/Export</strong> - Backup and restore data</li>
+</ul>
+<h2 id="%F0%9F%94%90-security">🔐 Security</h2>
+<p>All data is automatically encrypted using:</p>
+<ul>
+<li><strong>AES-256</strong> encryption in CBC mode</li>
+<li><strong>PBKDF2</strong> key derivation with 10,000 iterations</li>
+<li><strong>Customizable password</strong> protection through the editor</li>
+<li><strong>Secure file storage</strong> in platform-appropriate locations</li>
+</ul>
+<p>Change your encryption password safely through the editor - when changing passwords, all existing data is securely cleared to maintain integrity.</p>
+<h2 id="%F0%9F%8E%AF-use-cases">🎯 Use Cases</h2>
+<h3 id="game-settings">Game Settings</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Graphics and audio settings (global)</span>
+KPlayerPrefs.SetFloat(<span class="hljs-string">"MasterVolume"</span>, <span class="hljs-number">0.8f</span>);
+KPlayerPrefs.SetInt(<span class="hljs-string">"QualityLevel"</span>, <span class="hljs-number">2</span>);
+KPlayerPrefs.SetBool(<span class="hljs-string">"Fullscreen"</span>, <span class="hljs-literal">true</span>);
+</div></code></pre>
+<h3 id="player-progress">Player Progress</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Character data (per profile)</span>
+KPlayerPrefs.Profiles.SetString(<span class="hljs-string">"CharacterName"</span>, <span class="hljs-string">"Hero"</span>);
+KPlayerPrefs.Profiles.SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">25</span>);
+KPlayerPrefs.Profiles.SetFloat(<span class="hljs-string">"Experience"</span>, <span class="hljs-number">15750f</span>);
+KPlayerPrefs.Profiles.SetVector3(<span class="hljs-string">"LastPosition"</span>, checkpointPosition);
+</div></code></pre>
+<h3 id="save-game-system">Save Game System</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Multiple save slots</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">3</span>; i++)
+{
+    <span class="hljs-keyword">if</span> (KPlayerPrefs.Profiles.Exists(<span class="hljs-string">$"SaveSlot<span class="hljs-subst">{i}</span>"</span>))
+    {
+        <span class="hljs-keyword">var</span> level = KPlayerPrefs.Profiles.Profile(<span class="hljs-string">$"SaveSlot<span class="hljs-subst">{i}</span>"</span>).GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);
+        <span class="hljs-keyword">var</span> name = KPlayerPrefs.Profiles.Profile(<span class="hljs-string">$"SaveSlot<span class="hljs-subst">{i}</span>"</span>).GetString(<span class="hljs-string">"PlayerName"</span>, <span class="hljs-string">"Empty"</span>);
+        Debug.Log(<span class="hljs-string">$"Slot <span class="hljs-subst">{i}</span>: <span class="hljs-subst">{name}</span> - Level <span class="hljs-subst">{level}</span>"</span>);
+    }
+}
+</div></code></pre>
+<h2 id="%F0%9F%92%A1-best-practices">💡 Best Practices</h2>
+<ul>
+<li>✅ Use <strong>Global Data</strong> for settings and preferences</li>
+<li>✅ Use <strong>Profile Data</strong> for player progress and game state</li>
+<li>✅ Create profiles before using profile-specific methods</li>
+<li>✅ Always provide sensible default values</li>
+<li>✅ Use direct profile access for bulk operations</li>
+<li>✅ Change passwords through the editor for security</li>
+</ul>
+<h2 id="%F0%9F%86%98-support">🆘 Support</h2>
+<ul>
+<li>📧 <strong>Email</strong>: kairosolo.124329@gmail.com</li>
+</ul>
+<h2 id="%F0%9F%93%84-license">📄 License</h2>
+<p>This software is provided under a commercial license agreement. You may use KPlayerPrefs in unlimited projects and modify the source code for your own use, but may not redistribute or resell the asset. See the <a href="LICENSE.html">LICENSE</a> file for complete licensing terms.</p>
+<hr>
+<p><strong>Created by <a href="https://kairosolo.com">Kairosolo</a></strong><br>
+<em>Making Unity development easier, one tool at a time.</em></p>
+
+</body>
+</html>

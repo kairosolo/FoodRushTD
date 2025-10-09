@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Documentation.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="kplayerprefs---documentation">KPlayerPrefs - Documentation</h1>
+<p>Comprehensive documentation for the advanced multi-profile PlayerPrefs system.</p>
+<blockquote>
+<p><strong>New to KPlayerPrefs?</strong> Start with the <a href="Quick-Start-Guide.html">Quick Start Guide</a> for a 5-minute introduction.</p>
+</blockquote>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#advanced-features">Advanced Features</a></li>
+<li><a href="#editor-tools">Editor Tools</a></li>
+<li><a href="#security--encryption">Security &amp; Encryption</a></li>
+<li><a href="#performance--analytics">Performance &amp; Analytics</a></li>
+<li><a href="#best-practices">Best Practices</a></li>
+<li><a href="#complete-examples">Complete Examples</a></li>
+</ul>
+<hr>
+<p><em>For basic usage and getting started, see <a href="Quick-Start-Guide.html">Quick Start Guide</a></em><br>
+<em>For method signatures, see <a href="API-Reference.html">API Reference</a></em><br>
+<em>For migrating from Unity PlayerPrefs, see <a href="Migration-From-PlayerPrefs.html">Migration Guide</a></em></p>
+<h2 id="advanced-features">Advanced Features</h2>
+<h3 id="direct-profile-access">Direct Profile Access</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Access specific profiles without switching the active profile</span>
+KPlayerPrefs.Profiles.Profile(<span class="hljs-string">"Player1"</span>).SetString(<span class="hljs-string">"PlayerName"</span>, <span class="hljs-string">"Hero"</span>);
+KPlayerPrefs.Profiles.Profile(<span class="hljs-string">"Player2"</span>).SetString(<span class="hljs-string">"PlayerName"</span>, <span class="hljs-string">"Villain"</span>);
+<span class="hljs-keyword">int</span> player1Level = KPlayerPrefs.Profiles.Profile(<span class="hljs-string">"Player1"</span>).GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);
+<span class="hljs-keyword">int</span> player2Level = KPlayerPrefs.Profiles.Profile(<span class="hljs-string">"Player2"</span>).GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);
+
+<span class="hljs-comment">// Active profile remains unchanged</span>
+Debug.Log(KPlayerPrefs.Profiles.ActiveProfile); <span class="hljs-comment">// Still whatever it was before</span>
+
+<span class="hljs-comment">// Useful for comparing profiles or bulk operations</span>
+<span class="hljs-keyword">string</span>[] allProfiles = KPlayerPrefs.Profiles.GetAll();
+<span class="hljs-keyword">foreach</span>(<span class="hljs-keyword">string</span> profileName <span class="hljs-keyword">in</span> allProfiles)
+{
+    <span class="hljs-keyword">var</span> level = KPlayerPrefs.Profiles.Profile(profileName).GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">var</span> lastPlayed = KPlayerPrefs.Profiles.Profile(profileName).GetDateTime(<span class="hljs-string">"LastPlayed"</span>, DateTime.MinValue);
+    Debug.Log(<span class="hljs-string">$"<span class="hljs-subst">{profileName}</span>: Level <span class="hljs-subst">{level}</span>, Last played <span class="hljs-subst">{(DateTime.Now - lastPlayed).Days}</span> days ago"</span>);
+}
+
+<span class="hljs-comment">// Mixed usage patterns</span>
+KPlayerPrefs.Profiles.SetActive(<span class="hljs-string">"MainPlayer"</span>);                    <span class="hljs-comment">// Set active for main gameplay</span>
+KPlayerPrefs.Profiles.SetInt(<span class="hljs-string">"CurrentHP"</span>, <span class="hljs-number">100</span>);                   <span class="hljs-comment">// Uses active profile</span>
+KPlayerPrefs.Profiles.Profile(<span class="hljs-string">"Player2"</span>).SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">15</span>);     <span class="hljs-comment">// Direct access to other profile</span>
+KPlayerPrefs.Profiles.Profile(<span class="hljs-string">"Player3"</span>).SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">30</span>);     <span class="hljs-comment">// Direct access to another profile</span>
+<span class="hljs-comment">// Active profile is still "MainPlayer"</span>
+</div></code></pre>
+<p>KPlayerPrefs is a drop-in replacement! Simply change your calls:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// OLD - Unity PlayerPrefs</span>
+PlayerPrefs.SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">5</span>);
+<span class="hljs-keyword">int</span> level = PlayerPrefs.GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);
+
+<span class="hljs-comment">// NEW - KPlayerPrefs (Global Data)</span>
+KPlayerPrefs.SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">5</span>);
+<span class="hljs-keyword">int</span> level = KPlayerPrefs.GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);
+
+<span class="hljs-comment">// NEW - KPlayerPrefs (Profile Data)</span>
+KPlayerPrefs.Profiles.SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">5</span>);
+<span class="hljs-keyword">int</span> level = KPlayerPrefs.Profiles.GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);
+</div></code></pre>
+<h2 id="global-data-api">Global Data API</h2>
+<p>Global data is shared across all profiles - perfect for settings and preferences.</p>
+<h3 id="basic-types">Basic Types</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Integers</span>
+KPlayerPrefs.SetInt(<span class="hljs-string">"GraphicsQuality"</span>, <span class="hljs-number">2</span>);
+<span class="hljs-keyword">int</span> quality = KPlayerPrefs.GetInt(<span class="hljs-string">"GraphicsQuality"</span>, <span class="hljs-number">1</span>);
+
+<span class="hljs-comment">// Floats</span>
+KPlayerPrefs.SetFloat(<span class="hljs-string">"MasterVolume"</span>, <span class="hljs-number">0.8f</span>);
+<span class="hljs-keyword">float</span> volume = KPlayerPrefs.GetFloat(<span class="hljs-string">"MasterVolume"</span>, <span class="hljs-number">1.0f</span>);
+
+<span class="hljs-comment">// Strings</span>
+KPlayerPrefs.SetString(<span class="hljs-string">"PlayerLanguage"</span>, <span class="hljs-string">"English"</span>);
+<span class="hljs-keyword">string</span> language = KPlayerPrefs.GetString(<span class="hljs-string">"PlayerLanguage"</span>, <span class="hljs-string">"English"</span>);
+
+<span class="hljs-comment">// Booleans</span>
+KPlayerPrefs.SetBool(<span class="hljs-string">"FullscreenMode"</span>, <span class="hljs-literal">true</span>);
+<span class="hljs-keyword">bool</span> fullscreen = KPlayerPrefs.GetBool(<span class="hljs-string">"FullscreenMode"</span>, <span class="hljs-literal">false</span>);
+</div></code></pre>
+<h3 id="advanced-types">Advanced Types</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Vector2 - Perfect for screen coordinates, 2D positions</span>
+Vector2 screenPos = <span class="hljs-keyword">new</span> Vector2(Input.mousePosition.x, Input.mousePosition.y);
+KPlayerPrefs.SetVector2(<span class="hljs-string">"LastMousePosition"</span>, screenPos);
+Vector2 savedPos = KPlayerPrefs.GetVector2(<span class="hljs-string">"LastMousePosition"</span>, Vector2.zero);
+
+<span class="hljs-comment">// Vector3 - For 3D positions, rotations, scales</span>
+KPlayerPrefs.Profiles.SetVector3(<span class="hljs-string">"PlayerPosition"</span>, transform.position);
+KPlayerPrefs.Profiles.SetVector3(<span class="hljs-string">"CameraRotation"</span>, Camera.main.transform.eulerAngles);
+Vector3 lastPos = KPlayerPrefs.Profiles.GetVector3(<span class="hljs-string">"PlayerPosition"</span>, Vector3.zero);
+</div></code></pre>
+<h3 id="utility-methods">Utility Methods</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Check if key exists</span>
+<span class="hljs-keyword">if</span> (KPlayerPrefs.HasKey(<span class="hljs-string">"MasterVolume"</span>))
+{
+    <span class="hljs-comment">// Key exists</span>
+}
+
+<span class="hljs-comment">// Delete a key</span>
+KPlayerPrefs.DeleteKey(<span class="hljs-string">"OldSetting"</span>);
+
+<span class="hljs-comment">// Get all keys</span>
+<span class="hljs-keyword">string</span>[] allKeys = KPlayerPrefs.GetAllKeys();
+
+<span class="hljs-comment">// Get all data</span>
+Dictionary&lt;<span class="hljs-keyword">string</span>, <span class="hljs-keyword">object</span>&gt; allData = KPlayerPrefs.GetAllData();
+
+<span class="hljs-comment">// Clear all global data</span>
+KPlayerPrefs.DeleteAll();
+</div></code></pre>
+<h2 id="profile-system">Profile System</h2>
+<p>Profiles allow you to store separate data for different players or save slots.</p>
+<h3 id="profile-management">Profile Management</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Create new profile</span>
+<span class="hljs-keyword">bool</span> success = KPlayerPrefs.Profiles.Create(<span class="hljs-string">"Player1"</span>);
+
+<span class="hljs-comment">// Check if profile exists</span>
+<span class="hljs-keyword">bool</span> exists = KPlayerPrefs.Profiles.Exists(<span class="hljs-string">"Player1"</span>);
+
+<span class="hljs-comment">// Set active profile</span>
+KPlayerPrefs.Profiles.SetActive(<span class="hljs-string">"Player1"</span>);
+
+<span class="hljs-comment">// Get active profile name</span>
+<span class="hljs-keyword">string</span> activeProfile = KPlayerPrefs.Profiles.ActiveProfile;
+
+<span class="hljs-comment">// Get all profiles</span>
+<span class="hljs-keyword">string</span>[] allProfiles = KPlayerPrefs.Profiles.GetAll();
+
+<span class="hljs-comment">// Delete profile (cannot delete "Default")</span>
+KPlayerPrefs.Profiles.Delete(<span class="hljs-string">"Player1"</span>);
+
+<span class="hljs-comment">// Copy profile</span>
+KPlayerPrefs.Profiles.Copy(<span class="hljs-string">"Player1"</span>, <span class="hljs-string">"Player1_Backup"</span>);
+
+<span class="hljs-comment">// Rename profile</span>
+KPlayerPrefs.Profiles.Rename(<span class="hljs-string">"OldName"</span>, <span class="hljs-string">"NewName"</span>);
+</div></code></pre>
+<h3 id="profile-data-api">Profile Data API</h3>
+<p>The profile data API mirrors the global API but operates on the active profile:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Basic types (same as global API)</span>
+KPlayerPrefs.Profiles.SetString(<span class="hljs-string">"PlayerName"</span>, <span class="hljs-string">"Hero"</span>);
+KPlayerPrefs.Profiles.SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">25</span>);
+KPlayerPrefs.Profiles.SetFloat(<span class="hljs-string">"Health"</span>, <span class="hljs-number">100f</span>);
+KPlayerPrefs.Profiles.SetBool(<span class="hljs-string">"TutorialComplete"</span>, <span class="hljs-literal">true</span>);
+
+<span class="hljs-comment">// Advanced types</span>
+KPlayerPrefs.Profiles.SetVector3(<span class="hljs-string">"LastPosition"</span>, transform.position);
+KPlayerPrefs.Profiles.SetColor(<span class="hljs-string">"PlayerColor"</span>, Color.red);
+KPlayerPrefs.Profiles.SetDateTime(<span class="hljs-string">"LastPlayed"</span>, DateTime.Now);
+
+<span class="hljs-comment">// Retrieve data</span>
+<span class="hljs-keyword">string</span> name = KPlayerPrefs.Profiles.GetString(<span class="hljs-string">"PlayerName"</span>, <span class="hljs-string">"Unknown"</span>);
+<span class="hljs-keyword">int</span> level = KPlayerPrefs.Profiles.GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);
+Vector3 pos = KPlayerPrefs.Profiles.GetVector3(<span class="hljs-string">"LastPosition"</span>, Vector3.zero);
+</div></code></pre>
+<h3 id="direct-profile-access">Direct Profile Access</h3>
+<p>Access specific profiles without switching the active profile:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Get accessor for specific profile</span>
+<span class="hljs-keyword">var</span> player1Data = KPlayerPrefs.Profiles.GetProfileAccessor(<span class="hljs-string">"Player1"</span>);
+
+<span class="hljs-comment">// Use the accessor</span>
+player1Data.SetString(<span class="hljs-string">"PlayerName"</span>, <span class="hljs-string">"Hero"</span>);
+<span class="hljs-keyword">string</span> name = player1Data.GetString(<span class="hljs-string">"PlayerName"</span>, <span class="hljs-string">"Unknown"</span>);
+
+<span class="hljs-comment">// This doesn't change the active profile</span>
+Debug.Log(KPlayerPrefs.Profiles.ActiveProfile); <span class="hljs-comment">// Still whatever it was before</span>
+</div></code></pre>
+<h3 id="profile-metadata">Profile Metadata</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Set custom metadata</span>
+KPlayerPrefs.Profiles.SetMetadata(<span class="hljs-string">"Player1"</span>, <span class="hljs-string">"Difficulty"</span>, <span class="hljs-string">"Hard"</span>);
+KPlayerPrefs.Profiles.SetMetadata(<span class="hljs-string">"Player1"</span>, <span class="hljs-string">"GameMode"</span>, <span class="hljs-string">"Survival"</span>);
+KPlayerPrefs.Profiles.SetMetadata(<span class="hljs-string">"Player1"</span>, <span class="hljs-string">"Region"</span>, <span class="hljs-string">"US-West"</span>);
+
+<span class="hljs-comment">// Get metadata</span>
+<span class="hljs-keyword">var</span> metadata = KPlayerPrefs.Profiles.GetMetadata(<span class="hljs-string">"Player1"</span>);
+<span class="hljs-keyword">string</span> difficulty = metadata.ContainsKey(<span class="hljs-string">"Difficulty"</span>) ? 
+    metadata[<span class="hljs-string">"Difficulty"</span>].ToString() : <span class="hljs-string">"Normal"</span>;
+
+<span class="hljs-comment">// Batch metadata operations</span>
+<span class="hljs-keyword">var</span> profileMetadata = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-keyword">string</span>, <span class="hljs-keyword">object</span>&gt;
+{
+    [<span class="hljs-meta"><span class="hljs-meta-string">"Character"</span></span>] = <span class="hljs-string">"Warrior"</span>,
+    [<span class="hljs-meta"><span class="hljs-meta-string">"Class"</span></span>] = <span class="hljs-string">"Tank"</span>,
+    [<span class="hljs-meta"><span class="hljs-meta-string">"Specialization"</span></span>] = <span class="hljs-string">"Defense"</span>
+};
+<span class="hljs-keyword">foreach</span>(<span class="hljs-keyword">var</span> kvp <span class="hljs-keyword">in</span> profileMetadata)
+{
+    KPlayerPrefs.Profiles.SetMetadata(<span class="hljs-string">"Player1"</span>, kvp.Key, kvp.Value);
+}
+</div></code></pre>
+<h3 id="batch-operations">Batch Operations</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Delete multiple keys at once</span>
+<span class="hljs-keyword">string</span>[] keysToDelete = { <span class="hljs-string">"TempData1"</span>, <span class="hljs-string">"TempData2"</span>, <span class="hljs-string">"OldSetting"</span> };
+KPlayerPrefs.Profiles.DeleteKeys(keysToDelete);
+
+<span class="hljs-comment">// Clear specific categories of data</span>
+<span class="hljs-keyword">string</span>[] allKeys = KPlayerPrefs.Profiles.GetAllKeys();
+<span class="hljs-keyword">var</span> tempKeys = allKeys.Where(key =&gt; key.StartsWith(<span class="hljs-string">"Temp_"</span>)).ToArray();
+KPlayerPrefs.Profiles.DeleteKeys(tempKeys);
+
+<span class="hljs-comment">// Bulk data operations using GetAllData</span>
+<span class="hljs-keyword">var</span> profileData = KPlayerPrefs.Profiles.GetAllData();
+<span class="hljs-keyword">foreach</span>(<span class="hljs-keyword">var</span> kvp <span class="hljs-keyword">in</span> profileData)
+{
+    <span class="hljs-keyword">if</span> (kvp.Key.StartsWith(<span class="hljs-string">"Score_"</span>))
+    {
+        <span class="hljs-comment">// Process all score-related data</span>
+        Debug.Log(<span class="hljs-string">$"Score data: <span class="hljs-subst">{kvp.Key}</span> = <span class="hljs-subst">{kvp.Value}</span>"</span>);
+    }
+}
+</div></code></pre>
+<h2 id="advanced-data-types">Advanced Data Types</h2>
+<p>KPlayerPrefs supports Unity's common data types out of the box:</p>
+<h3 id="vector-types">Vector Types</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Vector2 - Perfect for screen coordinates, 2D positions</span>
+Vector2 screenPos = <span class="hljs-keyword">new</span> Vector2(Input.mousePosition.x, Input.mousePosition.y);
+KPlayerPrefs.SetVector2(<span class="hljs-string">"LastMousePosition"</span>, screenPos);
+
+<span class="hljs-comment">// Vector3 - For 3D positions, rotations, scales</span>
+KPlayerPrefs.Profiles.SetVector3(<span class="hljs-string">"PlayerPosition"</span>, transform.position);
+KPlayerPrefs.Profiles.SetVector3(<span class="hljs-string">"CameraRotation"</span>, Camera.main.transform.eulerAngles);
+</div></code></pre>
+<h3 id="color-system">Color System</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Store UI colors, player preferences</span>
+Color playerColor = <span class="hljs-keyword">new</span> Color(<span class="hljs-number">0.8f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.1f</span>, <span class="hljs-number">1.0f</span>);
+KPlayerPrefs.Profiles.SetColor(<span class="hljs-string">"PlayerColor"</span>, playerColor);
+
+<span class="hljs-comment">// Apply to renderers</span>
+GetComponent&lt;Renderer&gt;().material.color = 
+    KPlayerPrefs.Profiles.GetColor(<span class="hljs-string">"PlayerColor"</span>, Color.white);
+
+<span class="hljs-comment">// UI theme colors</span>
+KPlayerPrefs.SetColor(<span class="hljs-string">"UIThemeColor"</span>, Color.blue);
+Color theme = KPlayerPrefs.GetColor(<span class="hljs-string">"UIThemeColor"</span>, Color.white);
+</div></code></pre>
+<h3 id="datetime-handling">DateTime Handling</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Track when events occurred</span>
+KPlayerPrefs.SetDateTime(<span class="hljs-string">"GameInstalled"</span>, DateTime.Now);
+KPlayerPrefs.SetDateTime(<span class="hljs-string">"FirstLaunch"</span>, DateTime.Now);
+KPlayerPrefs.Profiles.SetDateTime(<span class="hljs-string">"LastLogin"</span>, DateTime.Now);
+KPlayerPrefs.Profiles.SetDateTime(<span class="hljs-string">"LevelCompleted"</span>, DateTime.Now);
+KPlayerPrefs.Profiles.SetDateTime(<span class="hljs-string">"LastSaved"</span>, DateTime.Now);
+
+<span class="hljs-comment">// Calculate time differences</span>
+DateTime lastPlayed = KPlayerPrefs.Profiles.GetDateTime(<span class="hljs-string">"LastPlayed"</span>, DateTime.Now);
+TimeSpan timeSince = DateTime.Now - lastPlayed;
+Debug.Log(<span class="hljs-string">$"Last played <span class="hljs-subst">{timeSince.Days}</span> days ago"</span>);
+
+<span class="hljs-comment">// Daily reward systems</span>
+DateTime lastReward = KPlayerPrefs.Profiles.GetDateTime(<span class="hljs-string">"LastDailyReward"</span>, DateTime.MinValue);
+<span class="hljs-keyword">if</span> (DateTime.Now.Date &gt; lastReward.Date)
+{
+    <span class="hljs-comment">// Give daily reward</span>
+    KPlayerPrefs.Profiles.SetDateTime(<span class="hljs-string">"LastDailyReward"</span>, DateTime.Now);
+}
+</div></code></pre>
+<h2 id="editor-tools">Editor Tools</h2>
+<p>KPlayerPrefs includes a powerful editor window for managing your data.</p>
+<h3 id="opening-the-editor">Opening the Editor</h3>
+<ul>
+<li><strong>Menu</strong>: <code>Tools → Kairosolo → KPlayerPrefs Editor</code></li>
+<li><strong>Shortcut</strong>: Open data folder with <code>Tools → Kairosolo → Open Data Folder</code></li>
+</ul>
+<h3 id="editor-features">Editor Features</h3>
+<h4 id="%F0%9F%94%91-password-management">🔑 Password Management</h4>
+<ul>
+<li><strong>Secure Password Editing</strong> - Change encryption password safely through the editor</li>
+<li><strong>Data Protection</strong> - When changing passwords, all existing data is securely cleared to maintain integrity</li>
+<li><strong>Editor-Only Access</strong> - Password management is restricted to development environment for security</li>
+</ul>
+<h4 id="%F0%9F%94%84-live-data-management">🔄 Live Data Management</h4>
+<ul>
+<li><strong>Auto-Update</strong>: Real-time synchronization with runtime changes</li>
+<li><strong>Global/Profile Tabs</strong>: Switch between global and profile data views</li>
+<li><strong>Search &amp; Filter</strong>: Find keys quickly</li>
+<li><strong>Sorting</strong>: Alphabetical or by data type</li>
+</ul>
+<h4 id="%F0%9F%91%A5-profile-management">👥 Profile Management</h4>
+<ul>
+<li><strong>Create Profiles</strong>: Add new profiles with custom names</li>
+<li><strong>Switch Profiles</strong>: Change active profile from dropdown</li>
+<li><strong>Copy Profiles</strong>: Duplicate existing profiles</li>
+<li><strong>Delete Profiles</strong>: Remove unwanted profiles (except Default)</li>
+<li><strong>Batch Delete</strong>: Remove all profiles except Default</li>
+</ul>
+<h4 id="%E2%9C%8F%EF%B8%8F-data-editing">✏️ Data Editing</h4>
+<ul>
+<li><strong>Inline Editing</strong>: Click &quot;Edit&quot; to modify values directly</li>
+<li><strong>Type-Safe Inputs</strong>: Appropriate input fields for each data type</li>
+<li><strong>Batch Operations</strong>: Select multiple keys for bulk deletion</li>
+<li><strong>Add New Keys</strong>: Create new entries with any supported data type</li>
+</ul>
+<h4 id="%F0%9F%93%8A-performance-monitoring">📊 Performance Monitoring</h4>
+<ul>
+<li><strong>Operation Tracking</strong>: Monitor save/load performance</li>
+<li><strong>Timing Analytics</strong>: Average operation times</li>
+<li><strong>Memory Usage</strong>: Track data storage efficiency</li>
+</ul>
+<h4 id="%F0%9F%92%BE-importexport">💾 Import/Export</h4>
+<ul>
+<li><strong>Export Data</strong>: Save profile or global data to JSON with full file paths</li>
+<li><strong>Import Data</strong>: Load data from JSON files using complete file paths</li>
+<li><strong>Merge Mode</strong>: Option to merge or replace existing data</li>
+<li><strong>Backup Creation</strong>: Easy data backup solutions</li>
+</ul>
+<p><strong>Example Export/Import Workflow:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Export with proper file paths</span>
+<span class="hljs-keyword">string</span> backupPath = Path.Combine(Application.persistentDataPath, <span class="hljs-string">"profile_backup.json"</span>);
+KPlayerPrefs.ExportActiveProfile(backupPath);
+
+<span class="hljs-comment">// Import from specific location</span>
+<span class="hljs-keyword">string</span> restorePath = Path.Combine(Application.dataPath, <span class="hljs-string">"../Backups/profile_backup.json"</span>);
+KPlayerPrefs.ImportActiveProfile(restorePath, merge: <span class="hljs-literal">true</span>);
+</div></code></pre>
+<h3 id="editor-keyboard-shortcuts">Editor Keyboard Shortcuts</h3>
+<ul>
+<li><strong>Tab/Shift+Tab</strong>: Switch between Global/Profile tabs</li>
+<li><strong>Ctrl+A</strong>: Select all visible keys</li>
+<li><strong>Delete</strong>: Remove selected keys</li>
+<li><strong>F5</strong>: Refresh data manually</li>
+<li><strong>Escape</strong>: Clear selection and cancel edits</li>
+</ul>
+<h2 id="security--encryption">Security &amp; Encryption</h2>
+<p>KPlayerPrefs automatically encrypts all data using industry-standard encryption.</p>
+<h3 id="encryption-details">Encryption Details</h3>
+<ul>
+<li><strong>Algorithm</strong>: AES-256 in CBC mode</li>
+<li><strong>Key Derivation</strong>: PBKDF2 with 10,000 iterations</li>
+<li><strong>Salt</strong>: Fixed salt for consistency (customizable in source)</li>
+<li><strong>Padding</strong>: PKCS7 padding for block alignment</li>
+</ul>
+<h3 id="password-management">Password Management</h3>
+<ul>
+<li><strong>Editor-Based Password Editing</strong>: Change encryption passwords safely through the KPlayerPrefs Editor</li>
+<li><strong>Secure Password Changes</strong>: When changing passwords, all existing data is automatically cleared to prevent corruption</li>
+<li><strong>Development-Only Access</strong>: Password management is restricted to the Unity Editor for security</li>
+</ul>
+<h3 id="security-features">Security Features</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// All data is automatically encrypted - no extra code needed!</span>
+KPlayerPrefs.SetString(<span class="hljs-string">"CreditCardNumber"</span>, <span class="hljs-string">"1234-5678-9012-3456"</span>); <span class="hljs-comment">// Encrypted</span>
+KPlayerPrefs.SetInt(<span class="hljs-string">"HighScore"</span>, <span class="hljs-number">999999</span>); <span class="hljs-comment">// Encrypted</span>
+
+<span class="hljs-comment">// Files are stored encrypted on disk</span>
+<span class="hljs-comment">// %USERPROFILE%/AppData/LocalLow/YourCompany/YourGame/KPlayerPrefs_Global.dat</span>
+</div></code></pre>
+<h3 id="file-locations">File Locations</h3>
+<pre class="hljs"><code><div>Windows: %USERPROFILE%/AppData/LocalLow/[Company]/[Product]/
+Mac: ~/Library/Application Support/[Company]/[Product]/
+Linux: ~/.config/unity3d/[Company]/[Product]/
+
+Files:
+├── KPlayerPrefs_Global.dat           # Global data
+├── KPlayerPrefs_ProfilesConfig.dat   # Profile configuration
+└── KPlayerPrefs_Profiles/            # Profile data directory
+    ├── Default.dat                   # Default profile
+    ├── Player1.dat                   # Custom profiles
+    └── Player2.dat
+</div></code></pre>
+<h2 id="performance">Performance</h2>
+<h3 id="performance-monitoring">Performance Monitoring</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Get comprehensive performance statistics</span>
+<span class="hljs-keyword">var</span> stats = KPlayerPrefs.GetPerformanceStats();
+
+Debug.Log(<span class="hljs-string">$"Save Operations: <span class="hljs-subst">{stats.SaveCount}</span>"</span>);
+Debug.Log(<span class="hljs-string">$"Load Operations: <span class="hljs-subst">{stats.LoadCount}</span>"</span>);
+Debug.Log(<span class="hljs-string">$"Average Save Time: <span class="hljs-subst">{stats.AverageSaveTime * <span class="hljs-number">1000</span>:F2}</span>ms"</span>);
+Debug.Log(<span class="hljs-string">$"Average Load Time: <span class="hljs-subst">{stats.AverageLoadTime * <span class="hljs-number">1000</span>:F2}</span>ms"</span>);
+Debug.Log(<span class="hljs-string">$"Active Profile Items: <span class="hljs-subst">{stats.ActiveProfileItemCount}</span>"</span>);
+Debug.Log(<span class="hljs-string">$"Global Items: <span class="hljs-subst">{stats.GlobalItemCount}</span>"</span>);
+Debug.Log(<span class="hljs-string">$"Total Profiles: <span class="hljs-subst">{stats.TotalProfiles}</span>"</span>);
+Debug.Log(<span class="hljs-string">$"Memory Usage: <span class="hljs-subst">{stats.EstimatedMemoryUsage / <span class="hljs-number">1024</span>:F1}</span> KB"</span>);
+
+<span class="hljs-comment">// Performance monitoring in game loop</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)</span>
+{
+    <span class="hljs-keyword">if</span> (Input.GetKeyDown(KeyCode.P))
+    {
+        <span class="hljs-keyword">var</span> perfStats = KPlayerPrefs.GetPerformanceStats();
+        <span class="hljs-keyword">if</span> (perfStats.AverageSaveTime &gt; <span class="hljs-number">0.1f</span>) <span class="hljs-comment">// More than 100ms</span>
+        {
+            Debug.LogWarning(<span class="hljs-string">"KPlayerPrefs save operations are slow!"</span>);
+        }
+    }
+}
+</div></code></pre>
+<h3 id="event-system">Event System</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SaveSystemManager</span> : <span class="hljs-title">MonoBehaviour</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// Subscribe to data change events</span>
+        KPlayerPrefs.OnDataChanged += HandleDataChanged;
+        KPlayerPrefs.OnActiveProfileChanged += HandleProfileChanged;
+        KPlayerPrefs.OnProfileCreated += HandleProfileCreated;
+        KPlayerPrefs.OnProfileDeleted += HandleProfileDeleted;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">OnDestroy</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// Unsubscribe to prevent memory leaks</span>
+        KPlayerPrefs.OnDataChanged -= HandleDataChanged;
+        KPlayerPrefs.OnActiveProfileChanged -= HandleProfileChanged;
+        KPlayerPrefs.OnProfileCreated -= HandleProfileCreated;
+        KPlayerPrefs.OnProfileDeleted -= HandleProfileDeleted;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">HandleDataChanged</span>(<span class="hljs-params"></span>)</span>
+    {
+        Debug.Log(<span class="hljs-string">"KPlayerPrefs data has changed"</span>);
+        <span class="hljs-comment">// Update UI, sync to cloud, etc.</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">HandleProfileChanged</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> newProfileName</span>)</span>
+    {
+        Debug.Log(<span class="hljs-string">$"Active profile changed to: <span class="hljs-subst">{newProfileName}</span>"</span>);
+        <span class="hljs-comment">// Update profile-specific UI elements</span>
+        RefreshPlayerUI();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">HandleProfileCreated</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> profileName</span>)</span>
+    {
+        Debug.Log(<span class="hljs-string">$"New profile created: <span class="hljs-subst">{profileName}</span>"</span>);
+        <span class="hljs-comment">// Update profile selection dropdown</span>
+        RefreshProfileDropdown();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">HandleProfileDeleted</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> profileName</span>)</span>
+    {
+        Debug.Log(<span class="hljs-string">$"Profile deleted: <span class="hljs-subst">{profileName}</span>"</span>);
+        <span class="hljs-comment">// Clean up profile-specific resources</span>
+        RefreshProfileDropdown();
+    }
+}
+</div></code></pre>
+<h3 id="error-handling--validation">Error Handling &amp; Validation</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SafeDataManager</span> : <span class="hljs-title">MonoBehaviour</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">TrySwitchProfile</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> profileName</span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">string</span>.IsNullOrEmpty(profileName))
+        {
+            Debug.LogError(<span class="hljs-string">"Profile name cannot be null or empty"</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+
+        <span class="hljs-keyword">if</span> (!KPlayerPrefs.Profiles.Exists(profileName))
+        {
+            Debug.LogWarning(<span class="hljs-string">$"Profile '<span class="hljs-subst">{profileName}</span>' does not exist"</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+
+        <span class="hljs-keyword">try</span>
+        {
+            <span class="hljs-keyword">return</span> KPlayerPrefs.Profiles.SetActive(profileName);
+        }
+        <span class="hljs-keyword">catch</span> (System.Exception ex)
+        {
+            Debug.LogError(<span class="hljs-string">$"Failed to switch to profile '<span class="hljs-subst">{profileName}</span>': <span class="hljs-subst">{ex.Message}</span>"</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">SafeCreateProfile</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> profileName</span>)</span>
+    {
+        <span class="hljs-comment">// Validate profile name</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">string</span>.IsNullOrWhiteSpace(profileName))
+        {
+            Debug.LogError(<span class="hljs-string">"Profile name cannot be empty or whitespace"</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+
+        <span class="hljs-keyword">if</span> (profileName.IndexOfAny(Path.GetInvalidFileNameChars()) &gt;= <span class="hljs-number">0</span>)
+        {
+            Debug.LogError(<span class="hljs-string">"Profile name contains invalid characters"</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+
+        <span class="hljs-keyword">if</span> (KPlayerPrefs.Profiles.Exists(profileName))
+        {
+            Debug.LogWarning(<span class="hljs-string">$"Profile '<span class="hljs-subst">{profileName}</span>' already exists"</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+
+        <span class="hljs-keyword">try</span>
+        {
+            <span class="hljs-keyword">return</span> KPlayerPrefs.Profiles.Create(profileName);
+        }
+        <span class="hljs-keyword">catch</span> (System.Exception ex)
+        {
+            Debug.LogError(<span class="hljs-string">$"Failed to create profile '<span class="hljs-subst">{profileName}</span>': <span class="hljs-subst">{ex.Message}</span>"</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+    }
+
+    <span class="hljs-keyword">public</span> T SafeGetValue&lt;T&gt;(<span class="hljs-keyword">string</span> key, T defaultValue, <span class="hljs-keyword">bool</span> isProfile = <span class="hljs-literal">false</span>)
+    {
+        <span class="hljs-keyword">try</span>
+        {
+            <span class="hljs-keyword">if</span> (isProfile)
+            {
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span>(T) == <span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">int</span>))
+                    <span class="hljs-keyword">return</span> (T)(<span class="hljs-keyword">object</span>)KPlayerPrefs.Profiles.GetInt(key, (<span class="hljs-keyword">int</span>)(<span class="hljs-keyword">object</span>)defaultValue);
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span>(T) == <span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">float</span>))
+                    <span class="hljs-keyword">return</span> (T)(<span class="hljs-keyword">object</span>)KPlayerPrefs.Profiles.GetFloat(key, (<span class="hljs-keyword">float</span>)(<span class="hljs-keyword">object</span>)defaultValue);
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span>(T) == <span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">string</span>))
+                    <span class="hljs-keyword">return</span> (T)(<span class="hljs-keyword">object</span>)KPlayerPrefs.Profiles.GetString(key, (<span class="hljs-keyword">string</span>)(<span class="hljs-keyword">object</span>)defaultValue);
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span>(T) == <span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">bool</span>))
+                    <span class="hljs-keyword">return</span> (T)(<span class="hljs-keyword">object</span>)KPlayerPrefs.Profiles.GetBool(key, (<span class="hljs-keyword">bool</span>)(<span class="hljs-keyword">object</span>)defaultValue);
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span>(T) == <span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">int</span>))
+                    <span class="hljs-keyword">return</span> (T)(<span class="hljs-keyword">object</span>)KPlayerPrefs.GetInt(key, (<span class="hljs-keyword">int</span>)(<span class="hljs-keyword">object</span>)defaultValue);
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span>(T) == <span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">float</span>))
+                    <span class="hljs-keyword">return</span> (T)(<span class="hljs-keyword">object</span>)KPlayerPrefs.GetFloat(key, (<span class="hljs-keyword">float</span>)(<span class="hljs-keyword">object</span>)defaultValue);
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span>(T) == <span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">string</span>))
+                    <span class="hljs-keyword">return</span> (T)(<span class="hljs-keyword">object</span>)KPlayerPrefs.GetString(key, (<span class="hljs-keyword">string</span>)(<span class="hljs-keyword">object</span>)defaultValue);
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span>(T) == <span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">bool</span>))
+                    <span class="hljs-keyword">return</span> (T)(<span class="hljs-keyword">object</span>)KPlayerPrefs.GetBool(key, (<span class="hljs-keyword">bool</span>)(<span class="hljs-keyword">object</span>)defaultValue);
+            }
+        }
+        <span class="hljs-keyword">catch</span> (System.Exception ex)
+        {
+            Debug.LogError(<span class="hljs-string">$"Failed to get value for key '<span class="hljs-subst">{key}</span>': <span class="hljs-subst">{ex.Message}</span>"</span>);
+        }
+        
+        <span class="hljs-keyword">return</span> defaultValue;
+    }
+}
+</div></code></pre>
+<h3 id="profile-information--analytics">Profile Information &amp; Analytics</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ProfileAnalytics</span> : <span class="hljs-title">MonoBehaviour</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ShowProfileInfo</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> profileName</span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (!KPlayerPrefs.Profiles.Exists(profileName)) <span class="hljs-keyword">return</span>;
+
+        <span class="hljs-comment">// Get profile information</span>
+        <span class="hljs-keyword">var</span> profileInfo = KPlayerPrefs.Profiles.GetInfo(profileName);
+        Debug.Log(<span class="hljs-string">$"Profile: <span class="hljs-subst">{profileName}</span>"</span>);
+        Debug.Log(<span class="hljs-string">$"Created: <span class="hljs-subst">{profileInfo.creationDate:yyyy/MM/dd HH:mm:ss}</span>"</span>);
+        Debug.Log(<span class="hljs-string">$"Last Access: <span class="hljs-subst">{profileInfo.lastAccessDate:yyyy/MM/dd HH:mm:ss}</span>"</span>);
+        Debug.Log(<span class="hljs-string">$"Data Size: <span class="hljs-subst">{profileInfo.dataSize}</span> bytes"</span>);
+        Debug.Log(<span class="hljs-string">$"Key Count: <span class="hljs-subst">{profileInfo.keyCount}</span>"</span>);
+
+        <span class="hljs-comment">// Get all data for analysis</span>
+        <span class="hljs-keyword">var</span> accessor = KPlayerPrefs.Profiles.GetProfileAccessor(profileName);
+        <span class="hljs-keyword">var</span> allData = accessor.GetAllData();
+        
+        <span class="hljs-comment">// Analyze data types</span>
+        <span class="hljs-keyword">int</span> intCount = <span class="hljs-number">0</span>, floatCount = <span class="hljs-number">0</span>, stringCount = <span class="hljs-number">0</span>, boolCount = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">int</span> vector2Count = <span class="hljs-number">0</span>, vector3Count = <span class="hljs-number">0</span>, colorCount = <span class="hljs-number">0</span>, dateTimeCount = <span class="hljs-number">0</span>;
+
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> kvp <span class="hljs-keyword">in</span> allData)
+        {
+            <span class="hljs-keyword">switch</span> (kvp.Value)
+            {
+                <span class="hljs-keyword">case</span> <span class="hljs-keyword">int</span> _: intCount++; <span class="hljs-keyword">break</span>;
+                <span class="hljs-keyword">case</span> <span class="hljs-keyword">float</span> _: floatCount++; <span class="hljs-keyword">break</span>;
+                <span class="hljs-keyword">case</span> <span class="hljs-keyword">string</span> _: stringCount++; <span class="hljs-keyword">break</span>;
+                <span class="hljs-keyword">case</span> <span class="hljs-keyword">bool</span> _: boolCount++; <span class="hljs-keyword">break</span>;
+                <span class="hljs-keyword">case</span> Vector2 _: vector2Count++; <span class="hljs-keyword">break</span>;
+                <span class="hljs-keyword">case</span> Vector3 _: vector3Count++; <span class="hljs-keyword">break</span>;
+                <span class="hljs-keyword">case</span> Color _: colorCount++; <span class="hljs-keyword">break</span>;
+                <span class="hljs-keyword">case</span> DateTime _: dateTimeCount++; <span class="hljs-keyword">break</span>;
+            }
+        }
+
+        Debug.Log(<span class="hljs-string">$"Data Types: <span class="hljs-subst">{intCount}</span> ints, <span class="hljs-subst">{floatCount}</span> floats, <span class="hljs-subst">{stringCount}</span> strings, "</span> +
+                 <span class="hljs-string">$"<span class="hljs-subst">{boolCount}</span> bools, <span class="hljs-subst">{vector2Count}</span> Vector2s, <span class="hljs-subst">{vector3Count}</span> Vector3s, "</span> +
+                 <span class="hljs-string">$"<span class="hljs-subst">{colorCount}</span> colors, <span class="hljs-subst">{dateTimeCount}</span> DateTimes"</span>);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ShowAllProfilesComparison</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">string</span>[] profiles = KPlayerPrefs.Profiles.GetAll();
+        Debug.Log(<span class="hljs-string">$"Total Profiles: <span class="hljs-subst">{profiles.Length}</span>"</span>);
+
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">string</span> profile <span class="hljs-keyword">in</span> profiles)
+        {
+            <span class="hljs-keyword">var</span> info = KPlayerPrefs.Profiles.GetInfo(profile);
+            <span class="hljs-keyword">var</span> accessor = KPlayerPrefs.Profiles.GetProfileAccessor(profile);
+            
+            <span class="hljs-keyword">int</span> level = accessor.GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">0</span>);
+            <span class="hljs-keyword">float</span> experience = accessor.GetFloat(<span class="hljs-string">"Experience"</span>, <span class="hljs-number">0f</span>);
+            DateTime lastPlayed = accessor.GetDateTime(<span class="hljs-string">"LastPlayed"</span>, DateTime.MinValue);
+            
+            Debug.Log(<span class="hljs-string">$"Profile '<span class="hljs-subst">{profile}</span>': Level <span class="hljs-subst">{level}</span>, XP <span class="hljs-subst">{experience:F0}</span>, "</span> +
+                     <span class="hljs-string">$"Last played <span class="hljs-subst">{(DateTime.Now - lastPlayed).Days}</span> days ago"</span>);
+        }
+    }
+}
+</div></code></pre>
+<h3 id="optimization-tips">Optimization Tips</h3>
+<ol>
+<li><strong>Use Global Data for Settings</strong>: Store UI preferences, graphics settings globally</li>
+<li><strong>Use Profile Data for Progress</strong>: Store player progress, inventory per profile</li>
+<li><strong>Batch Operations</strong>: Group multiple Set operations together</li>
+<li><strong>Cache Frequently Used Values</strong>: Don't call Get methods every frame</li>
+</ol>
+<h3 id="performance-characteristics">Performance Characteristics</h3>
+<ul>
+<li><strong>Memory</strong>: Minimal RAM usage with lazy loading</li>
+<li><strong>Disk I/O</strong>: Efficient binary serialization with compression</li>
+<li><strong>Encryption Overhead</strong>: ~5-10% performance cost for security</li>
+<li><strong>Scalability</strong>: Handles thousands of keys efficiently</li>
+</ul>
+<h2 id="migration-guide">Migration Guide</h2>
+<h3 id="from-unity-playerprefs">From Unity PlayerPrefs</h3>
+<p><strong>Step 1</strong>: Add the using statement</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">using</span> KairosoloSystems;
+</div></code></pre>
+<p><strong>Step 2</strong>: Decide on data scope (Global vs Profile)</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Settings → Global</span>
+PlayerPrefs.SetFloat(<span class="hljs-string">"Volume"</span>, <span class="hljs-number">0.8f</span>);
+<span class="hljs-comment">// becomes</span>
+KPlayerPrefs.SetFloat(<span class="hljs-string">"Volume"</span>, <span class="hljs-number">0.8f</span>);
+
+<span class="hljs-comment">// Player data → Profile</span>
+PlayerPrefs.SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">5</span>);
+<span class="hljs-comment">// becomes</span>
+KPlayerPrefs.Profiles.SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">5</span>);
+</div></code></pre>
+<p><strong>Step 3</strong>: Handle profile creation</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+{
+    <span class="hljs-comment">// Ensure default profile exists</span>
+    <span class="hljs-keyword">if</span> (!KPlayerPrefs.Profiles.Exists(<span class="hljs-string">"MainPlayer"</span>))
+    {
+        KPlayerPrefs.Profiles.Create(<span class="hljs-string">"MainPlayer"</span>);
+        KPlayerPrefs.Profiles.SetActive(<span class="hljs-string">"MainPlayer"</span>);
+    }
+}
+</div></code></pre>
+<h3 id="from-other-save-systems">From Other Save Systems</h3>
+<p>KPlayerPrefs provides import/export functionality to help migrate data:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Export existing data for backup (requires full file paths)</span>
+<span class="hljs-keyword">string</span> globalBackupPath = Path.Combine(Application.persistentDataPath, <span class="hljs-string">"backup_global.json"</span>);
+<span class="hljs-keyword">string</span> profileBackupPath = Path.Combine(Application.persistentDataPath, <span class="hljs-string">"backup_profile.json"</span>);
+
+KPlayerPrefs.ExportGlobalData(globalBackupPath);
+KPlayerPrefs.ExportActiveProfile(profileBackupPath);
+
+<span class="hljs-comment">// Import data from other systems (also requires full file paths)</span>
+<span class="hljs-keyword">string</span> importedSettingsPath = Path.Combine(Application.persistentDataPath, <span class="hljs-string">"imported_settings.json"</span>);
+<span class="hljs-keyword">string</span> importedPlayerPath = Path.Combine(Application.persistentDataPath, <span class="hljs-string">"imported_player_data.json"</span>);
+
+KPlayerPrefs.ImportGlobalData(importedSettingsPath);
+KPlayerPrefs.ImportActiveProfile(importedPlayerPath);
+
+<span class="hljs-comment">// Example with file dialogs in editor</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> UNITY_EDITOR</span>
+<span class="hljs-keyword">string</span> importPath = UnityEditor.EditorUtility.OpenFilePanel(<span class="hljs-string">"Import Profile"</span>, <span class="hljs-string">""</span>, <span class="hljs-string">"json"</span>);
+<span class="hljs-keyword">if</span> (!<span class="hljs-keyword">string</span>.IsNullOrEmpty(importPath))
+{
+    KPlayerPrefs.ImportActiveProfile(importPath);
+}
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+</div></code></pre>
+<h2 id="best-practices">Best Practices</h2>
+<h3 id="%F0%9F%8E%AF-data-organization">🎯 Data Organization</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ GOOD: Use Global for settings</span>
+KPlayerPrefs.SetFloat(<span class="hljs-string">"MasterVolume"</span>, <span class="hljs-number">0.8f</span>);
+KPlayerPrefs.SetString(<span class="hljs-string">"Language"</span>, <span class="hljs-string">"English"</span>);
+KPlayerPrefs.SetBool(<span class="hljs-string">"ShowFPS"</span>, <span class="hljs-literal">false</span>);
+
+<span class="hljs-comment">// ✅ GOOD: Use Profile for player-specific data</span>
+KPlayerPrefs.Profiles.SetString(<span class="hljs-string">"PlayerName"</span>, <span class="hljs-string">"Hero"</span>);
+KPlayerPrefs.Profiles.SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">25</span>);
+KPlayerPrefs.Profiles.SetVector3(<span class="hljs-string">"LastPosition"</span>, transform.position);
+</div></code></pre>
+<h3 id="%F0%9F%94%91-key-naming-conventions">🔑 Key Naming Conventions</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ GOOD: Descriptive, consistent naming</span>
+KPlayerPrefs.SetFloat(<span class="hljs-string">"Audio_MasterVolume"</span>, <span class="hljs-number">0.8f</span>);
+KPlayerPrefs.SetFloat(<span class="hljs-string">"Audio_SFXVolume"</span>, <span class="hljs-number">0.6f</span>);
+KPlayerPrefs.SetFloat(<span class="hljs-string">"Audio_MusicVolume"</span>, <span class="hljs-number">0.7f</span>);
+
+KPlayerPrefs.Profiles.SetInt(<span class="hljs-string">"Player_Level"</span>, <span class="hljs-number">25</span>);
+KPlayerPrefs.Profiles.SetFloat(<span class="hljs-string">"Player_Health"</span>, <span class="hljs-number">100f</span>);
+KPlayerPrefs.Profiles.SetVector3(<span class="hljs-string">"Player_LastPosition"</span>, pos);
+
+<span class="hljs-comment">// ❌ AVOID: Vague or inconsistent names</span>
+KPlayerPrefs.SetFloat(<span class="hljs-string">"vol"</span>, <span class="hljs-number">0.8f</span>);
+KPlayerPrefs.SetInt(<span class="hljs-string">"data1"</span>, <span class="hljs-number">25</span>);
+</div></code></pre>
+<h3 id="%F0%9F%9B%A1%EF%B8%8F-security-best-practices">🛡️ Security Best Practices</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ GOOD: Use editor for password management</span>
+<span class="hljs-comment">// Change passwords through Tools → Kairosolo → KPlayerPrefs Editor</span>
+
+<span class="hljs-comment">// ✅ GOOD: Trust the encryption</span>
+KPlayerPrefs.SetString(<span class="hljs-string">"SensitiveData"</span>, <span class="hljs-string">"Protected automatically"</span>);
+
+<span class="hljs-comment">// ✅ GOOD: Understand password change implications</span>
+<span class="hljs-comment">// When changing passwords in the editor, all data is cleared for security</span>
+</div></code></pre>
+<h3 id="%F0%9F%9A%80-performance-best-practices">🚀 Performance Best Practices</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ GOOD: Use direct profile access for bulk operations</span>
+<span class="hljs-keyword">string</span>[] allProfiles = KPlayerPrefs.Profiles.GetAll();
+<span class="hljs-keyword">foreach</span>(<span class="hljs-keyword">string</span> profile <span class="hljs-keyword">in</span> allProfiles)
+{
+    <span class="hljs-comment">// No active profile switching needed!</span>
+    KPlayerPrefs.Profiles.Profile(profile).SetDateTime(<span class="hljs-string">"LastUpdated"</span>, DateTime.Now);
+}
+
+<span class="hljs-comment">// ❌ AVOID: Switching active profile repeatedly</span>
+<span class="hljs-keyword">foreach</span>(<span class="hljs-keyword">string</span> profile <span class="hljs-keyword">in</span> allProfiles)
+{
+    KPlayerPrefs.Profiles.SetActive(profile);  <span class="hljs-comment">// Expensive!</span>
+    KPlayerPrefs.Profiles.SetDateTime(<span class="hljs-string">"LastUpdated"</span>, DateTime.Now);
+}
+
+<span class="hljs-comment">// ✅ GOOD: Cache frequently accessed values</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PlayerManager</span> : <span class="hljs-title">MonoBehaviour</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> playerName;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> playerLevel;
+    
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// Load once, cache in memory</span>
+        playerName = KPlayerPrefs.Profiles.GetString(<span class="hljs-string">"PlayerName"</span>, <span class="hljs-string">"Unknown"</span>);
+        playerLevel = KPlayerPrefs.Profiles.GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">LevelUp</span>(<span class="hljs-params"></span>)</span>
+    {
+        playerLevel++;
+        KPlayerPrefs.Profiles.SetInt(<span class="hljs-string">"Level"</span>, playerLevel); <span class="hljs-comment">// Save when changed</span>
+    }
+}
+
+<span class="hljs-comment">// ❌ AVOID: Frequent Get calls</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)</span>
+{
+    <span class="hljs-comment">// Don't do this every frame!</span>
+    <span class="hljs-keyword">string</span> name = KPlayerPrefs.Profiles.GetString(<span class="hljs-string">"PlayerName"</span>, <span class="hljs-string">"Unknown"</span>);
+    <span class="hljs-keyword">int</span> level = KPlayerPrefs.Profiles.GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);
+}
+</div></code></pre>
+<h3 id="%F0%9F%9B%A1%EF%B8%8F-error-handling">🛡️ Error Handling</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ GOOD: Handle profile operations safely</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">SwitchToProfile</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> profileName</span>)</span>
+{
+    <span class="hljs-keyword">if</span> (KPlayerPrefs.Profiles.Exists(profileName))
+    {
+        <span class="hljs-keyword">return</span> KPlayerPrefs.Profiles.SetActive(profileName);
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        Debug.LogWarning(<span class="hljs-string">$"Profile '<span class="hljs-subst">{profileName}</span>' does not exist"</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+}
+
+<span class="hljs-comment">// ✅ GOOD: Always provide sensible defaults</span>
+<span class="hljs-keyword">float</span> volume = KPlayerPrefs.GetFloat(<span class="hljs-string">"MasterVolume"</span>, <span class="hljs-number">0.8f</span>); <span class="hljs-comment">// Default to 80%</span>
+<span class="hljs-keyword">int</span> level = KPlayerPrefs.Profiles.GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);       <span class="hljs-comment">// Default to level 1</span>
+</div></code></pre>
+<h3 id="%F0%9F%93%B1-multi-platform-considerations">📱 Multi-Platform Considerations</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ GOOD: Platform-specific defaults</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetPlatformDefaults</span>(<span class="hljs-params"></span>)</span>
+{
+<span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> UNITY_MOBILE</span>
+    KPlayerPrefs.SetBool(<span class="hljs-string">"TouchControls"</span>, <span class="hljs-literal">true</span>);
+    KPlayerPrefs.SetFloat(<span class="hljs-string">"UIScale"</span>, <span class="hljs-number">1.2f</span>);
+<span class="hljs-meta">#<span class="hljs-meta-keyword">elif</span> UNITY_STANDALONE</span>
+    KPlayerPrefs.SetBool(<span class="hljs-string">"TouchControls"</span>, <span class="hljs-literal">false</span>);
+    KPlayerPrefs.SetFloat(<span class="hljs-string">"UIScale"</span>, <span class="hljs-number">1.0f</span>);
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+}
+</div></code></pre>
+<h2 id="complete-examples">Complete Examples</h2>
+<h3 id="settings-manager">Settings Manager</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SettingsManager</span> : <span class="hljs-title">MonoBehaviour</span>
+{
+    [<span class="hljs-meta">Header(<span class="hljs-meta-string">"Audio Settings"</span>)</span>]
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> masterVolume = <span class="hljs-number">0.8f</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> sfxVolume = <span class="hljs-number">0.8f</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> musicVolume = <span class="hljs-number">0.8f</span>;
+    
+    [<span class="hljs-meta">Header(<span class="hljs-meta-string">"Graphics Settings"</span>)</span>]
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> qualityLevel = <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> isFullscreen = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> resolution = <span class="hljs-string">"1920x1080"</span>;
+    
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+        LoadSettings();
+        ApplySettings();
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">LoadSettings</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// Load global settings</span>
+        masterVolume = KPlayerPrefs.GetFloat(<span class="hljs-string">"Audio_MasterVolume"</span>, <span class="hljs-number">0.8f</span>);
+        sfxVolume = KPlayerPrefs.GetFloat(<span class="hljs-string">"Audio_SFXVolume"</span>, <span class="hljs-number">0.8f</span>);
+        musicVolume = KPlayerPrefs.GetFloat(<span class="hljs-string">"Audio_MusicVolume"</span>, <span class="hljs-number">0.8f</span>);
+        
+        qualityLevel = KPlayerPrefs.GetInt(<span class="hljs-string">"Graphics_Quality"</span>, <span class="hljs-number">2</span>);
+        isFullscreen = KPlayerPrefs.GetBool(<span class="hljs-string">"Graphics_Fullscreen"</span>, <span class="hljs-literal">true</span>);
+        resolution = KPlayerPrefs.GetString(<span class="hljs-string">"Graphics_Resolution"</span>, <span class="hljs-string">"1920x1080"</span>);
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ApplySettings</span>(<span class="hljs-params"></span>)</span>
+    {
+        AudioListener.volume = masterVolume;
+        QualitySettings.SetQualityLevel(qualityLevel);
+        Screen.fullScreen = isFullscreen;
+        
+        <span class="hljs-comment">// Parse and apply resolution</span>
+        <span class="hljs-keyword">var</span> parts = resolution.Split(<span class="hljs-string">'x'</span>);
+        <span class="hljs-keyword">if</span> (parts.Length == <span class="hljs-number">2</span>)
+        {
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">int</span>.TryParse(parts[<span class="hljs-number">0</span>], <span class="hljs-keyword">out</span> <span class="hljs-keyword">int</span> width) &amp;&amp; <span class="hljs-keyword">int</span>.TryParse(parts[<span class="hljs-number">1</span>], <span class="hljs-keyword">out</span> <span class="hljs-keyword">int</span> height))
+            {
+                Screen.SetResolution(width, height, isFullscreen);
+            }
+        }
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SaveSettings</span>(<span class="hljs-params"></span>)</span>
+    {
+        KPlayerPrefs.SetFloat(<span class="hljs-string">"Audio_MasterVolume"</span>, masterVolume);
+        KPlayerPrefs.SetFloat(<span class="hljs-string">"Audio_SFXVolume"</span>, sfxVolume);
+        KPlayerPrefs.SetFloat(<span class="hljs-string">"Audio_MusicVolume"</span>, musicVolume);
+        
+        KPlayerPrefs.SetInt(<span class="hljs-string">"Graphics_Quality"</span>, qualityLevel);
+        KPlayerPrefs.SetBool(<span class="hljs-string">"Graphics_Fullscreen"</span>, isFullscreen);
+        KPlayerPrefs.SetString(<span class="hljs-string">"Graphics_Resolution"</span>, resolution);
+        
+        Debug.Log(<span class="hljs-string">"Settings saved!"</span>);
+    }
+}
+</div></code></pre>
+<h3 id="save-game-system">Save Game System</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SaveGameSystem</span> : <span class="hljs-title">MonoBehaviour</span>
+{
+    [<span class="hljs-meta">System.Serializable</span>]
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SaveData</span>
+    {
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> playerName;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> level;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> experience;
+        <span class="hljs-keyword">public</span> Vector3 position;
+        <span class="hljs-keyword">public</span> Color playerColor;
+        <span class="hljs-keyword">public</span> DateTime lastPlayed;
+        <span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; inventory;
+    }
+    
+    <span class="hljs-keyword">public</span> SaveData currentSave;
+    
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+        CreateDefaultProfileIfNeeded();
+        LoadGame();
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">CreateDefaultProfileIfNeeded</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (!KPlayerPrefs.Profiles.Exists(<span class="hljs-string">"MainSave"</span>))
+        {
+            KPlayerPrefs.Profiles.Create(<span class="hljs-string">"MainSave"</span>);
+            Debug.Log(<span class="hljs-string">"Created new save profile"</span>);
+        }
+        KPlayerPrefs.Profiles.SetActive(<span class="hljs-string">"MainSave"</span>);
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">LoadGame</span>(<span class="hljs-params"></span>)</span>
+    {
+        currentSave = <span class="hljs-keyword">new</span> SaveData
+        {
+            playerName = KPlayerPrefs.Profiles.GetString(<span class="hljs-string">"PlayerName"</span>, <span class="hljs-string">"New Player"</span>),
+            level = KPlayerPrefs.Profiles.GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>),
+            experience = KPlayerPrefs.Profiles.GetFloat(<span class="hljs-string">"Experience"</span>, <span class="hljs-number">0f</span>),
+            position = KPlayerPrefs.Profiles.GetVector3(<span class="hljs-string">"Position"</span>, Vector3.zero),
+            playerColor = KPlayerPrefs.Profiles.GetColor(<span class="hljs-string">"PlayerColor"</span>, Color.white),
+            lastPlayed = KPlayerPrefs.Profiles.GetDateTime(<span class="hljs-string">"LastPlayed"</span>, DateTime.Now),
+            inventory = LoadInventory()
+        };
+        
+        <span class="hljs-comment">// Apply loaded data</span>
+        transform.position = currentSave.position;
+        GetComponent&lt;Renderer&gt;().material.color = currentSave.playerColor;
+        
+        Debug.Log(<span class="hljs-string">$"Game loaded: <span class="hljs-subst">{currentSave.playerName}</span>, Level <span class="hljs-subst">{currentSave.level}</span>"</span>);
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SaveGame</span>(<span class="hljs-params"></span>)</span>
+    {
+        currentSave.position = transform.position;
+        currentSave.lastPlayed = DateTime.Now;
+        
+        KPlayerPrefs.Profiles.SetString(<span class="hljs-string">"PlayerName"</span>, currentSave.playerName);
+        KPlayerPrefs.Profiles.SetInt(<span class="hljs-string">"Level"</span>, currentSave.level);
+        KPlayerPrefs.Profiles.SetFloat(<span class="hljs-string">"Experience"</span>, currentSave.experience);
+        KPlayerPrefs.Profiles.SetVector3(<span class="hljs-string">"Position"</span>, currentSave.position);
+        KPlayerPrefs.Profiles.SetColor(<span class="hljs-string">"PlayerColor"</span>, currentSave.playerColor);
+        KPlayerPrefs.Profiles.SetDateTime(<span class="hljs-string">"LastPlayed"</span>, currentSave.lastPlayed);
+        
+        SaveInventory(currentSave.inventory);
+        
+        Debug.Log(<span class="hljs-string">"Game saved!"</span>);
+    }
+    
+    <span class="hljs-function">List&lt;<span class="hljs-keyword">string</span>&gt; <span class="hljs-title">LoadInventory</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> inventory = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();
+        <span class="hljs-keyword">int</span> itemCount = KPlayerPrefs.Profiles.GetInt(<span class="hljs-string">"InventoryCount"</span>, <span class="hljs-number">0</span>);
+        
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; itemCount; i++)
+        {
+            <span class="hljs-keyword">string</span> item = KPlayerPrefs.Profiles.GetString(<span class="hljs-string">$"InventoryItem_<span class="hljs-subst">{i}</span>"</span>, <span class="hljs-string">""</span>);
+            <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">string</span>.IsNullOrEmpty(item))
+            {
+                inventory.Add(item);
+            }
+        }
+        
+        <span class="hljs-keyword">return</span> inventory;
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SaveInventory</span>(<span class="hljs-params">List&lt;<span class="hljs-keyword">string</span>&gt; inventory</span>)</span>
+    {
+        KPlayerPrefs.Profiles.SetInt(<span class="hljs-string">"InventoryCount"</span>, inventory.Count);
+        
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; inventory.Count; i++)
+        {
+            KPlayerPrefs.Profiles.SetString(<span class="hljs-string">$"InventoryItem_<span class="hljs-subst">{i}</span>"</span>, inventory[i]);
+        }
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">CreateNewSaveSlot</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> slotName</span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (KPlayerPrefs.Profiles.Create(slotName))
+        {
+            KPlayerPrefs.Profiles.SetActive(slotName);
+            
+            <span class="hljs-comment">// Initialize new save with default values</span>
+            currentSave = <span class="hljs-keyword">new</span> SaveData
+            {
+                playerName = <span class="hljs-string">"New Player"</span>,
+                level = <span class="hljs-number">1</span>,
+                experience = <span class="hljs-number">0f</span>,
+                position = Vector3.zero,
+                playerColor = Color.white,
+                lastPlayed = DateTime.Now,
+                inventory = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;()
+            };
+            
+            SaveGame();
+            Debug.Log(<span class="hljs-string">$"Created new save slot: <span class="hljs-subst">{slotName}</span>"</span>);
+        }
+    }
+}
+</div></code></pre>
+<h3 id="multi-player-profile-manager">Multi-Player Profile Manager</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MultiPlayerManager</span> : <span class="hljs-title">MonoBehaviour</span>
+{
+    [<span class="hljs-meta">System.Serializable</span>]
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PlayerInfo</span>
+    {
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> name;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> level;
+        <span class="hljs-keyword">public</span> Color color;
+        <span class="hljs-keyword">public</span> DateTime created;
+        <span class="hljs-keyword">public</span> DateTime lastPlayed;
+    }
+    
+    <span class="hljs-keyword">public</span> List&lt;PlayerInfo&gt; players = <span class="hljs-keyword">new</span> List&lt;PlayerInfo&gt;();
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> currentPlayer = <span class="hljs-string">""</span>;
+    
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+        RefreshPlayerList();
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">RefreshPlayerList</span>(<span class="hljs-params"></span>)</span>
+    {
+        players.Clear();
+        <span class="hljs-keyword">string</span>[] profileNames = KPlayerPrefs.Profiles.GetAll();
+        
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">string</span> profileName <span class="hljs-keyword">in</span> profileNames)
+        {
+            <span class="hljs-keyword">var</span> accessor = KPlayerPrefs.Profiles.GetProfileAccessor(profileName);
+            <span class="hljs-keyword">var</span> info = KPlayerPrefs.Profiles.GetInfo(profileName);
+            
+            players.Add(<span class="hljs-keyword">new</span> PlayerInfo
+            {
+                name = accessor.GetString(<span class="hljs-string">"PlayerName"</span>, profileName),
+                level = accessor.GetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>),
+                color = accessor.GetColor(<span class="hljs-string">"PlayerColor"</span>, Color.white),
+                created = info.creationDate,
+                lastPlayed = info.lastAccessDate
+            });
+        }
+        
+        currentPlayer = KPlayerPrefs.Profiles.ActiveProfile;
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SwitchToPlayer</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> playerName</span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (KPlayerPrefs.Profiles.Exists(playerName))
+        {
+            KPlayerPrefs.Profiles.SetActive(playerName);
+            currentPlayer = playerName;
+            Debug.Log(<span class="hljs-string">$"Switched to player: <span class="hljs-subst">{playerName}</span>"</span>);
+        }
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">CreateNewPlayer</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> playerName, Color playerColor</span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (KPlayerPrefs.Profiles.Create(playerName))
+        {
+            <span class="hljs-keyword">var</span> accessor = KPlayerPrefs.Profiles.GetProfileAccessor(playerName);
+            accessor.SetString(<span class="hljs-string">"PlayerName"</span>, playerName);
+            accessor.SetInt(<span class="hljs-string">"Level"</span>, <span class="hljs-number">1</span>);
+            accessor.SetFloat(<span class="hljs-string">"Experience"</span>, <span class="hljs-number">0f</span>);
+            accessor.SetColor(<span class="hljs-string">"PlayerColor"</span>, playerColor);
+            accessor.SetDateTime(<span class="hljs-string">"Created"</span>, DateTime.Now);
+            
+            RefreshPlayerList();
+            Debug.Log(<span class="hljs-string">$"Created new player: <span class="hljs-subst">{playerName}</span>"</span>);
+        }
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DeletePlayer</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> playerName</span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (playerName != <span class="hljs-string">"Default"</span> &amp;&amp; KPlayerPrefs.Profiles.Exists(playerName))
+        {
+            KPlayerPrefs.Profiles.Delete(playerName);
+            
+            <span class="hljs-comment">// Switch to Default if we deleted the active player</span>
+            <span class="hljs-keyword">if</span> (currentPlayer == playerName)
+            {
+                KPlayerPrefs.Profiles.SetActive(<span class="hljs-string">"Default"</span>);
+                currentPlayer = <span class="hljs-string">"Default"</span>;
+            }
+            
+            RefreshPlayerList();
+            Debug.Log(<span class="hljs-string">$"Deleted player: <span class="hljs-subst">{playerName}</span>"</span>);
+        }
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ShowPlayerStats</span>(<span class="hljs-params"></span>)</span>
+    {
+        Debug.Log(<span class="hljs-string">$"=== Player Statistics ==="</span>);
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> player <span class="hljs-keyword">in</span> players)
+        {
+            Debug.Log(<span class="hljs-string">$"<span class="hljs-subst">{player.name}</span>: Level <span class="hljs-subst">{player.level}</span>, "</span> +
+                     <span class="hljs-string">$"Created <span class="hljs-subst">{player.created:yyyy/MM/dd}</span>, "</span> +
+                     <span class="hljs-string">$"Last played <span class="hljs-subst">{(DateTime.Now - player.lastPlayed).Days}</span> days ago"</span>);
+        }
+    }
+}
+</div></code></pre>
+<hr>
+<h2 id="support--community">Support &amp; Community</h2>
+<p>For questions, bug reports, or feature requests, please contact us.</p>
+<p><strong>Created by Kairosolo</strong><br>
+<em>Making Unity development easier, one tool at a time.</em></p>
+
+</body>
+</html>
