@@ -7,6 +7,7 @@ using System.Collections.Generic;
 [CustomEditor(typeof(AudioManager))]
 public class AudioManagerEditor : Editor
 {
+    private SerializedProperty masterMixerProp;
     private SerializedProperty musicMixerProp;
     private SerializedProperty sfxMixerProp;
     private SerializedProperty musicAudioSourceProp;
@@ -32,6 +33,7 @@ public class AudioManagerEditor : Editor
 
     private void OnEnable()
     {
+        masterMixerProp = serializedObject.FindProperty("masterMixer");
         musicMixerProp = serializedObject.FindProperty("musicMixer");
         sfxMixerProp = serializedObject.FindProperty("sfxMixer");
         musicAudioSourceProp = serializedObject.FindProperty("musicAudioSource");
@@ -70,6 +72,7 @@ public class AudioManagerEditor : Editor
         }
 
         EditorGUILayout.LabelField("Audio Mixers", EditorStyles.boldLabel);
+        EditorGUILayout.PropertyField(masterMixerProp);
         EditorGUILayout.PropertyField(musicMixerProp);
         EditorGUILayout.PropertyField(sfxMixerProp);
 
@@ -124,21 +127,20 @@ public class AudioManagerEditor : Editor
                     elementsToShowCount++;
                     EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
 
-                    string buttonLabel = (_currentlyPlayingClip == clip && _isClipPlaying != null && _isClipPlaying(clip)) ? "Stop" : "Play";
                     GUI.enabled = clip != null && _playClip != null;
-                    if (GUILayout.Button(buttonLabel, GUILayout.Width(50)))
+                    if (GUILayout.Button("Play", GUILayout.Width(50)))
                     {
-                        if (_currentlyPlayingClip == clip && _isClipPlaying != null && _isClipPlaying(clip))
-                        {
-                            _stopAllClips?.Invoke();
-                            _currentlyPlayingClip = null;
-                        }
-                        else
-                        {
-                            _stopAllClips?.Invoke();
-                            _playClip?.Invoke(clip);
-                            _currentlyPlayingClip = clip;
-                        }
+                        _stopAllClips?.Invoke();
+                        _playClip?.Invoke(clip);
+                        _currentlyPlayingClip = clip;
+                    }
+                    GUI.enabled = true;
+
+                    GUI.enabled = clip != null && _stopAllClips != null;
+                    if (GUILayout.Button("Stop", GUILayout.Width(50)))
+                    {
+                        _stopAllClips?.Invoke();
+                        _currentlyPlayingClip = null;
                     }
                     GUI.enabled = true;
 

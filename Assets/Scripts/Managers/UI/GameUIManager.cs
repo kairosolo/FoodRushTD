@@ -1,8 +1,12 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
+    // --- NEW ---
+    public static GameUIManager Instance { get; private set; }
+
     [Header("Clock UI")]
     [SerializeField] private TextMeshProUGUI dayText;
     [SerializeField] private TextMeshProUGUI timeText;
@@ -13,13 +17,76 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cashText;
     [SerializeField] private TextMeshProUGUI unsatisfiedCustomersText;
 
+    [Header("VIP UI")]
+    [SerializeField] private GameObject vipPatienceMeterContainer;
+    [SerializeField] private Image vipPatienceMeterFill;
+    [SerializeField] private TextMeshProUGUI vipNameText;
+
+    private Customer currentVip;
+
+    // --- NEW ---
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
+    private void Start()
+    {
+        if (vipPatienceMeterContainer != null)
+        {
+            vipPatienceMeterContainer.SetActive(false);
+        }
+    }
+
+    public void ShowVipPatienceMeter(Customer vip)
+    {
+        if (vipPatienceMeterContainer == null || vip == null) return;
+
+        currentVip = vip;
+        currentVip.OnPatienceChanged += HandleVipPatienceChanged;
+
+        if (vipNameText != null)
+        {
+            vipNameText.text = "Food Critic's Patience";
+        }
+
+        vipPatienceMeterContainer.SetActive(true);
+    }
+
+    public void HideVipPatienceMeter()
+    {
+        if (vipPatienceMeterContainer == null) return;
+
+        if (currentVip != null)
+        {
+            currentVip.OnPatienceChanged -= HandleVipPatienceChanged;
+            currentVip = null;
+        }
+
+        vipPatienceMeterContainer.SetActive(false);
+    }
+
+    private void HandleVipPatienceChanged(float current, float max)
+    {
+        if (vipPatienceMeterFill != null)
+        {
+            vipPatienceMeterFill.fillAmount = Mathf.Clamp01(current / max);
+        }
+    }
+
     private void OnEnable()
     {
         GameClock.OnTimeChanged += HandleTimeChanged;
         GameClock.OnDayChanged += HandleDayChanged;
         GameClock.OnDayPhaseStart += HandleDayPhaseStart;
         GameClock.OnNightPhaseStart += HandleNightPhaseStart;
-
         EconomyManager.OnCashChanged += UpdateCashText;
         GameLoopManager.OnUnsatisfiedCustomersChanged += UpdateUnsatisfiedCustomersText;
     }
@@ -30,12 +97,14 @@ public class GameUIManager : MonoBehaviour
         GameClock.OnDayChanged -= HandleDayChanged;
         GameClock.OnDayPhaseStart -= HandleDayPhaseStart;
         GameClock.OnNightPhaseStart -= HandleNightPhaseStart;
-
         EconomyManager.OnCashChanged -= UpdateCashText;
         GameLoopManager.OnUnsatisfiedCustomersChanged -= UpdateUnsatisfiedCustomersText;
+        if (currentVip != null)
+        {
+            currentVip.OnPatienceChanged -= HandleVipPatienceChanged;
+        }
     }
 
-    // --- NEW METHOD ---
     private void UpdateCashText(int newAmount)
     {
         if (cashText != null)
@@ -54,7 +123,10 @@ public class GameUIManager : MonoBehaviour
 
     private void HandleDayChanged(int day)
     {
-        if (dayText != null) dayText.text = $"Day {day}";
+        if (dayText != null)
+        {
+            dayText.text = $"Day {day}";
+        }
     }
 
     private void HandleTimeChanged(int hour, int minute)

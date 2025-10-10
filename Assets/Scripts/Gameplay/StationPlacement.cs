@@ -3,45 +3,99 @@ using UnityEngine.InputSystem;
 
 public class StationPlacement : MonoBehaviour
 {
-    [Header("Placement Settings")]
-    [SerializeField] private StationData stationToPlace;
-    [SerializeField] private LayerMask placementLayer;
+    public static StationPlacement Instance { get; private set; }
+
+    [Header("Visuals")]
+    [SerializeField] private Color ghostColorValid = new Color(0.5f, 1f, 0.5f, 0.5f); // Green
+    [SerializeField] private Color ghostColorInvalid = new Color(1f, 0.5f, 0.5f, 0.5f); // Red
 
     private Camera mainCamera;
+    private StationData stationToPlace;
+
+    private GameObject stationGhost;
+    private SpriteRenderer ghostRenderer;
+    private bool currentPlacementIsValid;
+
+    public bool IsPlacing { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) Destroy(this.gameObject);
+        else Instance = this;
+    }
 
     private void Start()
     {
         mainCamera = Camera.main;
     }
 
-    public void OnPlaceStation(InputAction.CallbackContext context)
+    private void Update()
     {
-        if (!context.performed)
+        if (IsPlacing && stationGhost != null)
         {
-            return;
+            Vector2 mousePosition = Mouse.current.position.ReadValue();
+            Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, mainCamera.nearClipPlane));
+            stationGhost.transform.position = new Vector2(worldPosition.x, worldPosition.y);
+
+            currentPlacementIsValid = PlacementManager.Instance.IsValidPlacement(stationGhost.transform.position);
+
+            ghostRenderer.color = currentPlacementIsValid ? ghostColorValid : ghostColorInvalid;
         }
-        Vector2 mousePosition = Mouse.current.position.ReadValue();
-        PlaceStationAt(mousePosition);
     }
 
-    private void PlaceStationAt(Vector2 screenPosition)
+    public void BeginPlacingStation(StationData stationData)
+    {
+        if (IsPlacing) CancelPlacement();
+        if (EconomyManager.Instance.CurrentCash < stationData.PlacementCost) return;
+
+        IsPlacing = true;
+        stationToPlace = stationData;
+
+        stationGhost = Instantiate(stationToPlace.StationPrefab);
+        ghostRenderer = stationGhost.GetComponentInChildren<SpriteRenderer>();
+
+        if (stationGhost.TryGetComponent<Station>(out Station station)) station.enabled = false;
+    }
+
+    public void OnPlaceStation(InputAction.CallbackContext context)
+    {
+        if (context.performed && IsPlacing && currentPlacementIsValid)
+        {
+            FinishPlacing();
+        }
+    }
+
+    public void OnCancelPlacement(InputAction.CallbackContext context)
+    {
+        if (context.performed && IsPlacing) CancelPlacement();
+    }
+
+    private void FinishPlacing()
     {
         if (!EconomyManager.Instance.SpendCash(stationToPlace.PlacementCost))
         {
+            CancelPlacement();
             return;
         }
 
-        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, mainCamera.nearClipPlane));
-        Vector2 placementPosition = new Vector2(worldPosition.x, worldPosition.y);
+        ghostRenderer.color = Color.white;
 
-        GameObject stationObject = Instantiate(stationToPlace.StationPrefab, placementPosition, Quaternion.identity);
-
-        if (stationObject.TryGetComponent<Station>(out Station station))
+        if (stationGhost.TryGetComponent<Station>(out Station station))
         {
+            station.enabled = true;
             station.Initialize(stationToPlace);
         }
 
-        // Trigger PlaceStationSFX
-        Debug.Log($"Placed {stationToPlace.StationName} at {placementPosition}");
+        IsPlacing = false;
+        stationGhost = null;
+        stationToPlace = null;
+    }
+
+    private void CancelPlacement()
+    {
+        Destroy(stationGhost);
+        IsPlacing = false;
+        stationGhost = null;
+        stationToPlace = null;
     }
 }

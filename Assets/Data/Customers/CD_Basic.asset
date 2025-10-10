@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9b8baf2b590d44ab22d46ef8718761, type: 3}
+  m_Name: CD_Basic
+  m_EditorClassIdentifier: Assembly-CSharp::CustomerData
+  customerTypeName: The Basic
+  customerPrefab: {fileID: 2199783616792833757, guid: 30feb04fa3b37d140a16264e8caa13f0, type: 3}
+  moveSpeed: 2
+  cashReward: 50
+  potentialOrder:
+  - {fileID: 11400000, guid: c2ce3a7495a19fd4295a6effdbd36024, type: 2}
+  isVip: 0
+  patienceDuration: 60

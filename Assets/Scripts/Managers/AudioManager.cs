@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
+    [SerializeField] private AudioMixer masterMixer;
     [SerializeField] private AudioMixer musicMixer;
     [SerializeField] private AudioMixer sfxMixer;
 
@@ -54,10 +55,14 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        masterMixer.SetFloat("MasterVolume", Mathf.Log10(KPlayerPrefs.GetFloat("MasterVolume", 0.8f)) * 20);
         musicMixer.SetFloat("MusicVolume", Mathf.Log10(KPlayerPrefs.GetFloat("MusicVolume", 0.5f)) * 20);
         sfxMixer.SetFloat("SfxVolume", Mathf.Log10(KPlayerPrefs.GetFloat("SfxVolume", 0.5f)) * 20);
 
-        PlayMusic("MenuMusic");
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "MenuScene")
+        {
+            PlayMusic("MenuMusic");
+        }
     }
 
     public void PlayMusic(string name)

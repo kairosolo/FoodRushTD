@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PD_Fries
   m_EditorClassIdentifier: Assembly-CSharp::ProductData
   productName: Fries
-  productIcon: {fileID: 21300000, guid: ac47ed8ccc79cf04dae198b9cc5b3a6f, type: 3}
+  productIcon: {fileID: 138216426066323220, guid: 4e1a9356880b6a941b2b7ea4b508aceb, type: 3}
   basePreparationTime: 5
   foodProjectilePrefab: {fileID: 3775760721492486323, guid: 99abd112b16407447a922d9cc27bfd95, type: 3}

@@ -1,14 +1,11 @@
-using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class CustomerSpawner : MonoBehaviour
 {
     [Header("Spawner Settings")]
-    [SerializeField] private GameObject customerPrefab;
     [SerializeField] private float spawnInterval = 3f;
-
-    [Header("Order Settings")]
-    [SerializeField] private ProductData friesData;
 
     private float spawnTimer;
     private bool isSpawning = false;
@@ -45,33 +42,70 @@ public class CustomerSpawner : MonoBehaviour
         }
     }
 
-    private void StartSpawning()
-    {
-        isSpawning = true;
-        spawnTimer = 0f;
-    }
+    private void StartSpawning() => isSpawning = true;
 
-    private void StopSpawning()
-    {
-        isSpawning = false;
-    }
+    private void StopSpawning() => isSpawning = false;
 
     private void SpawnCustomer()
     {
-        if (customerPrefab == null || friesData == null)
+        CustomerData customerToSpawn = GetCustomerToSpawn();
+
+        if (customerToSpawn == null)
         {
-            Debug.LogError("Customer Prefab or Fries Data is not assigned in the spawner!");
+            Debug.LogWarning("Could not determine a customer to spawn!");
             return;
         }
 
-        GameObject customerObject = Instantiate(customerPrefab);
-
+        GameObject customerObject = Instantiate(customerToSpawn.CustomerPrefab);
         if (customerObject.TryGetComponent<Customer>(out Customer customer))
         {
-            // Give the customer an order for 1 Fries (for now)
-            List<ProductData> newOrder = new List<ProductData> { friesData };
-            customer.Initialize(newOrder);
+            customer.Initialize(customerToSpawn);
         }
         // Trigger CustomerSpawnSFX
+    }
+
+    private CustomerData GetCustomerToSpawn()
+    {
+        DailyEventData activeEvent = DailyEventManager.Instance.ActiveEvent;
+        List<CustomerData> validCustomerPool = GetValidCustomerPool();
+
+        if (validCustomerPool.Count == 0) return null;
+
+        if (activeEvent != null)
+        {
+            int roll = Random.Range(1, 101);
+            if (roll <= activeEvent.FeaturedCustomerChance)
+            {
+                var validEventCustomers = activeEvent.FeaturedCustomers.Intersect(validCustomerPool).ToList();
+                if (validEventCustomers.Count > 0)
+                {
+                    return validEventCustomers[Random.Range(0, validEventCustomers.Count)];
+                }
+            }
+        }
+
+        return validCustomerPool[Random.Range(0, validCustomerPool.Count)];
+    }
+
+    private List<CustomerData> GetValidCustomerPool()
+    {
+        List<CustomerData> validCustomers = new List<CustomerData>();
+        List<ProductData> unlockedProducts = new List<ProductData>();
+
+        foreach (var station in ProgressionManager.Instance.AvailableStations)
+        {
+            unlockedProducts.AddRange(station.AvailableProducts);
+        }
+        unlockedProducts = unlockedProducts.Distinct().ToList();
+
+        foreach (var customerData in ProgressionManager.Instance.AvailableCustomers)
+        {
+            if (customerData.PotentialOrder.All(orderItem => unlockedProducts.Contains(orderItem)))
+            {
+                validCustomers.Add(customerData);
+            }
+        }
+
+        return validCustomers;
     }
 }

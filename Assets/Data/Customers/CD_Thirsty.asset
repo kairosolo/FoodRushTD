@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9b8baf2b590d44ab22d46ef8718761, type: 3}
+  m_Name: CD_Thirsty
+  m_EditorClassIdentifier: Assembly-CSharp::CustomerData
+  customerTypeName: The Thirsty
+  customerPrefab: {fileID: 6837286113289875323, guid: cbfdcd59f1d7683428701981b04a89a3, type: 3}
+  moveSpeed: 2.2
+  cashReward: 40
+  potentialOrder:
+  - {fileID: 11400000, guid: d23426ceed6dab34b952d93746e734c7, type: 2}
+  isVip: 0
+  patienceDuration: 60
