@@ -109,7 +109,7 @@ public class GameUIManager : MonoBehaviour
     {
         if (cashText != null)
         {
-            cashText.text = $"${newAmount}";
+            cashText.text = $"<sprite name=\"Multi_Cash\"> {newAmount}";
         }
     }
 
@@ -117,7 +117,8 @@ public class GameUIManager : MonoBehaviour
     {
         if (unsatisfiedCustomersText != null)
         {
-            unsatisfiedCustomersText.text = $"Unsatisfied: {newAmount} / 10";
+            unsatisfiedCustomersText.text = $"<sprite name=\"Sad_Customer\"> {newAmount} / 10";
+
         }
     }
 

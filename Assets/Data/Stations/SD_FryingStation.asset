@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b461031bc52fb2f48bb35a4debf8717d, type: 3}
   m_Name: SD_FryingStation
   m_EditorClassIdentifier: Assembly-CSharp::StationData
-  stationIcon: {fileID: 3514213634008630315, guid: 4e1a9356880b6a941b2b7ea4b508aceb, type: 3}
+  stationIcon: {fileID: 8383161892591538385, guid: f2c184ef969514f42a5e48a5c8800a5c, type: 3}
   stationName: Frying Station
   placementCost: 100
   stationPrefab: {fileID: 2922440456857387492, guid: 809084021de77464da71b5d9f9a1e5d9, type: 3}

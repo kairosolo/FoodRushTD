@@ -17,7 +17,7 @@ public class StationButton : MonoBehaviour
 
         stationIcon.sprite = stationData.StationIcon;
         stationNameText.text = stationData.StationName;
-        stationCostText.text = $"${stationData.PlacementCost}";
+        stationCostText.text = $"<sprite name=\"Cash\"> {stationData.PlacementCost}";
 
         button.onClick.AddListener(OnButtonClicked);
     }

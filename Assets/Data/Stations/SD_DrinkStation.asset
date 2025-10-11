@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b461031bc52fb2f48bb35a4debf8717d, type: 3}
   m_Name: SD_DrinkStation
   m_EditorClassIdentifier: Assembly-CSharp::StationData
-  stationIcon: {fileID: -2860202713576427454, guid: 4e1a9356880b6a941b2b7ea4b508aceb, type: 3}
+  stationIcon: {fileID: -5899781108965522012, guid: f2c184ef969514f42a5e48a5c8800a5c, type: 3}
   stationName: Drink Station
   placementCost: 150
   stationPrefab: {fileID: 2922440456857387492, guid: 1618a08d3cae3584fb333516bd234cb7, type: 3}

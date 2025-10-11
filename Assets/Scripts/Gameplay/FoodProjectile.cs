@@ -4,6 +4,7 @@ public class FoodProjectile : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float travelSpeed = 10f;
+    [SerializeField] private float rotZSpeed = 10f;
 
     private Customer targetCustomer;
     private ProductData productData;
@@ -25,6 +26,8 @@ public class FoodProjectile : MonoBehaviour
 
         Vector3 direction = (targetCustomer.transform.position - transform.position).normalized;
         transform.position += direction * travelSpeed * Time.deltaTime;
+
+        transform.Rotate(0f, 0f, rotZSpeed * Time.deltaTime);
 
         float distanceToTarget = Vector3.Distance(transform.position, targetCustomer.transform.position);
         if (distanceToTarget < 0.2f)

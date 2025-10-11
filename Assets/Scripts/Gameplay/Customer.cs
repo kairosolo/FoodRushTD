@@ -5,9 +5,12 @@ using UnityEngine.UI;
 
 public class Customer : MonoBehaviour
 {
-    [Header("Order UI")]
+    [Header("References")]
     [SerializeField] private GameObject orderIconContainer;
     [SerializeField] private GameObject orderIconPrefab;
+    [SerializeField] private CharacterRandomizer characterRandomizer;
+    [SerializeField] private Animator animator;
+
 
     public event Action<float, float> OnPatienceChanged;
 
@@ -38,6 +41,8 @@ public class Customer : MonoBehaviour
 
     public void Initialize(CustomerData data)
     {
+        characterRandomizer.RandomizeAll();
+
         this.moveSpeed = data.MoveSpeed;
         this.cashReward = data.CashReward;
         this.order = new List<ProductData>(data.PotentialOrder);
@@ -147,6 +152,7 @@ public class Customer : MonoBehaviour
     private void HandleOrderComplete()
     {
         isOrderComplete = true;
+        animator.SetTrigger("isHappy");
 
         if (isVip)
         {

@@ -725,7 +725,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -31.100098, y: -46}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &8028982236211533484
@@ -756,7 +756,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -8877223472909547753, guid: f2c184ef969514f42a5e48a5c8800a5c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1053,39 +1053,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 625877457403863750, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.00090009003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 625877457403863750, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1040702862834390997, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.00090009003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1040702862834390997, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1040702862834390997, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.00090009003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3101976266136670010, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.00090009003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3101976266136670010, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3464911784234114297, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.00090009003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3464911784234114297, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4385201692048479507, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_Name
@@ -1097,15 +1097,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5043900078701725681, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.00090009003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5043900078701725681, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5043900078701725681, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.00090009003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5217731717294144558, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_Pivot.x
@@ -1189,15 +1189,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8315194602350758230, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.00090009003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8315194602350758230, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8315194602350758230, guid: e4f02bc057df0c04aa9ca3728aedffad, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.00090009003
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

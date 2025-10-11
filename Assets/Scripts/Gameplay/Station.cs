@@ -11,12 +11,16 @@ public class Station : MonoBehaviour
     [Header("Interaction Settings")]
     [SerializeField] private float interactionDelay = 0.5f;
 
-    [Header("UI References")]
+
+    [Header("References")]
+    [SerializeField] private SpriteRenderer productVisualizer; //Changes
+    [SerializeField] private Animator animator; //Changes
     [SerializeField] private Image productIconImage;
     [SerializeField] private Image progressBarImage;
 
     private StationData stationData;
     private ProductData currentProduct;
+    private CharacterRandomizer characterRandomizer; //Changes
     private float preparationTimer;
     private bool isPreparing;
     private bool isHoldingProduct;
@@ -26,6 +30,11 @@ public class Station : MonoBehaviour
     private float interactionTimer;
 
     public float ClickRadius => clickRadius;
+
+    private void Awake()
+    {
+        characterRandomizer = GetComponent<CharacterRandomizer>();
+    }
 
     private void OnEnable()
     {
@@ -42,6 +51,9 @@ public class Station : MonoBehaviour
 
     public void Initialize(StationData data)
     {
+        animator.SetTrigger("isPlacing"); //Changes
+        characterRandomizer.RandomizeAll(); //Changes
+
         stationData = data;
         if (stationData.AvailableProducts != null && stationData.AvailableProducts.Count > 0)
         {
@@ -123,6 +135,8 @@ public class Station : MonoBehaviour
         currentProduct = newProduct;
         productIconImage.sprite = currentProduct.ProductIcon;
         productIconImage.gameObject.SetActive(true);
+
+        productVisualizer.sprite = currentProduct.ProductIcon;
         StartPreparation();
     }
 
@@ -173,6 +187,7 @@ public class Station : MonoBehaviour
 
     private void ServeFoodToCustomer(Customer target)
     {
+        animator.SetTrigger("isShooting"); //Changes
         if (currentProduct.FoodProjectilePrefab == null)
         {
             Debug.LogError($"No projectile prefab assigned for {currentProduct.ProductName}!");
