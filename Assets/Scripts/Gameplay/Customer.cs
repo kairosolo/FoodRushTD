@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using UnityEngine.UI;
 
 public class Customer : MonoBehaviour
 {
@@ -10,14 +9,13 @@ public class Customer : MonoBehaviour
     [SerializeField] private GameObject orderIconPrefab;
     [SerializeField] private CharacterRandomizer characterRandomizer;
     [SerializeField] private Animator animator;
-
+    [SerializeField] private GameObject dialogueBox;
 
     public event Action<float, float> OnPatienceChanged;
 
     private float moveSpeed;
     private float satisfiedMoveSpeedMultiplier = 2.5f;
     private int cashReward;
-    private List<ProductData> order;
     private bool isVip;
     private float patienceDuration;
     private float currentPatience;
@@ -31,23 +29,28 @@ public class Customer : MonoBehaviour
     private bool isOrderComplete = false;
     private bool isEnraged = false;
 
-    private Dictionary<ProductData, GameObject> orderIconMap;
+    private Dictionary<ProductData, int> currentOrder;
+    private Dictionary<ProductData, int> itemsInFlight;
+    private Dictionary<ProductData, OrderIconUI> orderIconMap;
 
     private void Awake()
     {
+        orderIconMap = new Dictionary<ProductData, OrderIconUI>();
+        currentOrder = new Dictionary<ProductData, int>();
+        itemsInFlight = new Dictionary<ProductData, int>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        orderIconMap = new Dictionary<ProductData, GameObject>();
     }
 
     public void Initialize(CustomerData data)
     {
         characterRandomizer.RandomizeAll();
 
-        this.moveSpeed = data.MoveSpeed;
+        this.moveSpeed = data.MoveSpeed * DifficultyManager.Instance.SpeedMultiplier;
         this.cashReward = data.CashReward;
-        this.order = new List<ProductData>(data.PotentialOrder);
         this.isVip = data.IsVip;
-        this.patienceDuration = data.PatienceDuration;
+        this.patienceDuration = data.PatienceDuration / DifficultyManager.Instance.SpeedMultiplier;
+
+        GenerateOrder(data.PotentialOrder);
 
         if (isVip) currentPatience = patienceDuration;
 
@@ -86,15 +89,32 @@ public class Customer : MonoBehaviour
     private void HandlePatienceDepleted()
     {
         isEnraged = true;
-
         GameUIManager.Instance.HideVipPatienceMeter();
 
         Debug.Log("VIP has run out of patience and is enraged!");
-        // Trigger VIPLostSFX
+        AudioManager.Instance.PlaySFX("VIP_PatienceFail");
 
-        order.Clear();
-        foreach (var icon in orderIconMap.Values) Destroy(icon);
+        if (dialogueBox != null)
+        {
+            dialogueBox.SetActive(false);
+        }
+
+        foreach (var iconUI in orderIconMap.Values)
+        {
+            if (iconUI != null) // Safety check
+            {
+                Destroy(iconUI.gameObject);
+            }
+        }
+
+        if (orderIconContainer != null)
+        {
+            orderIconContainer.transform.parent.gameObject.SetActive(false);
+        }
+
         orderIconMap.Clear();
+        currentOrder.Clear();
+        itemsInFlight.Clear();
 
         if (spriteRenderer != null) spriteRenderer.color = new Color(1f, 0.4f, 0.4f, 1f);
 
@@ -112,11 +132,25 @@ public class Customer : MonoBehaviour
         }
     }
 
-    public bool DoesOrderContain(ProductData product)
+    private void GenerateOrder(List<OrderItem> baseOrder)
     {
-        if (isOrderComplete || isEnraged) return false;
+        currentOrder.Clear();
+        foreach (var item in baseOrder)
+        {
+            currentOrder.Add(item.product, item.quantity);
+        }
 
-        return order.Contains(product);
+        int extraItems = DifficultyManager.Instance.MaxAdditionalItems;
+        if (extraItems > 0 && baseOrder.Count > 0)
+        {
+            for (int i = 0; i < extraItems; i++)
+            {
+                ProductData productToAdd = baseOrder[UnityEngine.Random.Range(0, baseOrder.Count)].product;
+                currentOrder[productToAdd]++;
+            }
+        }
+
+        DisplayOrderIcons();
     }
 
     private void DisplayOrderIcons()
@@ -124,35 +158,63 @@ public class Customer : MonoBehaviour
         foreach (Transform child in orderIconContainer.transform) Destroy(child.gameObject);
         orderIconMap.Clear();
         if (orderIconPrefab == null || orderIconContainer == null) return;
-        foreach (ProductData product in order)
+        foreach (var product in currentOrder.Keys)
         {
             GameObject iconObject = Instantiate(orderIconPrefab, orderIconContainer.transform);
-            if (iconObject.TryGetComponent<Image>(out Image iconImage))
+            if (iconObject.TryGetComponent<OrderIconUI>(out var iconScript))
             {
-                iconImage.sprite = product.ProductIcon;
-                if (!orderIconMap.ContainsKey(product)) orderIconMap.Add(product, iconObject);
+                iconScript.Initialize(product.ProductIcon, currentOrder[product]);
+                orderIconMap.Add(product, iconScript);
             }
         }
     }
 
     public void ReceiveFoodItem(ProductData receivedProduct)
     {
-        if (order.Contains(receivedProduct))
+        if (itemsInFlight.ContainsKey(receivedProduct)) itemsInFlight[receivedProduct]--;
+
+        if (currentOrder.ContainsKey(receivedProduct))
         {
-            order.Remove(receivedProduct);
-            if (orderIconMap.TryGetValue(receivedProduct, out GameObject iconObject))
+            currentOrder[receivedProduct]--;
+            orderIconMap[receivedProduct].UpdateQuantity(currentOrder[receivedProduct]);
+
+            if (currentOrder[receivedProduct] <= 0)
             {
-                Destroy(iconObject);
+                Destroy(orderIconMap[receivedProduct].gameObject);
                 orderIconMap.Remove(receivedProduct);
+                currentOrder.Remove(receivedProduct);
             }
-            if (order.Count == 0) HandleOrderComplete();
+
+            if (currentOrder.Count == 0) HandleOrderComplete();
         }
+    }
+
+    public bool DoesOrderContain(ProductData product)
+    {
+        if (isOrderComplete || isEnraged) return false;
+
+        int needed = currentOrder.ContainsKey(product) ? currentOrder[product] : 0;
+        int inFlight = itemsInFlight.ContainsKey(product) ? itemsInFlight[product] : 0;
+
+        return needed > inFlight;
+    }
+
+    public void NotifyItemInFlight(ProductData product)
+    {
+        if (itemsInFlight.ContainsKey(product)) itemsInFlight[product]++;
+        else itemsInFlight.Add(product, 1);
     }
 
     private void HandleOrderComplete()
     {
         isOrderComplete = true;
         animator.SetTrigger("isHappy");
+        AudioManager.Instance.PlaySFX("Customer_OrderComplete");
+
+        if (dialogueBox != null)
+        {
+            dialogueBox.SetActive(false);
+        }
 
         if (isVip)
         {

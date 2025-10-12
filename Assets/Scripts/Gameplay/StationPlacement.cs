@@ -82,9 +82,14 @@ public class StationPlacement : MonoBehaviour
 
         if (stationGhost.TryGetComponent<Station>(out Station station))
         {
-            station.enabled = true;
-            station.Initialize(stationToPlace);
+            station.PartialInitialize(stationToPlace);
+
+            station.TriggerPlacementEffects();
+
+            UpgradeUIManager.Instance.OpenInitialProductSelection(station);
         }
+
+        AudioManager.Instance.PlaySFX("Station_Place");
 
         IsPlacing = false;
         stationGhost = null;

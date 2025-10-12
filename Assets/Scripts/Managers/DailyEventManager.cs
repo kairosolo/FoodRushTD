@@ -56,6 +56,7 @@ public class DailyEventManager : MonoBehaviour
             {
                 ActiveEvent = possibleEvents[UnityEngine.Random.Range(0, possibleEvents.Count)];
                 Debug.Log($"DAILY EVENT: {ActiveEvent.EventName} has started!");
+                AudioManager.Instance.PlaySFX("Event_Announce");
             }
         }
         else

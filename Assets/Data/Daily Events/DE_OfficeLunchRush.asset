@@ -17,4 +17,4 @@ MonoBehaviour:
     are popular!
   featuredCustomers:
   - {fileID: 11400000, guid: 0ea83ae92e27b4248b8c9cdf4fba2e98, type: 2}
-  featuredCustomerChance: 100
+  featuredCustomerChance: 70

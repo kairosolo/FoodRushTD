@@ -46,7 +46,7 @@ public class EconomyManager : MonoBehaviour
             OnCashChanged?.Invoke(CurrentCash);
             return true;
         }
-        // Trigger NotEnoughCashSFX
+        AudioManager.Instance.PlaySFX("UI_Error");
         Debug.Log("Not enough cash!");
         return false;
     }

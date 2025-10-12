@@ -17,6 +17,7 @@ MonoBehaviour:
   moveSpeed: 1.9
   cashReward: 90
   potentialOrder:
-  - {fileID: 11400000, guid: bb2822edf7994534aa2ca1ace00f30f7, type: 2}
+  - product: {fileID: 11400000, guid: bb2822edf7994534aa2ca1ace00f30f7, type: 2}
+    quantity: 1
   isVip: 0
   patienceDuration: 60

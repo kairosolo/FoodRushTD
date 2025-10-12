@@ -5,11 +5,15 @@ public class PlacementManager : MonoBehaviour
 {
     public static PlacementManager Instance { get; private set; }
 
+    [Header("Placement Area")]
+    [SerializeField] private Transform minBounds;
+
+    [SerializeField] private Transform maxBounds;
+
     [Header("Placement Rules")]
     [SerializeField] private float pathClearanceRadius = 1.0f;
     [SerializeField] private float stationClearanceRadius = 1.0f;
 
-    private Camera mainCamera;
     private List<Transform> pathWaypoints;
 
     private void Awake()
@@ -26,7 +30,6 @@ public class PlacementManager : MonoBehaviour
 
     private void Start()
     {
-        mainCamera = Camera.main;
         pathWaypoints = new List<Transform>();
         for (int i = 0; i < PathManager.Instance.WaypointCount; i++)
         {
@@ -36,9 +39,9 @@ public class PlacementManager : MonoBehaviour
 
     public bool IsValidPlacement(Vector2 position)
     {
-        if (!IsWithinScreenBounds(position))
+        if (!IsWithinCustomBounds(position))
         {
-            Debug.Log("Placement failed: Outside screen bounds.");
+            Debug.Log("Placement failed: Outside of defined bounds.");
             return false;
         }
 
@@ -57,11 +60,16 @@ public class PlacementManager : MonoBehaviour
         return true;
     }
 
-    private bool IsWithinScreenBounds(Vector2 position)
+    private bool IsWithinCustomBounds(Vector2 position)
     {
-        Vector3 screenPoint = mainCamera.WorldToViewportPoint(position);
-        return screenPoint.x > 0.05f && screenPoint.x < 0.95f &&
-               screenPoint.y > 0.05f && screenPoint.y < 0.95f;
+        if (minBounds == null || maxBounds == null)
+        {
+            Debug.LogError("Placement bounds are not assigned in PlacementManager!");
+            return false;
+        }
+
+        return position.x > minBounds.position.x && position.x < maxBounds.position.x &&
+               position.y > minBounds.position.y && position.y < maxBounds.position.y;
     }
 
     private bool IsClearOfPath(Vector2 position)
@@ -107,5 +115,21 @@ public class PlacementManager : MonoBehaviour
         Vector2 projection = lineStart + t * (lineEnd - lineStart);
 
         return Vector2.Distance(point, projection);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (minBounds == null || maxBounds == null) return;
+
+        Vector3 topLeft = new Vector3(minBounds.position.x, maxBounds.position.y, 0);
+        Vector3 topRight = new Vector3(maxBounds.position.x, maxBounds.position.y, 0);
+        Vector3 bottomLeft = new Vector3(minBounds.position.x, minBounds.position.y, 0);
+        Vector3 bottomRight = new Vector3(maxBounds.position.x, minBounds.position.y, 0);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(topLeft, topRight);
+        Gizmos.DrawLine(topRight, bottomRight);
+        Gizmos.DrawLine(bottomRight, bottomLeft);
+        Gizmos.DrawLine(bottomLeft, topLeft);
     }
 }

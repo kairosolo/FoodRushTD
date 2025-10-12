@@ -6,9 +6,7 @@ public class VIPManager : MonoBehaviour
 
     [Header("VIP Settings")]
     [SerializeField] private CustomerData vipCustomerData;
-    [SerializeField] private int vipSpawnDay = 5;
-
-    private bool hasVipSpawnedThisGame = false;
+    [SerializeField] private int vipSpawnIntervalInDays = 5;
 
     private void Awake()
     {
@@ -34,9 +32,10 @@ public class VIPManager : MonoBehaviour
 
     private void CheckAndSpawnVip()
     {
-        if (GameClock.Instance.CurrentDay == vipSpawnDay && !hasVipSpawnedThisGame)
+        int currentDay = GameClock.Instance.CurrentDay;
+        // Spawn on day 5, 10, 15, etc.
+        if (currentDay > 0 && currentDay % vipSpawnIntervalInDays == 0)
         {
-            hasVipSpawnedThisGame = true;
             SpawnVip();
         }
     }
@@ -56,7 +55,7 @@ public class VIPManager : MonoBehaviour
         {
             customer.Initialize(vipCustomerData);
             GameUIManager.Instance.ShowVipPatienceMeter(customer);
-            // Trigger VIPArrivedSFX
+            AudioManager.Instance.PlaySFX("VIP_Arrive");
         }
     }
 }

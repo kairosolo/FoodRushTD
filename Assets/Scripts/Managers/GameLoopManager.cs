@@ -7,7 +7,7 @@ public class GameLoopManager : MonoBehaviour
     public static GameLoopManager Instance { get; private set; }
 
     public enum GameState
-    { Preparation, Action, GameOver }
+    { Preparation, Action, GameOver, UIMode }
 
     public static event Action<int> OnUnsatisfiedCustomersChanged;
 
@@ -16,8 +16,10 @@ public class GameLoopManager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private GameOverUI gameOverUI;
-
+    [SerializeField] private StationSelectionUI stationSelectionUI;
     public GameState CurrentState { get; private set; }
+    private GameState previousState;
+
     private int currentUnsatisfiedCustomers;
 
     private const string HIGHSCORE_KEY = "HighestCashEarned";
@@ -56,13 +58,21 @@ public class GameLoopManager : MonoBehaviour
     private void StartDayPhase()
     {
         if (CurrentState == GameState.GameOver) return;
-        CurrentState = GameState.Action;
+        if (CurrentState != GameState.UIMode)
+        {
+            CurrentState = GameState.Action;
+        }
+        previousState = GameState.Action;
     }
 
     private void StartNightPhase()
     {
         if (CurrentState == GameState.GameOver) return;
-        CurrentState = GameState.Preparation;
+        if (CurrentState != GameState.UIMode)
+        {
+            CurrentState = GameState.Preparation;
+        }
+        previousState = GameState.Preparation;
     }
 
     public void CustomerReachedExitUnsatisfied()
@@ -71,6 +81,7 @@ public class GameLoopManager : MonoBehaviour
 
         currentUnsatisfiedCustomers++;
         OnUnsatisfiedCustomersChanged?.Invoke(currentUnsatisfiedCustomers);
+        AudioManager.Instance.PlaySFX("Game_CustomerLost");
 
         if (currentUnsatisfiedCustomers >= maxUnsatisfiedCustomers)
         {
@@ -94,7 +105,26 @@ public class GameLoopManager : MonoBehaviour
             KPlayerPrefs.Save();
             Debug.Log($"New highscore: {highScore}");
         }
-
+        AudioManager.Instance.PlaySFX("Game_LoseJingle");
         gameOverUI.Show(finalScore, highScore);
+    }
+
+    public void EnterUIMode()
+    {
+        if (CurrentState == GameState.GameOver || CurrentState == GameState.UIMode) return;
+
+        previousState = CurrentState;
+        CurrentState = GameState.UIMode;
+        stationSelectionUI.SetInteractable(false);
+        Debug.Log("Entered UI Mode. Interactions locked.");
+    }
+
+    public void ExitUIMode()
+    {
+        if (CurrentState != GameState.UIMode) return;
+
+        CurrentState = previousState;
+        stationSelectionUI.SetInteractable(true);
+        Debug.Log("Exited UI Mode. Interactions unlocked.");
     }
 }

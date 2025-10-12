@@ -5,7 +5,7 @@ using UnityEngine;
 public class CustomerSpawner : MonoBehaviour
 {
     [Header("Spawner Settings")]
-    [SerializeField] private float spawnInterval = 3f;
+    [SerializeField] private float baseSpawnInterval = 3f;
 
     private float spawnTimer;
     private bool isSpawning = false;
@@ -35,9 +35,12 @@ public class CustomerSpawner : MonoBehaviour
         if (!isSpawning) return;
 
         spawnTimer += Time.deltaTime;
-        if (spawnTimer >= spawnInterval)
+
+        float currentSpawnInterval = baseSpawnInterval / DifficultyManager.Instance.SpawnRateDivisor;
+
+        if (spawnTimer >= currentSpawnInterval)
         {
-            spawnTimer -= spawnInterval;
+            spawnTimer -= currentSpawnInterval;
             SpawnCustomer();
         }
     }
@@ -61,7 +64,7 @@ public class CustomerSpawner : MonoBehaviour
         {
             customer.Initialize(customerToSpawn);
         }
-        // Trigger CustomerSpawnSFX
+        AudioManager.Instance.PlaySFX("Customer_Spawn");
     }
 
     private CustomerData GetCustomerToSpawn()
@@ -100,7 +103,7 @@ public class CustomerSpawner : MonoBehaviour
 
         foreach (var customerData in ProgressionManager.Instance.AvailableCustomers)
         {
-            if (customerData.PotentialOrder.All(orderItem => unlockedProducts.Contains(orderItem)))
+            if (customerData.PotentialOrder.All(orderItem => unlockedProducts.Contains(orderItem.product)))
             {
                 validCustomers.Add(customerData);
             }

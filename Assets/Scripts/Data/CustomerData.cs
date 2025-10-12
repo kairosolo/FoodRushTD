@@ -1,5 +1,15 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+
+[Serializable]
+public class OrderItem
+{
+    public ProductData product;
+
+    [Range(1, 5)]
+    public int quantity = 1;
+}
 
 [CreateAssetMenu(fileName = "NewCustomerData", menuName = "Food Rush/Customer Data")]
 public class CustomerData : ScriptableObject
@@ -11,17 +21,17 @@ public class CustomerData : ScriptableObject
     [SerializeField] private int cashReward = 50;
 
     [Header("Order Details")]
-    [SerializeField] private List<ProductData> potentialOrder;
+    [SerializeField] private List<OrderItem> potentialOrder;
 
     [Header("VIP Settings")]
     [SerializeField] private bool isVip = false;
     [SerializeField] private float patienceDuration = 60f;
 
-    public string CustomerTypeName => customerTypeName;
+    public List<OrderItem> PotentialOrder => potentialOrder;
     public GameObject CustomerPrefab => customerPrefab;
+    public string CustomerTypeName => customerTypeName;
     public float MoveSpeed => moveSpeed;
     public int CashReward => cashReward;
-    public List<ProductData> PotentialOrder => potentialOrder;
     public bool IsVip => isVip;
     public float PatienceDuration => patienceDuration;
 }

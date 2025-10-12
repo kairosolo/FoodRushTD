@@ -13,11 +13,15 @@ public class StationInteraction : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
+        if (GameLoopManager.Instance.CurrentState == GameLoopManager.GameState.UIMode)
+        {
+            return;
+        }
 
-        if (stationPlacement.IsPlacing) return;
+        if (!context.performed || stationPlacement.IsPlacing) return;
 
         Vector2 mouseWorldPos = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
         Station closestStation = null;
         float shortestDistance = float.MaxValue;
 
@@ -33,7 +37,14 @@ public class StationInteraction : MonoBehaviour
 
         if (closestStation != null && shortestDistance <= closestStation.ClickRadius)
         {
-            closestStation.CycleProduct();
+            if (closestStation.CanInteract())
+            {
+                UpgradeUIManager.Instance.OpenPanel(closestStation);
+            }
+            else
+            {
+                Debug.Log("Station is still in its placement cooldown.");
+            }
         }
     }
 }
