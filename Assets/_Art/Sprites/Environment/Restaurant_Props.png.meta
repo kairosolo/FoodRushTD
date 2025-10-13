@@ -1,0 +1,548 @@
+fileFormatVersion: 2
+guid: b45311e88e043d64f8ab66137c2f2090
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8801523153736206636
+    second: Restaurant_Props_0
+  - first:
+      213: 4041613734124599920
+    second: Restaurant_Props_1
+  - first:
+      213: -315220861361943061
+    second: Restaurant_Props_2
+  - first:
+      213: 4256313293578614383
+    second: Restaurant_Props_3
+  - first:
+      213: -2986945729217927265
+    second: Restaurant_Props_4
+  - first:
+      213: 5093352283718040364
+    second: Restaurant_Props_5
+  - first:
+      213: 1268346696865906550
+    second: Restaurant_Props_6
+  - first:
+      213: 3347015211803534253
+    second: Restaurant_Props_7
+  - first:
+      213: 169799731205685471
+    second: Restaurant_Props_8
+  - first:
+      213: -3689242813666556522
+    second: Restaurant_Props_9
+  - first:
+      213: 8964125887687735311
+    second: Restaurant_Props_10
+  - first:
+      213: -7442588375898338759
+    second: Restaurant_Props_11
+  - first:
+      213: -1874607941690201948
+    second: Restaurant_Props_12
+  - first:
+      213: 7024617236244160756
+    second: Restaurant_Props_13
+  - first:
+      213: -3309144866286314250
+    second: Restaurant_Props_14
+  - first:
+      213: 1534217413475276765
+    second: Restaurant_Props_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Restaurant_Props_0
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 622
+        width: 98
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d67d2bf255bad580800000000000000
+      internalID: -8801523153736206636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restaurant_Props_1
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 622
+        width: 183
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07a36dd1742b61830800000000000000
+      internalID: 4041613734124599920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restaurant_Props_2
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 643
+        width: 107
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bed8ab4fb4c10abf0800000000000000
+      internalID: -315220861361943061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restaurant_Props_3
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 615
+        width: 107
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f66b68cb366711b30800000000000000
+      internalID: 4256313293578614383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restaurant_Props_4
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 605
+        width: 88
+        height: 98
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f97689e4fac3c86d0800000000000000
+      internalID: -2986945729217927265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restaurant_Props_5
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 680
+        width: 273
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2b30f29ae83fa640800000000000000
+      internalID: 5093352283718040364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restaurant_Props_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 420
+        width: 171
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67f7bbec9921a9110800000000000000
+      internalID: 1268346696865906550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restaurant_Props_7
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 419
+        width: 54
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da3e0651a9cf27e20800000000000000
+      internalID: 3347015211803534253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restaurant_Props_8
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 427
+        width: 117
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd0c875b4ff3b5200800000000000000
+      internalID: 169799731205685471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restaurant_Props_9
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 224
+        width: 86
+        height: 102
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6950e39153d2dccc0800000000000000
+      internalID: -3689242813666556522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restaurant_Props_10
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 222
+        width: 136
+        height: 102
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f08b2893009f66c70800000000000000
+      internalID: 8964125887687735311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restaurant_Props_11
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 229
+        width: 70
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93ac02dfd4d96b890800000000000000
+      internalID: -7442588375898338759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restaurant_Props_12
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 228
+        width: 84
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a8ed66520e0cf5e0800000000000000
+      internalID: -1874607941690201948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restaurant_Props_13
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 207
+        width: 133
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f06b6988247c7160800000000000000
+      internalID: 7024617236244160756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restaurant_Props_14
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 29
+        width: 213
+        height: 134
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fc52b6d64e8312d0800000000000000
+      internalID: -3309144866286314250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restaurant_Props_15
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 65
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd79962eb92aa4510800000000000000
+      internalID: 1534217413475276765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 28b136104e3f6a84db33716c1952f801
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Restaurant_Props_0: -8801523153736206636
+      Restaurant_Props_1: 4041613734124599920
+      Restaurant_Props_10: 8964125887687735311
+      Restaurant_Props_11: -7442588375898338759
+      Restaurant_Props_12: -1874607941690201948
+      Restaurant_Props_13: 7024617236244160756
+      Restaurant_Props_14: -3309144866286314250
+      Restaurant_Props_15: 1534217413475276765
+      Restaurant_Props_2: -315220861361943061
+      Restaurant_Props_3: 4256313293578614383
+      Restaurant_Props_4: -2986945729217927265
+      Restaurant_Props_5: 5093352283718040364
+      Restaurant_Props_6: 1268346696865906550
+      Restaurant_Props_7: 3347015211803534253
+      Restaurant_Props_8: 169799731205685471
+      Restaurant_Props_9: -3689242813666556522
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,546 @@
+fileFormatVersion: 2
+guid: 02411f89a3160c9429a9958bd9ed4609
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4155197620207599207
+    second: Customer_Hats_Batch_2_0
+  - first:
+      213: 7716134072855886379
+    second: Customer_Hats_Batch_2_1
+  - first:
+      213: -505299574088677879
+    second: Customer_Hats_Batch_2_2
+  - first:
+      213: -642164869656672982
+    second: Customer_Hats_Batch_2_3
+  - first:
+      213: -7472445525674794487
+    second: Customer_Hats_Batch_2_4
+  - first:
+      213: -1654932979276716927
+    second: Customer_Hats_Batch_2_5
+  - first:
+      213: 2234811528739793681
+    second: Customer_Hats_Batch_2_6
+  - first:
+      213: 6422234927859666388
+    second: Customer_Hats_Batch_2_7
+  - first:
+      213: -8304807319180628372
+    second: Customer_Hats_Batch_2_8
+  - first:
+      213: 1458068079580269712
+    second: Customer_Hats_Batch_2_9
+  - first:
+      213: 5055649217212533726
+    second: Customer_Hats_Batch_2_10
+  - first:
+      213: -5002953857545979850
+    second: Customer_Hats_Batch_2_11
+  - first:
+      213: -5612579189894276774
+    second: Customer_Hats_Batch_2_12
+  - first:
+      213: -4843769826068121316
+    second: Customer_Hats_Batch_2_13
+  - first:
+      213: 6386946016897767276
+    second: Customer_Hats_Batch_2_14
+  - first:
+      213: 8083504109649352635
+    second: Customer_Hats_Batch_2_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 486
+        width: 191
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76eb50c683a3aa930800000000000000
+      internalID: 4155197620207599207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_1
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 486
+        width: 190
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2afcd3be07351b60800000000000000
+      internalID: 7716134072855886379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_2
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 486
+        width: 191
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 906c94de6b0dcf8f0800000000000000
+      internalID: -505299574088677879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_3
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 486
+        width: 190
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2501e014729617f0800000000000000
+      internalID: -642164869656672982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_4
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 345
+        width: 157
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90262b6926a8c4890800000000000000
+      internalID: -7472445525674794487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_5
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 345
+        width: 157
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 184e12b393f7809e0800000000000000
+      internalID: -1654932979276716927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_6
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 345
+        width: 156
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11bab7eae35a30f10800000000000000
+      internalID: 2234811528739793681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_7
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 345
+        width: 157
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dd8e23f3ac502950800000000000000
+      internalID: 6422234927859666388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_8
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 199
+        width: 142
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6eac247eb56fbc80800000000000000
+      internalID: -8304807319180628372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_9
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 199
+        width: 142
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09cc7b571391c3410800000000000000
+      internalID: 1458068079580269712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_10
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 199
+        width: 142
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edb4fe45d26492640800000000000000
+      internalID: 5055649217212533726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_11
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 199
+        width: 142
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6383d4d29ffe19ab0800000000000000
+      internalID: -5002953857545979850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_12
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 58
+        width: 141
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a591a98a6fc1c12b0800000000000000
+      internalID: -5612579189894276774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_13
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 58
+        width: 142
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c19347fa10977ccb0800000000000000
+      internalID: -4843769826068121316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_14
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 58
+        width: 141
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6799c8109df2a850800000000000000
+      internalID: 6386946016897767276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hats_Batch_2_15
+      rect:
+        serializedVersion: 2
+        x: 757
+        y: 58
+        width: 142
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb75f04d8206e2070800000000000000
+      internalID: 8083504109649352635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Customer_Hats_Batch_2_0: 4155197620207599207
+      Customer_Hats_Batch_2_1: 7716134072855886379
+      Customer_Hats_Batch_2_10: 5055649217212533726
+      Customer_Hats_Batch_2_11: -5002953857545979850
+      Customer_Hats_Batch_2_12: -5612579189894276774
+      Customer_Hats_Batch_2_13: -4843769826068121316
+      Customer_Hats_Batch_2_14: 6386946016897767276
+      Customer_Hats_Batch_2_15: 8083504109649352635
+      Customer_Hats_Batch_2_2: -505299574088677879
+      Customer_Hats_Batch_2_3: -642164869656672982
+      Customer_Hats_Batch_2_4: -7472445525674794487
+      Customer_Hats_Batch_2_5: -1654932979276716927
+      Customer_Hats_Batch_2_6: 2234811528739793681
+      Customer_Hats_Batch_2_7: 6422234927859666388
+      Customer_Hats_Batch_2_8: -8304807319180628372
+      Customer_Hats_Batch_2_9: 1458068079580269712
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

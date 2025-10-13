@@ -1,0 +1,754 @@
+fileFormatVersion: 2
+guid: 7ae0c320ae28b184394d9fea71a39929
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5184593255844855753
+    second: Customer_Shirts_Batch_2_0
+  - first:
+      213: -5333756087038339234
+    second: Customer_Shirts_Batch_2_1
+  - first:
+      213: -2289707369970633734
+    second: Customer_Shirts_Batch_2_2
+  - first:
+      213: 9058101946531430466
+    second: Customer_Shirts_Batch_2_3
+  - first:
+      213: -4545384968928311634
+    second: Customer_Shirts_Batch_2_4
+  - first:
+      213: 2724618940541715500
+    second: Customer_Shirts_Batch_2_5
+  - first:
+      213: -6658534887692464544
+    second: Customer_Shirts_Batch_2_6
+  - first:
+      213: 7985904394546090908
+    second: Customer_Shirts_Batch_2_7
+  - first:
+      213: 3640951738414399900
+    second: Customer_Shirts_Batch_2_8
+  - first:
+      213: -5667106284616542263
+    second: Customer_Shirts_Batch_2_9
+  - first:
+      213: 7827192770581679783
+    second: Customer_Shirts_Batch_2_10
+  - first:
+      213: 6348968495782497719
+    second: Customer_Shirts_Batch_2_11
+  - first:
+      213: -1567517635986607323
+    second: Customer_Shirts_Batch_2_12
+  - first:
+      213: -3367671059713807274
+    second: Customer_Shirts_Batch_2_13
+  - first:
+      213: 2697466605457410959
+    second: Customer_Shirts_Batch_2_14
+  - first:
+      213: 1206780031193428639
+    second: Customer_Shirts_Batch_2_15
+  - first:
+      213: -4597251193924654378
+    second: Customer_Shirts_Batch_2_16
+  - first:
+      213: -3025707435026082943
+    second: Customer_Shirts_Batch_2_17
+  - first:
+      213: -6956087372809694826
+    second: Customer_Shirts_Batch_2_18
+  - first:
+      213: 7708919566319010635
+    second: Customer_Shirts_Batch_2_19
+  - first:
+      213: -9032009325792807650
+    second: Customer_Shirts_Batch_2_20
+  - first:
+      213: -2639118622361712461
+    second: Customer_Shirts_Batch_2_21
+  - first:
+      213: -1540606401965826841
+    second: Customer_Shirts_Batch_2_22
+  - first:
+      213: 3318087222396399066
+    second: Customer_Shirts_Batch_2_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 248
+        width: 80
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cfb487d81063f740800000000000000
+      internalID: 5184593255844855753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_1
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 246
+        width: 80
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5790892911baf5b0800000000000000
+      internalID: -5333756087038339234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_2
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 247
+        width: 80
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af37e4547435930e0800000000000000
+      internalID: -2289707369970633734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_3
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 247
+        width: 80
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 240c74e7ab7d4bd70800000000000000
+      internalID: 9058101946531430466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_4
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 247
+        width: 80
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea6c0a7047c8be0c0800000000000000
+      internalID: -4545384968928311634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_5
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 247
+        width: 79
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c244a43ad7acfc520800000000000000
+      internalID: 2724618940541715500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_6
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 169
+        width: 80
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06e8b8e4cc12893a0800000000000000
+      internalID: -6658534887692464544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_7
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 167
+        width: 80
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9396275cb1a3de60800000000000000
+      internalID: 7985904394546090908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_8
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 169
+        width: 80
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c910884c052478230800000000000000
+      internalID: 3640951738414399900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_9
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 170
+        width: 80
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c71c091cd46a51b0800000000000000
+      internalID: -5667106284616542263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_10
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 170
+        width: 80
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7aec607ca56cf9c60800000000000000
+      internalID: 7827192770581679783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_11
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 170
+        width: 79
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bd034965311c1850800000000000000
+      internalID: 6348968495782497719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_12
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 88
+        width: 79
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 523bbdfd30f0f3ae0800000000000000
+      internalID: -1567517635986607323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_13
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 86
+        width: 79
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65c256d8301a341d0800000000000000
+      internalID: -3367671059713807274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_14
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 87
+        width: 79
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8b84cbf5935f6520800000000000000
+      internalID: 2697466605457410959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_15
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 88
+        width: 80
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f92b1596b085fb010800000000000000
+      internalID: 1206780031193428639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_16
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 88
+        width: 79
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6da61ea75684330c0800000000000000
+      internalID: -4597251193924654378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_17
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 88
+        width: 79
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18313056e178206d0800000000000000
+      internalID: -3025707435026082943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_18
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 5
+        width: 80
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 691191da363077f90800000000000000
+      internalID: -6956087372809694826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_19
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 3
+        width: 80
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b43c08080859bfa60800000000000000
+      internalID: 7708919566319010635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_20
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 5
+        width: 80
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e15ba103f5bd7a280800000000000000
+      internalID: -9032009325792807650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_21
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 6
+        width: 79
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b8030a7897ff5bd0800000000000000
+      internalID: -2639118622361712461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_22
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 6
+        width: 80
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ec5220d3aaae9ae0800000000000000
+      internalID: -1540606401965826841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Shirts_Batch_2_23
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 6
+        width: 79
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: add23b0bfb63c0e20800000000000000
+      internalID: 3318087222396399066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Customer_Shirts_Batch_2_0: 5184593255844855753
+      Customer_Shirts_Batch_2_1: -5333756087038339234
+      Customer_Shirts_Batch_2_10: 7827192770581679783
+      Customer_Shirts_Batch_2_11: 6348968495782497719
+      Customer_Shirts_Batch_2_12: -1567517635986607323
+      Customer_Shirts_Batch_2_13: -3367671059713807274
+      Customer_Shirts_Batch_2_14: 2697466605457410959
+      Customer_Shirts_Batch_2_15: 1206780031193428639
+      Customer_Shirts_Batch_2_16: -4597251193924654378
+      Customer_Shirts_Batch_2_17: -3025707435026082943
+      Customer_Shirts_Batch_2_18: -6956087372809694826
+      Customer_Shirts_Batch_2_19: 7708919566319010635
+      Customer_Shirts_Batch_2_2: -2289707369970633734
+      Customer_Shirts_Batch_2_20: -9032009325792807650
+      Customer_Shirts_Batch_2_21: -2639118622361712461
+      Customer_Shirts_Batch_2_22: -1540606401965826841
+      Customer_Shirts_Batch_2_23: 3318087222396399066
+      Customer_Shirts_Batch_2_3: 9058101946531430466
+      Customer_Shirts_Batch_2_4: -4545384968928311634
+      Customer_Shirts_Batch_2_5: 2724618940541715500
+      Customer_Shirts_Batch_2_6: -6658534887692464544
+      Customer_Shirts_Batch_2_7: 7985904394546090908
+      Customer_Shirts_Batch_2_8: 3640951738414399900
+      Customer_Shirts_Batch_2_9: -5667106284616542263
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

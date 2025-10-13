@@ -1,0 +1,910 @@
+fileFormatVersion: 2
+guid: da6ab4edcc29eb247b74a926dff40992
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5849156576340009645
+    second: Customer_Hairs_Batch_2_0
+  - first:
+      213: -6454929864749522479
+    second: Customer_Hairs_Batch_2_1
+  - first:
+      213: -6227576378616757391
+    second: Customer_Hairs_Batch_2_2
+  - first:
+      213: -3692071269737518416
+    second: Customer_Hairs_Batch_2_3
+  - first:
+      213: 4268122210067700154
+    second: Customer_Hairs_Batch_2_4
+  - first:
+      213: 291919526188353025
+    second: Customer_Hairs_Batch_2_5
+  - first:
+      213: 1549815985589393556
+    second: Customer_Hairs_Batch_2_6
+  - first:
+      213: 6077243646315420853
+    second: Customer_Hairs_Batch_2_7
+  - first:
+      213: 3068987404898833897
+    second: Customer_Hairs_Batch_2_8
+  - first:
+      213: -6440015601069076145
+    second: Customer_Hairs_Batch_2_9
+  - first:
+      213: -2607135771888739786
+    second: Customer_Hairs_Batch_2_10
+  - first:
+      213: -5427332012559784651
+    second: Customer_Hairs_Batch_2_11
+  - first:
+      213: 4951352896123786392
+    second: Customer_Hairs_Batch_2_12
+  - first:
+      213: -2931964512142081731
+    second: Customer_Hairs_Batch_2_13
+  - first:
+      213: -3141406595597108169
+    second: Customer_Hairs_Batch_2_14
+  - first:
+      213: -8537804419021468470
+    second: Customer_Hairs_Batch_2_15
+  - first:
+      213: 8310570329642856407
+    second: Customer_Hairs_Batch_2_16
+  - first:
+      213: 7566458993025618661
+    second: Customer_Hairs_Batch_2_17
+  - first:
+      213: 4601003017216232867
+    second: Customer_Hairs_Batch_2_18
+  - first:
+      213: -9092758926905963245
+    second: Customer_Hairs_Batch_2_19
+  - first:
+      213: -3852167684321551311
+    second: Customer_Hairs_Batch_2_20
+  - first:
+      213: 6337173089082481096
+    second: Customer_Hairs_Batch_2_21
+  - first:
+      213: 4039371030375932658
+    second: Customer_Hairs_Batch_2_22
+  - first:
+      213: -4632659028764480103
+    second: Customer_Hairs_Batch_2_23
+  - first:
+      213: 2793072384843027816
+    second: Customer_Hairs_Batch_2_24
+  - first:
+      213: 186507772177322295
+    second: Customer_Hairs_Batch_2_25
+  - first:
+      213: -4232006531636766757
+    second: Customer_Hairs_Batch_2_26
+  - first:
+      213: 1740091028470926143
+    second: Customer_Hairs_Batch_2_27
+  - first:
+      213: 3062119832950209912
+    second: Customer_Hairs_Batch_2_28
+  - first:
+      213: -841069911376312935
+    second: Customer_Hairs_Batch_2_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 693
+        width: 125
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35d1d9f751f93dea0800000000000000
+      internalID: -5849156576340009645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_1
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 687
+        width: 147
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d16b89dc7b7b66a0800000000000000
+      internalID: -6454929864749522479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_2
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 694
+        width: 148
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1734fec57443399a0800000000000000
+      internalID: -6227576378616757391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_3
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 692
+        width: 156
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0baaed9ddb023ccc0800000000000000
+      internalID: -3692071269737518416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_4
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 687
+        width: 126
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab95a0d598a6b3b30800000000000000
+      internalID: 4268122210067700154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_5
+      rect:
+        serializedVersion: 2
+        x: 867
+        y: 699
+        width: 128
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 106057d234b1d0400800000000000000
+      internalID: 291919526188353025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_6
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 531
+        width: 125
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49817487d6d028510800000000000000
+      internalID: 1549815985589393556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_7
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 524
+        width: 146
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bc5120d5e4b65450800000000000000
+      internalID: 6077243646315420853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_8
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 532
+        width: 148
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e59429d8cb379a20800000000000000
+      internalID: 3068987404898833897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_9
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 529
+        width: 156
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f41dd467ee770a6a0800000000000000
+      internalID: -6440015601069076145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_10
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 524
+        width: 125
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63a9b5324d791dbd0800000000000000
+      internalID: -2607135771888739786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_11
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 537
+        width: 128
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 535a4413a4e3ea4b0800000000000000
+      internalID: -5427332012559784651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_12
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 368
+        width: 125
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8945f03c93db6b440800000000000000
+      internalID: 4951352896123786392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_13
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 362
+        width: 147
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3148b77fc19f47d0800000000000000
+      internalID: -2931964512142081731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_14
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 369
+        width: 148
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73c7d5e585b7764d0800000000000000
+      internalID: -3141406595597108169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_15
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 366
+        width: 156
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acc077abd10a38980800000000000000
+      internalID: -8537804419021468470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_16
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 362
+        width: 126
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7df634bfea3155370800000000000000
+      internalID: 8310570329642856407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_17
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 374
+        width: 128
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e21ad68d56710960800000000000000
+      internalID: 7566458993025618661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_18
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 205
+        width: 125
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ad8ca3fddb0adf30800000000000000
+      internalID: 4601003017216232867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_19
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 199
+        width: 147
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31d02857ee700d180800000000000000
+      internalID: -9092758926905963245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_20
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 207
+        width: 148
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13c56c896e95a8ac0800000000000000
+      internalID: -3852167684321551311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_21
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 204
+        width: 156
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c91de6495922f750800000000000000
+      internalID: 6337173089082481096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_22
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 199
+        width: 125
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f2af85fc8abe0830800000000000000
+      internalID: 4039371030375932658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_23
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 212
+        width: 128
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99dacf0882d75bfb0800000000000000
+      internalID: -4632659028764480103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_24
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 43
+        width: 126
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8659582298cf2c620800000000000000
+      internalID: 2793072384843027816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_25
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 37
+        width: 147
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7319a74a4db969200800000000000000
+      internalID: 186507772177322295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_26
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 44
+        width: 148
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd758aa4b74e445c0800000000000000
+      internalID: -4232006531636766757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_27
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 41
+        width: 157
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3b8adc229b062810800000000000000
+      internalID: 1740091028470926143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_28
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 37
+        width: 126
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87dfca6a3c5de7a20800000000000000
+      internalID: 3062119832950209912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customer_Hairs_Batch_2_29
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 49
+        width: 128
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 995452d2f5be354f0800000000000000
+      internalID: -841069911376312935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Customer_Hairs_Batch_2_0: -5849156576340009645
+      Customer_Hairs_Batch_2_1: -6454929864749522479
+      Customer_Hairs_Batch_2_10: -2607135771888739786
+      Customer_Hairs_Batch_2_11: -5427332012559784651
+      Customer_Hairs_Batch_2_12: 4951352896123786392
+      Customer_Hairs_Batch_2_13: -2931964512142081731
+      Customer_Hairs_Batch_2_14: -3141406595597108169
+      Customer_Hairs_Batch_2_15: -8537804419021468470
+      Customer_Hairs_Batch_2_16: 8310570329642856407
+      Customer_Hairs_Batch_2_17: 7566458993025618661
+      Customer_Hairs_Batch_2_18: 4601003017216232867
+      Customer_Hairs_Batch_2_19: -9092758926905963245
+      Customer_Hairs_Batch_2_2: -6227576378616757391
+      Customer_Hairs_Batch_2_20: -3852167684321551311
+      Customer_Hairs_Batch_2_21: 6337173089082481096
+      Customer_Hairs_Batch_2_22: 4039371030375932658
+      Customer_Hairs_Batch_2_23: -4632659028764480103
+      Customer_Hairs_Batch_2_24: 2793072384843027816
+      Customer_Hairs_Batch_2_25: 186507772177322295
+      Customer_Hairs_Batch_2_26: -4232006531636766757
+      Customer_Hairs_Batch_2_27: 1740091028470926143
+      Customer_Hairs_Batch_2_28: 3062119832950209912
+      Customer_Hairs_Batch_2_29: -841069911376312935
+      Customer_Hairs_Batch_2_3: -3692071269737518416
+      Customer_Hairs_Batch_2_4: 4268122210067700154
+      Customer_Hairs_Batch_2_5: 291919526188353025
+      Customer_Hairs_Batch_2_6: 1549815985589393556
+      Customer_Hairs_Batch_2_7: 6077243646315420853
+      Customer_Hairs_Batch_2_8: 3068987404898833897
+      Customer_Hairs_Batch_2_9: -6440015601069076145
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

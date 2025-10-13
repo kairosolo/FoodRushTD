@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe97c1fabac5b24793bc472066e71a9, type: 3}
+  m_Name: DE_OfficeLunchRush
+  m_EditorClassIdentifier: Assembly-CSharp::DailyEventData
+  eventIcon: {fileID: -6788282280378061156, guid: 4713c55e361929043b3ffe430d6bce43, type: 3}
+  eventName: Office Lunch Rush
+  eventDescription: The nearby office building is on its lunch break. Combo meals
+    are popular!
+  featuredCustomers:
+  - {fileID: 11400000, guid: 84022340ed7be9040ae3265ada0ac18f, type: 2}
+  featuredCustomerChance: 70
