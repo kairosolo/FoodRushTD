@@ -16,7 +16,8 @@ public class MenuManager : MonoBehaviour
 
     public void StartRun()
     {
-        SceneManager.LoadScene(1);
+        if (LevelManager.Instance != null)
+            LevelManager.Instance.GoToLevelID(1);
     }
 
     public void OpenMenu()

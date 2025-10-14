@@ -1,0 +1,652 @@
+fileFormatVersion: 2
+guid: 04f40f79057b109419b7d9291992a179
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5859758836534787393
+    second: Frying_Worker_Loading_Screen_0
+  - first:
+      213: -2096952286790788945
+    second: Frying_Worker_Loading_Screen_1
+  - first:
+      213: 1034809500272586407
+    second: Frying_Worker_Loading_Screen_2
+  - first:
+      213: -6396332989313410406
+    second: Frying_Worker_Loading_Screen_3
+  - first:
+      213: 9114475703328973566
+    second: Frying_Worker_Loading_Screen_4
+  - first:
+      213: -5244357657316306531
+    second: Frying_Worker_Loading_Screen_5
+  - first:
+      213: -763354267501933234
+    second: Frying_Worker_Loading_Screen_6
+  - first:
+      213: 6964964083790450496
+    second: Frying_Worker_Loading_Screen_7
+  - first:
+      213: -10183802873280236
+    second: Frying_Worker_Loading_Screen_8
+  - first:
+      213: 8341503969533735504
+    second: Frying_Worker_Loading_Screen_9
+  - first:
+      213: -9109860840500155529
+    second: Frying_Worker_Loading_Screen_10
+  - first:
+      213: -7848302406349073533
+    second: Frying_Worker_Loading_Screen_11
+  - first:
+      213: 1194929601185649341
+    second: Frying_Worker_Loading_Screen_12
+  - first:
+      213: -72196709051114899
+    second: Frying_Worker_Loading_Screen_13
+  - first:
+      213: 1726932858402260342
+    second: Frying_Worker_Loading_Screen_14
+  - first:
+      213: 8923631239675798720
+    second: Frying_Worker_Loading_Screen_15
+  - first:
+      213: 8570159682438363819
+    second: Frying_Worker_Loading_Screen_16
+  - first:
+      213: 5652899171403406690
+    second: Frying_Worker_Loading_Screen_17
+  - first:
+      213: -9185160669370171337
+    second: Frying_Worker_Loading_Screen_18
+  - first:
+      213: -4216490415149544206
+    second: Frying_Worker_Loading_Screen_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_0
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 2952
+        width: 1046
+        height: 710
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14dbc119d9b025150800000000000000
+      internalID: 5859758836534787393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_1
+      rect:
+        serializedVersion: 2
+        x: 1501
+        y: 2821
+        width: 769
+        height: 678
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa854ea510126e2e0800000000000000
+      internalID: -2096952286790788945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_2
+      rect:
+        serializedVersion: 2
+        x: 2348
+        y: 3140
+        width: 156
+        height: 262
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ae62f102c16c5e00800000000000000
+      internalID: 1034809500272586407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_3
+      rect:
+        serializedVersion: 2
+        x: 2655
+        y: 3261
+        width: 220
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9a9cd21909ab37a0800000000000000
+      internalID: -6396332989313410406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_4
+      rect:
+        serializedVersion: 2
+        x: 2364
+        y: 2928
+        width: 134
+        height: 121
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef22ad29c5f1d7e70800000000000000
+      internalID: 9114475703328973566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_5
+      rect:
+        serializedVersion: 2
+        x: 1663
+        y: 2466
+        width: 466
+        height: 319
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d91df881f7c4837b0800000000000000
+      internalID: -5244357657316306531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_6
+      rect:
+        serializedVersion: 2
+        x: 2183
+        y: 2569
+        width: 191
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4dc4cf86550865f0800000000000000
+      internalID: -763354267501933234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_7
+      rect:
+        serializedVersion: 2
+        x: 2459
+        y: 2603
+        width: 218
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04f0fa7aee588a060800000000000000
+      internalID: 6964964083790450496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_8
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 2232
+        width: 486
+        height: 329
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 419864f92e1dbdff0800000000000000
+      internalID: -10183802873280236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_9
+      rect:
+        serializedVersion: 2
+        x: 1661
+        y: 1937
+        width: 286
+        height: 303
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 052b1944aa9f2c370800000000000000
+      internalID: 8341503969533735504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_10
+      rect:
+        serializedVersion: 2
+        x: 2576
+        y: 2064
+        width: 194
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77b2fb8e4d5439180800000000000000
+      internalID: -9109860840500155529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_11
+      rect:
+        serializedVersion: 2
+        x: 2802
+        y: 2066
+        width: 194
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38358b32b8a351390800000000000000
+      internalID: -7848302406349073533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_12
+      rect:
+        serializedVersion: 2
+        x: 3044
+        y: 2040
+        width: 250
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db2154a242e359010800000000000000
+      internalID: 1194929601185649341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_13
+      rect:
+        serializedVersion: 2
+        x: 1749
+        y: 1732
+        width: 133
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6a5e03c9718ffef0800000000000000
+      internalID: -72196709051114899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_14
+      rect:
+        serializedVersion: 2
+        x: 3320
+        y: 1268
+        width: 611
+        height: 439
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6754408f84c47f710800000000000000
+      internalID: 1726932858402260342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_15
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 923
+        width: 940
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c46473455b17db70800000000000000
+      internalID: 8923631239675798720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_16
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 249
+        width: 1920
+        height: 863
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: baafc1413d25fe670800000000000000
+      internalID: 8570159682438363819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_17
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 304
+        width: 316
+        height: 385
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26d999698d1237e40800000000000000
+      internalID: 5652899171403406690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_18
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 306
+        width: 298
+        height: 377
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7304d494901c78080800000000000000
+      internalID: -9185160669370171337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frying_Worker_Loading_Screen_19
+      rect:
+        serializedVersion: 2
+        x: 947
+        y: 314
+        width: 318
+        height: 375
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fc0c2eae440c75c0800000000000000
+      internalID: -4216490415149544206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 59ced06d6d46c7941aa30f09414ef007
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Frying_Worker_Loading_Screen_0: 5859758836534787393
+      Frying_Worker_Loading_Screen_1: -2096952286790788945
+      Frying_Worker_Loading_Screen_10: -9109860840500155529
+      Frying_Worker_Loading_Screen_11: -7848302406349073533
+      Frying_Worker_Loading_Screen_12: 1194929601185649341
+      Frying_Worker_Loading_Screen_13: -72196709051114899
+      Frying_Worker_Loading_Screen_14: 1726932858402260342
+      Frying_Worker_Loading_Screen_15: 8923631239675798720
+      Frying_Worker_Loading_Screen_16: 8570159682438363819
+      Frying_Worker_Loading_Screen_17: 5652899171403406690
+      Frying_Worker_Loading_Screen_18: -9185160669370171337
+      Frying_Worker_Loading_Screen_19: -4216490415149544206
+      Frying_Worker_Loading_Screen_2: 1034809500272586407
+      Frying_Worker_Loading_Screen_3: -6396332989313410406
+      Frying_Worker_Loading_Screen_4: 9114475703328973566
+      Frying_Worker_Loading_Screen_5: -5244357657316306531
+      Frying_Worker_Loading_Screen_6: -763354267501933234
+      Frying_Worker_Loading_Screen_7: 6964964083790450496
+      Frying_Worker_Loading_Screen_8: -10183802873280236
+      Frying_Worker_Loading_Screen_9: 8341503969533735504
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

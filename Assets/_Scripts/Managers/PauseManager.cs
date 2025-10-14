@@ -71,13 +71,15 @@ public class PauseManager : MonoBehaviour
     public void RestartGame()
     {
         Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
+        if (LevelManager.Instance != null)
+            LevelManager.Instance.GoToLevelName(currentScene.name);
     }
 
     public void GoToMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(0);
+        if (LevelManager.Instance != null)
+            LevelManager.Instance.GoToLevelID(2);
     }
 
     public void EndRun()
