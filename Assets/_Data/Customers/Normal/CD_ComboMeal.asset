@@ -15,7 +15,7 @@ MonoBehaviour:
   customerTypeName: The Combo Meal
   customerPrefab: {fileID: 2199783616792833757, guid: 9a946517036c97345a994cec8cb6e773, type: 3}
   moveSpeed: 1.8
-  cashReward: 120
+  cashReward: 55
   potentialOrder:
   - product: {fileID: 11400000, guid: bb2822edf7994534aa2ca1ace00f30f7, type: 2}
     quantity: 1

@@ -84,6 +84,7 @@ public class AudioManager : MonoBehaviour
         if (sfxDictionary.TryGetValue(name, out AudioClip clip))
         {
             sfxAudioSource.PlayOneShot(clip);
+            Debug.Log(name);
         }
         else
         {

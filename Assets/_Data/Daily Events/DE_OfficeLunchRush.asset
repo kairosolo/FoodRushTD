@@ -16,6 +16,7 @@ MonoBehaviour:
   eventName: Office Lunch Rush
   eventDescription: The nearby office building is on its lunch break. Combo meals
     are popular!
+  minDayToAppear: 5
   featuredCustomers:
   - {fileID: 11400000, guid: 84022340ed7be9040ae3265ada0ac18f, type: 2}
-  featuredCustomerChance: 70
+  eventWeight: 4

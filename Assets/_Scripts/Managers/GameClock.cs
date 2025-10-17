@@ -26,6 +26,7 @@ public class GameClock : MonoBehaviour
     private int currentDay;
     private int currentHour;
     private int currentMinute;
+    private bool isDayPhase = true;
 
     public int CurrentDay => currentDay;
     public int CurrentHour => currentHour;
@@ -53,11 +54,15 @@ public class GameClock : MonoBehaviour
         OnTimeChanged?.Invoke(currentHour, currentMinute);
         if (currentHour >= dayPhaseStartHour && currentHour < nightPhaseStartHour)
         {
+            isDayPhase = true;
             OnDayPhaseStart?.Invoke();
+            StartDayMusicAndAmbiance();
         }
         else
         {
+            isDayPhase = false;
             OnNightPhaseStart?.Invoke();
+            StartNightMusicAndAmbiance();
         }
     }
 
@@ -90,13 +95,31 @@ public class GameClock : MonoBehaviour
 
         OnTimeChanged?.Invoke(currentHour, currentMinute);
 
-        if (currentHour == dayPhaseStartHour && currentMinute == 0)
+        if (isDayPhase && currentHour == nightPhaseStartHour && currentMinute == 0)
         {
-            OnDayPhaseStart?.Invoke();
-        }
-        else if (currentHour == nightPhaseStartHour && currentMinute == 0)
-        {
+            isDayPhase = false;
             OnNightPhaseStart?.Invoke();
+            StartNightMusicAndAmbiance();
         }
+        else if (!isDayPhase && currentHour == dayPhaseStartHour && currentMinute == 0)
+        {
+            isDayPhase = true;
+            OnDayPhaseStart?.Invoke();
+            StartDayMusicAndAmbiance();
+        }
+    }
+
+    private void StartDayMusicAndAmbiance()
+    {
+        AudioManager.Instance.PlayMusic("Music_Gameplay_Day");
+        AudioManager.Instance.StopLoopingSFX();
+        AudioManager.Instance.PlayLoopingSFX("Ambiance_Restaurant_Day");
+    }
+
+    private void StartNightMusicAndAmbiance()
+    {
+        AudioManager.Instance.PlayMusic("Music_Gameplay_Night");
+        AudioManager.Instance.StopLoopingSFX();
+        AudioManager.Instance.PlayLoopingSFX("Ambiance_Night");
     }
 }

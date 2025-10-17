@@ -16,6 +16,15 @@ public class DailyEventUI : MonoBehaviour
     [SerializeField] private float displayDuration = 4f;
 
     private Coroutine displayCoroutine;
+
+    private void Start()
+    {
+        if (eventContainer != null)
+        {
+            eventContainer.SetActive(false);
+        }
+    }
+
     private void OnEnable()
     {
         DailyEventManager.OnNewDailyEvent += ShowEventAnnouncement;
@@ -48,9 +57,11 @@ public class DailyEventUI : MonoBehaviour
 
     private IEnumerator ShowAndHideRoutine()
     {
-
         eventContainer.SetActive(true);
         eventUIAnimator.SetTrigger("isPoppingIn");
+
+        AudioManager.Instance.PlaySFX("Event_Announce");
+
         yield return new WaitForSeconds(displayDuration);
 
         eventUIAnimator.SetTrigger("isPoppingOut");
@@ -58,5 +69,4 @@ public class DailyEventUI : MonoBehaviour
         yield return new WaitForSeconds(eventUIAnimator.GetCurrentAnimatorStateInfo(0).length);
         eventContainer.SetActive(false);
     }
-
 }

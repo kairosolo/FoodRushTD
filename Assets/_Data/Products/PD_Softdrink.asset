@@ -15,5 +15,9 @@ MonoBehaviour:
   productName: Soft drink
   productSprite: {fileID: 8326203587107148169, guid: 4e1a9356880b6a941b2b7ea4b508aceb, type: 3}
   productIconUI: {fileID: -903047517900881907, guid: 1dbf7feb1c2779244970d3de3c6b1bd7, type: 3}
-  basePreparationTime: 3
+  basePreparationTime: 7
   foodProjectilePrefab: {fileID: 3775760721492486323, guid: 38eb953d21445e34a892fe19646c3467, type: 3}
+  movementType: 1
+  projectileSpeed: 5
+  amplitude: 1
+  frequency: 2

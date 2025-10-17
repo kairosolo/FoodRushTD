@@ -2,24 +2,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
- 
 
 public class LevelManager : MonoBehaviour
 {
-
     public static LevelManager Instance { get; private set; }
 
     [SerializeField] private GameObject loadingScreen;
-
 
     [Header("Debug Only")]
     public bool isLoading = false;
     public bool isLevelInitialized = false;
 
-
     private Animator _loadingScreenAnim;
 
- 
     private void Awake()
     {
         if (Instance == null)
@@ -36,9 +31,7 @@ public class LevelManager : MonoBehaviour
         {
             _loadingScreenAnim = loadingScreen.GetComponent<Animator>();
         }
-
     }
-
 
     public void GoToLevelID(int levelID)
     {
@@ -76,7 +69,6 @@ public class LevelManager : MonoBehaviour
             StartCoroutine(LoadLevelInt(SceneManager.GetActiveScene().buildIndex, 0f));
         }
     }
-
 
     private IEnumerator LoadLevelString(string levelName, float levelLoadDelay)
     {
@@ -119,13 +111,12 @@ public class LevelManager : MonoBehaviour
             yield return null;
         }
 
-
         if (_loadingScreenAnim != null)
         {
             _loadingScreenAnim.SetTrigger("End");
             yield return new WaitForSeconds(_loadingScreenAnim.GetCurrentAnimatorStateInfo(0).length);
         }
 
+        isLoading = false;
     }
-
 }

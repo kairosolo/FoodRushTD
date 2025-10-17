@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class StationSelectionUI : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private GameObject stationButtonPrefab;
     [SerializeField] private Transform buttonContainer;
 
@@ -18,9 +17,9 @@ public class StationSelectionUI : MonoBehaviour
 
     public void SetInteractable(bool isInteractable)
     {
-        if (canvasGroup != null)
+        if (buttonContainer != null)
         {
-            canvasGroup.interactable = isInteractable;
+            buttonContainer.gameObject.SetActive(isInteractable);
         }
     }
 

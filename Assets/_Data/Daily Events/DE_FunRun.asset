@@ -15,6 +15,7 @@ MonoBehaviour:
   eventIcon: {fileID: 2973160256258697912, guid: 4713c55e361929043b3ffe430d6bce43, type: 3}
   eventName: Fun Run!
   eventDescription: A local marathon is passing by. Expect lots of thirsty customers!
+  minDayToAppear: 3
   featuredCustomers:
   - {fileID: 11400000, guid: e5b9ef01e4acc8d4d90ee18759375521, type: 2}
-  featuredCustomerChance: 80
+  eventWeight: 5

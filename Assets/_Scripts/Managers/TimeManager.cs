@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Audio;
 using System;
 
 public class TimeManager : MonoBehaviour
@@ -7,10 +6,6 @@ public class TimeManager : MonoBehaviour
     public static TimeManager Instance { get; private set; }
 
     public static event Action<float> OnTimeScaleChanged;
-
-    [Header("Audio")]
-    [SerializeField] private AudioMixer masterMixer;
-    [SerializeField] private string masterPitchParameter = "MasterPitch";
 
     [Header("Fast Forward Settings")]
     [SerializeField] private float maxTimeScale = 2f;
@@ -20,7 +15,6 @@ public class TimeManager : MonoBehaviour
 
     private bool isFastForwarding = false;
     private const float DEFAULT_TIME_SCALE = 1f;
-    private const float DEFAULT_PITCH = 1f;
 
     private void Awake()
     {
@@ -91,12 +85,6 @@ public class TimeManager : MonoBehaviour
     private void SetTimeScale(float newTimeScale)
     {
         Time.timeScale = newTimeScale;
-
-        if (masterMixer != null)
-        {
-            masterMixer.SetFloat(masterPitchParameter, newTimeScale);
-        }
-
         OnTimeScaleChanged?.Invoke(newTimeScale);
     }
 
@@ -105,10 +93,6 @@ public class TimeManager : MonoBehaviour
         if (Time.timeScale != 0f)
         {
             Time.timeScale = DEFAULT_TIME_SCALE;
-        }
-        if (masterMixer != null)
-        {
-            masterMixer.SetFloat(masterPitchParameter, DEFAULT_PITCH);
         }
     }
 }

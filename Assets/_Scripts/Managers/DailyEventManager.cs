@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class DailyEventManager : MonoBehaviour
 {
@@ -9,11 +10,10 @@ public class DailyEventManager : MonoBehaviour
     public static event Action<DailyEventData> OnNewDailyEvent;
 
     [Header("Event Settings")]
-    [SerializeField] private List<DailyEventData> possibleEvents;
+    [SerializeField] private List<DailyEventData> allPossibleEvents;
 
     [Range(0, 100)]
     [SerializeField] private int chanceForEvent = 50;
-    [SerializeField] private int firstDayForEvents = 3;
 
     public DailyEventData ActiveEvent { get; private set; }
 
@@ -41,9 +41,21 @@ public class DailyEventManager : MonoBehaviour
 
     private void TryTriggerNewEvent()
     {
+        if (GameClock.Instance != null && GameClock.Instance.CurrentDay <= 1)
+        {
+            ActiveEvent = null;
+            OnNewDailyEvent?.Invoke(null);
+            return;
+        }
+
         ActiveEvent = null;
 
-        if (GameClock.Instance.CurrentDay < firstDayForEvents)
+        int currentDay = GameClock.Instance.CurrentDay;
+        List<DailyEventData> validEventsForToday = allPossibleEvents
+            .Where(evt => currentDay >= evt.MinDayToAppear)
+            .ToList();
+
+        if (validEventsForToday.Count == 0)
         {
             OnNewDailyEvent?.Invoke(null);
             return;
@@ -52,12 +64,9 @@ public class DailyEventManager : MonoBehaviour
         int roll = UnityEngine.Random.Range(1, 101);
         if (roll <= chanceForEvent)
         {
-            if (possibleEvents.Count > 0)
-            {
-                ActiveEvent = possibleEvents[UnityEngine.Random.Range(0, possibleEvents.Count)];
-                Debug.Log($"DAILY EVENT: {ActiveEvent.EventName} has started!");
-                AudioManager.Instance.PlaySFX("Event_Announce");
-            }
+            ActiveEvent = validEventsForToday[UnityEngine.Random.Range(0, validEventsForToday.Count)];
+            Debug.Log($"DAILY EVENT: {ActiveEvent.EventName} has started!");
+            AudioManager.Instance.PlaySFX("Event_Announce");
         }
         else
         {
@@ -65,5 +74,14 @@ public class DailyEventManager : MonoBehaviour
         }
 
         OnNewDailyEvent?.Invoke(ActiveEvent);
+    }
+
+    public void Debug_TriggerEvent(DailyEventData eventData)
+    {
+        if (eventData != null)
+        {
+            ActiveEvent = eventData;
+            OnNewDailyEvent?.Invoke(eventData);
+        }
     }
 }

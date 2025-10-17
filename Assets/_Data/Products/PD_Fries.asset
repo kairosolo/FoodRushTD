@@ -15,5 +15,9 @@ MonoBehaviour:
   productName: Fries
   productSprite: {fileID: 138216426066323220, guid: 4e1a9356880b6a941b2b7ea4b508aceb, type: 3}
   productIconUI: {fileID: 530412033769746893, guid: 1dbf7feb1c2779244970d3de3c6b1bd7, type: 3}
-  basePreparationTime: 5
+  basePreparationTime: 6
   foodProjectilePrefab: {fileID: 3775760721492486323, guid: 99abd112b16407447a922d9cc27bfd95, type: 3}
+  movementType: 3
+  projectileSpeed: 5
+  amplitude: 1
+  frequency: 2

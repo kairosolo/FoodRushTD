@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PauseManager : MonoBehaviour
 {
@@ -9,8 +10,12 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject mainContent;
     [SerializeField] private GameObject settingsContent;
 
+    [Header("Animation Settings")]
+    [SerializeField] private float animationDuration = 0.2f;
+
     private bool isGamePaused;
     private bool canPause = true;
+    private Coroutine panelAnimationCoroutine;
 
     private void Awake()
     {
@@ -27,6 +32,7 @@ public class PauseManager : MonoBehaviour
     private void Start()
     {
         canPause = true;
+        mainContent.transform.localScale = Vector3.zero;
         mainContent.SetActive(false);
         settingsContent.SetActive(false);
     }
@@ -38,18 +44,58 @@ public class PauseManager : MonoBehaviour
         if (!canPause) return;
         isGamePaused = !isGamePaused;
 
+        if (panelAnimationCoroutine != null)
+        {
+            StopCoroutine(panelAnimationCoroutine);
+        }
+
         if (isGamePaused)
         {
-            mainContent.SetActive(true);
-            settingsContent.SetActive(false);
+            AudioManager.Instance.PlaySFX("UI_Pause");
             Time.timeScale = 0f;
+            panelAnimationCoroutine = StartCoroutine(AnimatePausePanel(true));
         }
         else
         {
+            AudioManager.Instance.PlaySFX("UI_Unpause");
+            Time.timeScale = 1f;
+            panelAnimationCoroutine = StartCoroutine(AnimatePausePanel(false));
+        }
+    }
+
+    private IEnumerator AnimatePausePanel(bool show)
+    {
+        Vector3 startScale = show ? Vector3.zero : Vector3.one;
+        Vector3 endScale = show ? Vector3.one : Vector3.zero;
+        float timer = 0f;
+
+        if (show)
+        {
+            mainContent.transform.localScale = startScale;
+            mainContent.SetActive(true);
+            settingsContent.SetActive(false);
+        }
+
+        while (timer < animationDuration)
+        {
+            timer += Time.unscaledDeltaTime;
+            float t = timer / animationDuration;
+
+            t = Mathf.Sin(t * Mathf.PI * 0.5f);
+
+            mainContent.transform.localScale = Vector3.Lerp(startScale, endScale, t);
+            yield return null;
+        }
+
+        mainContent.transform.localScale = endScale;
+
+        if (!show)
+        {
             mainContent.SetActive(false);
             settingsContent.SetActive(false);
-            Time.timeScale = 1f;
         }
+
+        panelAnimationCoroutine = null;
     }
 
     public void OpenSettings()
@@ -68,6 +114,7 @@ public class PauseManager : MonoBehaviour
     {
         if (isGamePaused) TogglePause();
     }
+
     public void RestartGame()
     {
         Scene currentScene = SceneManager.GetActiveScene();

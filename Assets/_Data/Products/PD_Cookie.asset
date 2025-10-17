@@ -15,5 +15,9 @@ MonoBehaviour:
   productName: Cookie
   productSprite: {fileID: 5091692154403781356, guid: 4e1a9356880b6a941b2b7ea4b508aceb, type: 3}
   productIconUI: {fileID: -6956365924691389520, guid: 1dbf7feb1c2779244970d3de3c6b1bd7, type: 3}
-  basePreparationTime: 5
+  basePreparationTime: 9
   foodProjectilePrefab: {fileID: 3775760721492486323, guid: d57674e067e40024d8082ddbf16dca9f, type: 3}
+  movementType: 2
+  projectileSpeed: 5
+  amplitude: 1
+  frequency: 2

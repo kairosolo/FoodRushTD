@@ -15,7 +15,7 @@ MonoBehaviour:
   customerTypeName: The Sweet Tooth
   customerPrefab: {fileID: 4400451901343395887, guid: 853289d9ea30b324594a30501f22f03f, type: 3}
   moveSpeed: 2
-  cashReward: 75
+  cashReward: 70
   potentialOrder:
   - product: {fileID: 11400000, guid: 1d75e22d4bb64b14188670becf034ffb, type: 2}
     quantity: 1

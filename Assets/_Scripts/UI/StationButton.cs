@@ -17,9 +17,29 @@ public class StationButton : MonoBehaviour
 
         stationIcon.sprite = stationData.StationIcon;
         stationNameText.text = stationData.StationName;
-        stationCostText.text = $"<sprite name=\"Cash\"> {stationData.PlacementCost}";
+        stationCostText.text = $"<sprite name=\"Multi_Cash\"> {stationData.PlacementCost}";
 
         button.onClick.AddListener(OnButtonClicked);
+
+        UpdateInteractableState(EconomyManager.Instance.CurrentCash);
+    }
+
+    private void OnEnable()
+    {
+        EconomyManager.OnCashChanged += UpdateInteractableState;
+    }
+
+    private void OnDisable()
+    {
+        EconomyManager.OnCashChanged -= UpdateInteractableState;
+    }
+
+    private void UpdateInteractableState(int currentCash)
+    {
+        if (stationData != null)
+        {
+            button.interactable = currentCash >= stationData.PlacementCost;
+        }
     }
 
     private void OnButtonClicked()

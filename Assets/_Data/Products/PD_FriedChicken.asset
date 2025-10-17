@@ -15,5 +15,9 @@ MonoBehaviour:
   productName: Fried Chicken
   productSprite: {fileID: 5093126576142034854, guid: 4e1a9356880b6a941b2b7ea4b508aceb, type: 3}
   productIconUI: {fileID: -8108320455294582955, guid: 1dbf7feb1c2779244970d3de3c6b1bd7, type: 3}
-  basePreparationTime: 2
+  basePreparationTime: 8
   foodProjectilePrefab: {fileID: 3775760721492486323, guid: 8b8d94b22d0f29f4684312a2e11d0e3b, type: 3}
+  movementType: 3
+  projectileSpeed: 5
+  amplitude: 1
+  frequency: 2

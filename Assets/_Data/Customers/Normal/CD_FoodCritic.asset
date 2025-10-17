@@ -15,7 +15,7 @@ MonoBehaviour:
   customerTypeName: The Food Critic
   customerPrefab: {fileID: 7113760741050908554, guid: 6e2c2779f23a7a8458fe45e9698ad468, type: 3}
   moveSpeed: 1
-  cashReward: 500
+  cashReward: 225
   potentialOrder:
   - product: {fileID: 11400000, guid: bb2822edf7994534aa2ca1ace00f30f7, type: 2}
     quantity: 1
@@ -25,5 +25,7 @@ MonoBehaviour:
     quantity: 1
   - product: {fileID: 11400000, guid: 740af49200ec88d41a1ba22baa92c562, type: 2}
     quantity: 1
+  - product: {fileID: 11400000, guid: 1d75e22d4bb64b14188670becf034ffb, type: 2}
+    quantity: 1
   isVip: 1
-  patienceDuration: 15
+  patienceDuration: 50

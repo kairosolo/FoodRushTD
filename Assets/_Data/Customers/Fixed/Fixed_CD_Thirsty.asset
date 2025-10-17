@@ -15,7 +15,7 @@ MonoBehaviour:
   customerTypeName: The Thirsty
   customerPrefab: {fileID: 6837286113289875323, guid: cbfdcd59f1d7683428701981b04a89a3, type: 3}
   moveSpeed: 2.2
-  cashReward: 40
+  cashReward: 15
   potentialOrder:
   - product: {fileID: 11400000, guid: d23426ceed6dab34b952d93746e734c7, type: 2}
     quantity: 1

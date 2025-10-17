@@ -417,6 +417,9 @@ MonoBehaviour:
   EmotionHolder: {fileID: 4760947513535006062}
   HappyIcon: {fileID: -6814530088632704309, guid: 371199428b3868a4eb79ade7a1db7150, type: 3}
   AngryIcon: {fileID: -6123611207674443113, guid: 87f60f3db06cbe742b1b2a7f4f6e51fa, type: 3}
+  dialogueBoxAnimDuration: 0.25
+  dialogueBoxPopScale: 1.1
+  dialogueBoxHitColor: {r: 0.18039216, g: 0.8, b: 0.44313726, a: 1}
 --- !u!1 &6212306271802858304
 GameObject:
   m_ObjectHideFlags: 0

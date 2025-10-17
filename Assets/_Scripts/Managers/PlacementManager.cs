@@ -131,5 +131,25 @@ public class PlacementManager : MonoBehaviour
         Gizmos.DrawLine(topRight, bottomRight);
         Gizmos.DrawLine(bottomRight, bottomLeft);
         Gizmos.DrawLine(bottomLeft, topLeft);
+
+        if (pathWaypoints == null || pathWaypoints.Count == 0) return;
+
+        Gizmos.color = new Color(1f, 0f, 0f, 0.25f);
+
+        foreach (var waypoint in pathWaypoints)
+        {
+            if (waypoint != null)
+            {
+                Gizmos.DrawSphere(waypoint.position, pathClearanceRadius);
+            }
+        }
+
+        for (int i = 0; i < pathWaypoints.Count - 1; i++)
+        {
+            if (pathWaypoints[i] != null && pathWaypoints[i + 1] != null)
+            {
+                Gizmos.DrawLine(pathWaypoints[i].position, pathWaypoints[i + 1].position);
+            }
+        }
     }
 }

@@ -22,16 +22,30 @@ public class UpgradeUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI diversifyButtonText;
     [SerializeField] private TextMeshProUGUI diversifyCostText;
 
+    [Header("Upgrade Pip Visuals")]
+    [SerializeField] private Transform specializePipsContainer;
+    [SerializeField] private Transform diversifyPipsContainer;
+    [SerializeField] private Color filledPipColor = Color.yellow;
+    [SerializeField] private Color emptyPipColor = new Color(0.3f, 0.3f, 0.3f);
+
     [Header("Product Switching")]
     [SerializeField] private Transform productButtonContainer;
     [SerializeField] private GameObject productButtonPrefab;
+
+    [Header("Sell Button")]
+    [SerializeField] private Button sellButton;
+    [SerializeField] private TextMeshProUGUI sellButtonText;
+
+    [Range(0f, 1f)]
+    [SerializeField] private float sellRefundPercentage = 0.75f;
 
     [Header("Initial Product Selection Panel")]
     [SerializeField] private GameObject productSelectPanelContainer;
     [SerializeField] private Transform initialProductButtonContainer;
 
     private Station currentStation;
-    public bool IsPanelOpen => upgradePanelContainer.activeSelf || productSelectPanelContainer.activeSelf;
+    public bool IsUpgradePanelOpen => upgradePanelContainer.activeSelf;
+    public bool IsPanelOpen => IsUpgradePanelOpen || productSelectPanelContainer.activeSelf;
 
     private void Awake()
     {
@@ -43,7 +57,6 @@ public class UpgradeUIManager : MonoBehaviour
     {
         upgradePanelContainer.SetActive(false);
         productSelectPanelContainer.SetActive(false);
-
     }
 
     public void OpenInitialProductSelection(Station station)
@@ -66,12 +79,14 @@ public class UpgradeUIManager : MonoBehaviour
         }
 
         productSelectPanelContainer.SetActive(true);
+        AudioManager.Instance.PlaySFX("UI_Panel_Open");
         GameLoopManager.Instance.EnterUIMode();
     }
 
     public void CloseInitialProductSelection()
     {
         productSelectPanelContainer.SetActive(false);
+        AudioManager.Instance.PlaySFX("UI_Panel_Close");
         currentStation = null;
         GameLoopManager.Instance.ExitUIMode();
     }
@@ -86,17 +101,30 @@ public class UpgradeUIManager : MonoBehaviour
 
     public void OpenPanel(Station station)
     {
+        if (currentStation != null && currentStation != station)
+        {
+            currentStation.HideRange();
+        }
+
         currentStation = station;
         if (currentStation == null) return;
 
+        currentStation.ShowRange();
         upgradePanelContainer.SetActive(true);
+        AudioManager.Instance.PlaySFX("UI_Panel_Open");
         RefreshPanel();
         GameLoopManager.Instance.EnterUIMode();
     }
 
     public void ClosePanel()
     {
+        if (currentStation != null)
+        {
+            currentStation.HideRange();
+        }
+
         upgradePanelContainer.SetActive(false);
+        AudioManager.Instance.PlaySFX("UI_Panel_Close");
         currentStation = null;
         GameLoopManager.Instance.ExitUIMode();
     }
@@ -135,7 +163,7 @@ public class UpgradeUIManager : MonoBehaviour
         }
         else
         {
-            diversifyCostText.text = "Diversified";
+            diversifyCostText.text = "Max Level";
         }
 
         foreach (Transform child in productButtonContainer) Destroy(child.gameObject);
@@ -145,6 +173,40 @@ public class UpgradeUIManager : MonoBehaviour
             if (buttonObj.TryGetComponent<ProductSwitchButton>(out var buttonScript))
             {
                 buttonScript.Initialize(product, currentStation, currentStation.CurrentProduct == product);
+            }
+        }
+
+        int refundAmount = Mathf.FloorToInt(currentStation.TotalValue * sellRefundPercentage);
+        sellButtonText.text = $"Sell\n${refundAmount}";
+
+        UpdateUpgradePips(specializePipsContainer,
+                         currentStation.SpecializationLevel,
+                         currentStation.StationData.MaxSpecializeLevel);
+
+        int diversifyLevel = currentStation.UnlockedProducts.Count - 1;
+        int maxDiversifyLevel = currentStation.StationData.AvailableProducts.Count - 1;
+        UpdateUpgradePips(diversifyPipsContainer, diversifyLevel, maxDiversifyLevel);
+    }
+
+    private void UpdateUpgradePips(Transform container, int currentLevel, int maxLevel)
+    {
+        if (container == null) return;
+
+        for (int i = 0; i < container.childCount; i++)
+        {
+            Transform pip = container.GetChild(i);
+            Image pipImage = pip.GetComponent<Image>();
+
+            if (pipImage == null) continue;
+
+            if (i < maxLevel)
+            {
+                pip.gameObject.SetActive(true);
+                pipImage.color = (i < currentLevel) ? filledPipColor : emptyPipColor;
+            }
+            else
+            {
+                pip.gameObject.SetActive(false);
             }
         }
     }
@@ -164,6 +226,25 @@ public class UpgradeUIManager : MonoBehaviour
         {
             currentStation.UnlockNextProduct();
             RefreshPanel();
+        }
+    }
+
+    public void OnSellClicked()
+    {
+        if (currentStation == null) return;
+
+        Station stationToSell = currentStation;
+
+        int refundAmount = Mathf.FloorToInt(stationToSell.TotalValue * sellRefundPercentage);
+        EconomyManager.Instance.AddCash(refundAmount);
+
+        ClosePanel();
+
+        AudioManager.Instance.PlaySFX("Station_Sell");
+
+        if (stationToSell != null)
+        {
+            Destroy(stationToSell.gameObject);
         }
     }
 }

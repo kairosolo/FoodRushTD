@@ -16,6 +16,7 @@ public class StationPlacement : MonoBehaviour
     private GameObject stationGhost;
     private SpriteRenderer ghostRenderer;
     private bool currentPlacementIsValid;
+    private bool isPointerOverUI = false;
 
     public bool IsPlacing { get; private set; }
 
@@ -32,6 +33,8 @@ public class StationPlacement : MonoBehaviour
 
     private void Update()
     {
+        isPointerOverUI = EventSystem.current.IsPointerOverGameObject();
+
         if (IsPlacing && stationGhost != null)
         {
             Vector2 mousePosition = Mouse.current.position.ReadValue();
@@ -55,12 +58,16 @@ public class StationPlacement : MonoBehaviour
         stationGhost = Instantiate(stationToPlace.StationPrefab);
         ghostRenderer = stationGhost.GetComponentInChildren<SpriteRenderer>();
 
-        if (stationGhost.TryGetComponent<Station>(out Station station)) station.enabled = false;
+        if (stationGhost.TryGetComponent<Station>(out Station station))
+        {
+            station.enabled = false;
+            station.ShowRange();
+        }
     }
 
     public void OnPlaceStation(InputAction.CallbackContext context)
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (isPointerOverUI)
         {
             return;
         }
@@ -87,6 +94,7 @@ public class StationPlacement : MonoBehaviour
 
         if (stationGhost.TryGetComponent<Station>(out Station station))
         {
+            station.HideRange();
             station.PartialInitialize(stationToPlace);
 
             station.TriggerPlacementEffects();

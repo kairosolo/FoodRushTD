@@ -33,7 +33,6 @@ public class VIPManager : MonoBehaviour
     private void CheckAndSpawnVip()
     {
         int currentDay = GameClock.Instance.CurrentDay;
-        // Spawn on day 5, 10, 15, etc.
         if (currentDay > 0 && currentDay % vipSpawnIntervalInDays == 0)
         {
             SpawnVip();
@@ -57,5 +56,10 @@ public class VIPManager : MonoBehaviour
             GameUIManager.Instance.ShowVipPatienceMeter(customer);
             AudioManager.Instance.PlaySFX("VIP_Arrive");
         }
+    }
+
+    public void Debug_SpawnVip()
+    {
+        SpawnVip();
     }
 }

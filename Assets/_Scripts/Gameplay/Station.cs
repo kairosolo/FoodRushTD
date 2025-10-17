@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Station : MonoBehaviour
 {
@@ -13,11 +14,14 @@ public class Station : MonoBehaviour
     [SerializeField] private float interactionDelay = 0.5f;
 
     [Header("References")]
+    [SerializeField] private RangeVisualizer rangeVisualizer;
     [SerializeField] private GameObject placementInfo;
     [SerializeField] private SpriteRenderer productVisualizer;
     [SerializeField] private Animator animator;
     [SerializeField] private Image productIconImage;
     [SerializeField] private Image progressBarImage;
+
+    public int TotalValue { get; private set; }
 
     public StationData StationData { get; private set; }
     public ProductData CurrentProduct { get; private set; }
@@ -37,11 +41,12 @@ public class Station : MonoBehaviour
         characterRandomizer = GetComponent<CharacterRandomizer>();
     }
 
-    public bool CanInteract() => canInteractFlag;
-
     private void OnEnable()
     {
-        StationManager.Instance.AddStation(this);
+        if (StationManager.Instance != null)
+        {
+            StationManager.Instance.AddStation(this);
+        }
     }
 
     private void OnDisable()
@@ -51,36 +56,6 @@ public class Station : MonoBehaviour
             StationManager.Instance.RemoveStation(this);
         }
     }
-
-    /*public void Initialize(StationData data) Keeping just in case.
-    {
-        if (animator != null)
-        {
-            animator.SetTrigger("isPlacing");
-        }
-        if (characterRandomizer != null)
-        {
-            characterRandomizer.RandomizeAll();
-        }
-
-        StationData = data;
-        SpecializationLevel = 0;
-        UnlockedProducts = new List<ProductData>();
-
-        if (StationData.AvailableProducts != null && StationData.AvailableProducts.Count > 0)
-        {
-            UnlockedProducts.Add(StationData.AvailableProducts[0]);
-            SetInitialProduct(UnlockedProducts[0]);
-        }
-        else
-        {
-            Debug.LogError("Station has no available products assigned in its StationData!");
-            isPreparing = false;
-        }
-
-        canInteractFlag = false;
-        interactionTimer = interactionDelay;
-    }*/
 
     private void Update()
     {
@@ -109,6 +84,28 @@ public class Station : MonoBehaviour
         }
     }
 
+    public bool CanInteract()
+    {
+        if (rangeVisualizer != null) rangeVisualizer.Hide();
+        return canInteractFlag;
+    }
+
+    public void ShowRange()
+    {
+        if (rangeVisualizer != null)
+        {
+            rangeVisualizer.Show(serviceRange);
+        }
+    }
+
+    public void HideRange()
+    {
+        if (rangeVisualizer != null)
+        {
+            rangeVisualizer.Hide();
+        }
+    }
+
     public void PartialInitialize(StationData data)
     {
         StationData = data;
@@ -116,6 +113,7 @@ public class Station : MonoBehaviour
         UnlockedProducts = new List<ProductData>();
 
         this.enabled = false;
+        TotalValue = StationData.PlacementCost;
     }
 
     public void TriggerPlacementEffects()
@@ -125,7 +123,9 @@ public class Station : MonoBehaviour
             characterRandomizer.RandomizeAll();
         }
 
-        VFXManager.Instance.PlayVFX("stationPlacementVFX", transform.position, transform.rotation);
+        if (VFXManager.Instance != null)
+            VFXManager.Instance.PlayVFX("stationPlacementVFX", transform.position, transform.rotation);
+
         placementInfo.SetActive(false);
 
         if (animator != null)
@@ -138,7 +138,9 @@ public class Station : MonoBehaviour
     {
         this.enabled = true;
 
-        UnlockedProducts.Add(initialProduct);
+        if (!UnlockedProducts.Contains(initialProduct))
+            UnlockedProducts.Add(initialProduct);
+
         SetInitialProduct(initialProduct);
 
         canInteractFlag = false;
@@ -158,13 +160,14 @@ public class Station : MonoBehaviour
         }
 
         CurrentProduct = newProduct;
-        productIconImage.sprite = CurrentProduct.ProductSprite;
+        productIconImage.sprite = CurrentProduct.ProductIconUI;
         if (productVisualizer != null)
         {
             productVisualizer.sprite = CurrentProduct.ProductSprite;
         }
 
-        AudioManager.Instance.PlaySFX("Station_SwitchProduct");
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFX("Station_SwitchProduct");
 
         StartPreparation();
 
@@ -177,7 +180,7 @@ public class Station : MonoBehaviour
     private void SetInitialProduct(ProductData newProduct)
     {
         CurrentProduct = newProduct;
-        productIconImage.sprite = CurrentProduct.ProductSprite;
+        productIconImage.sprite = CurrentProduct.ProductIconUI;
         if (productVisualizer != null)
         {
             productVisualizer.sprite = CurrentProduct.ProductSprite;
@@ -191,6 +194,17 @@ public class Station : MonoBehaviour
         StartPreparation();
     }
 
+    public void StartPreparation()
+    {
+        preparationTimer = 0f;
+        isPreparing = true;
+        isHoldingProduct = false;
+        if (progressBarImage != null)
+        {
+            progressBarImage.fillAmount = 0;
+        }
+    }
+
     public void UpgradeSpecialization()
     {
         if (!CanUpgradeSpecialization() || !canInteractFlag) return;
@@ -198,6 +212,7 @@ public class Station : MonoBehaviour
         int cost = GetSpecializeCost();
         if (EconomyManager.Instance.SpendCash(cost))
         {
+            TotalValue += cost;
             SpecializationLevel++;
             Debug.Log($"{StationData.StationName} specialized to Level {SpecializationLevel + 1}");
             AudioManager.Instance.PlaySFX("Station_Upgrade");
@@ -207,13 +222,31 @@ public class Station : MonoBehaviour
     public void UnlockNextProduct()
     {
         if (!CanUpgradeDiversify() || !canInteractFlag) return;
-
-        if (EconomyManager.Instance.SpendCash(StationData.DiversifyCost))
+        int cost = StationData.DiversifyCost;
+        if (EconomyManager.Instance.SpendCash(cost))
         {
-            ProductData productToUnlock = StationData.AvailableProducts[UnlockedProducts.Count];
-            UnlockedProducts.Add(productToUnlock);
-            Debug.Log($"{StationData.StationName} diversified to unlock {productToUnlock.ProductName}");
-            AudioManager.Instance.PlaySFX("Station_Upgrade");
+            ProductData productToUnlock = null;
+            foreach (var potentialProduct in StationData.AvailableProducts)
+            {
+                if (!UnlockedProducts.Contains(potentialProduct))
+                {
+                    productToUnlock = potentialProduct;
+                    break;
+                }
+            }
+
+            if (productToUnlock != null)
+            {
+                TotalValue += cost;
+                UnlockedProducts.Add(productToUnlock);
+                Debug.Log($"{StationData.StationName} diversified to unlock {productToUnlock.ProductName}");
+                AudioManager.Instance.PlaySFX("Station_Upgrade");
+            }
+            else
+            {
+                Debug.LogWarning("Tried to diversify, but no new product was found. Refunding cost.");
+                EconomyManager.Instance.AddCash(cost);
+            }
         }
     }
 
@@ -236,15 +269,18 @@ public class Station : MonoBehaviour
     {
         if (CurrentProduct == null) return float.MaxValue;
         float speedMultiplier = 1f + (SpecializationLevel * StationData.SpecializeSpeedBonus);
-        return CurrentProduct.BasePreparationTime / speedMultiplier;
-    }
+        float baseTime = CurrentProduct.BasePreparationTime / speedMultiplier;
 
-    private void StartPreparation()
-    {
-        preparationTimer = 0f;
-        isPreparing = true;
-        isHoldingProduct = false;
-        progressBarImage.fillAmount = 0;
+        if (DailyEventManager.Instance != null)
+        {
+            DailyEventData activeEvent = DailyEventManager.Instance.ActiveEvent;
+            if (activeEvent != null && activeEvent.Type == DailyEventData.EventType.ChallengeModifier)
+            {
+                return baseTime * activeEvent.StationPrepTimeMultiplier;
+            }
+        }
+
+        return baseTime;
     }
 
     private void UpdateProgressBar()
@@ -259,11 +295,9 @@ public class Station : MonoBehaviour
         isPreparing = false;
         isHoldingProduct = true;
         progressBarImage.fillAmount = 1;
-        if (animator != null)
-        {
-            animator.SetTrigger("isCooked");
-        }
-        AudioManager.Instance.PlaySFX("Station_FoodReady");
+        if (animator != null) animator.SetTrigger("isCooked");
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFX("Station_FoodReady");
     }
 
     private void FindAndServeCustomer()
@@ -279,6 +313,8 @@ public class Station : MonoBehaviour
 
     private Customer FindCustomerInRange()
     {
+        if (CustomerManager.Instance == null) return null;
+
         Customer nearestCustomer = null;
         float shortestDistance = float.MaxValue;
         foreach (Customer customer in CustomerManager.Instance.GetActiveCustomers())
@@ -299,11 +335,7 @@ public class Station : MonoBehaviour
     private void ServeFoodToCustomer(Customer target)
     {
         target.NotifyItemInFlight(CurrentProduct);
-
-        if (animator != null)
-        {
-            animator.SetTrigger("isShooting");
-        }
+        if (animator != null) animator.SetTrigger("isShooting");
 
         if (CurrentProduct.FoodProjectilePrefab == null)
         {
@@ -316,7 +348,9 @@ public class Station : MonoBehaviour
         if (projectileObj.TryGetComponent<FoodProjectile>(out FoodProjectile projectile))
         {
             projectile.Initialize(target, CurrentProduct);
-            AudioManager.Instance.PlaySFX("Projectile_Launch");
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlaySFX("Projectile_Launch");
         }
+        StartPreparation();
     }
 }

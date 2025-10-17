@@ -16,6 +16,10 @@ MonoBehaviour:
   stationName: Frying Station
   placementCost: 100
   stationPrefab: {fileID: 2922440456857387492, guid: 809084021de77464da71b5d9f9a1e5d9, type: 3}
+  specializeBaseCost: 80
+  specializeSpeedBonus: 0.15
+  maxSpecializeLevel: 5
+  diversifyCost: 100
   availableProducts:
   - {fileID: 11400000, guid: c2ce3a7495a19fd4295a6effdbd36024, type: 2}
   - {fileID: 11400000, guid: bb2822edf7994534aa2ca1ace00f30f7, type: 2}

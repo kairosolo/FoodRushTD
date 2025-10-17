@@ -14,6 +14,10 @@ public class GameLoopManager : MonoBehaviour
     [Header("Lose Condition")]
     [SerializeField] private int maxUnsatisfiedCustomers = 10;
 
+    [Header("Game Over Shake")]
+    [SerializeField] private float gameOverShakeDuration = 0.8f;
+    [SerializeField] private float gameOverShakeMagnitude = 0.3f;
+
     [Header("UI References")]
     [SerializeField] private GameOverUI gameOverUI;
     [SerializeField] private StationSelectionUI stationSelectionUI;
@@ -87,6 +91,13 @@ public class GameLoopManager : MonoBehaviour
         {
             TriggerGameOver();
         }
+        else
+        {
+            if (CameraManager.Instance != null && CameraManager.Instance.MainCameraShake != null)
+            {
+                CameraManager.Instance.MainCameraShake.TriggerShake();
+            }
+        }
     }
 
     private void TriggerGameOver()
@@ -95,18 +106,31 @@ public class GameLoopManager : MonoBehaviour
         Debug.Log("GAME OVER: Too many unsatisfied customers.");
         Time.timeScale = 0f;
 
+        if (CameraManager.Instance != null && CameraManager.Instance.MainCameraShake != null)
+        {
+            CameraManager.Instance.MainCameraShake.TriggerShake(gameOverShakeDuration, gameOverShakeMagnitude);
+        }
+
         int finalScore = EconomyManager.Instance.TotalCashEarned;
         int highScore = KPlayerPrefs.GetInt(HIGHSCORE_KEY, 0);
 
         if (finalScore > highScore)
         {
             highScore = finalScore;
-            KPlayerPrefs.SetInt(HIGHSCORE_KEY, highScore);
-            KPlayerPrefs.Save();
-            Debug.Log($"New highscore: {highScore}");
+
+            string dateString = DateTime.Now.ToString("yyyy-MM-dd");
+            KPlayerPrefs.SetString(HIGHSCORE_KEY, $"{highScore}|{dateString}");
+            Debug.Log($"New highscore: {highScore} set on {dateString}");
         }
+
         AudioManager.Instance.PlaySFX("Game_LoseJingle");
         gameOverUI.Show(finalScore, highScore);
+    }
+
+    public void Debug_TriggerGameOver()
+    {
+        Debug.Log("DEBUG: Manually triggering game over.");
+        TriggerGameOver();
     }
 
     public void EnterUIMode()

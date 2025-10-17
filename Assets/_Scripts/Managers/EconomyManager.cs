@@ -7,6 +7,8 @@ public class EconomyManager : MonoBehaviour
 
     public static event Action<int> OnCashChanged;
 
+    public static event Action OnCashCollected;
+
     [SerializeField] private int startingCash = 250;
 
     public int CurrentCash { get; private set; }
@@ -33,6 +35,7 @@ public class EconomyManager : MonoBehaviour
 
     public void AddCash(int amount)
     {
+        OnCashCollected?.Invoke();
         CurrentCash += amount;
         TotalCashEarned += amount;
         OnCashChanged?.Invoke(CurrentCash);

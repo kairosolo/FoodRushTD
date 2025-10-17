@@ -5,7 +5,11 @@ using UnityEngine;
 public class CustomerSpawner : MonoBehaviour
 {
     [Header("Spawner Settings")]
-    [SerializeField] private float baseSpawnInterval = 3f;
+    [SerializeField]
+    private float baseSpawnInterval = 3f;
+
+    [Header("Debug")]
+    [SerializeField] private float currentSpawnInterval;
 
     private float spawnTimer;
     private bool isSpawning = false;
@@ -37,7 +41,7 @@ public class CustomerSpawner : MonoBehaviour
         spawnTimer += Time.deltaTime;
 
         float currentSpawnInterval = baseSpawnInterval / DifficultyManager.Instance.SpawnRateDivisor;
-
+        this.currentSpawnInterval = currentSpawnInterval;
         if (spawnTimer >= currentSpawnInterval)
         {
             spawnTimer -= currentSpawnInterval;
@@ -74,17 +78,24 @@ public class CustomerSpawner : MonoBehaviour
 
         if (validCustomerPool.Count == 0) return null;
 
-        if (activeEvent != null)
+        if (activeEvent != null && activeEvent.FeaturedCustomers.Count > 0)
         {
-            int roll = Random.Range(1, 101);
-            if (roll <= activeEvent.FeaturedCustomerChance)
+            List<CustomerData> weightedPool = new List<CustomerData>();
+
+            weightedPool.AddRange(validCustomerPool);
+
+            foreach (var featuredCustomer in activeEvent.FeaturedCustomers)
             {
-                var validEventCustomers = activeEvent.FeaturedCustomers.Intersect(validCustomerPool).ToList();
-                if (validEventCustomers.Count > 0)
+                if (validCustomerPool.Contains(featuredCustomer))
                 {
-                    return validEventCustomers[Random.Range(0, validEventCustomers.Count)];
+                    for (int i = 0; i < activeEvent.EventWeight; i++)
+                    {
+                        weightedPool.Add(featuredCustomer);
+                    }
                 }
             }
+
+            return weightedPool[Random.Range(0, weightedPool.Count)];
         }
 
         return validCustomerPool[Random.Range(0, validCustomerPool.Count)];

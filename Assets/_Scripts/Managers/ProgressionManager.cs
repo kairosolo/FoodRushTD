@@ -8,6 +8,8 @@ public class ProgressionManager : MonoBehaviour
 
     public static event Action OnAvailableStationsChanged;
 
+    public static event Action<StationData> OnNewStationUnlocked;
+
     [System.Serializable]
     public class DailyProgression
     {
@@ -35,17 +37,26 @@ public class ProgressionManager : MonoBehaviour
         }
     }
 
-    private void OnEnable() => GameClock.OnDayChanged += UpdateProgression;
+    private void OnEnable()
+    {
+        GameClock.OnDayChanged += UpdateProgression;
+    }
 
-    private void OnDisable() => GameClock.OnDayChanged -= UpdateProgression;
+    private void OnDisable()
+    {
+        GameClock.OnDayChanged -= UpdateProgression;
+    }
 
-    private void Start() => UpdateProgression(GameClock.Instance.CurrentDay);
+    private void Start()
+    {
+        UpdateProgression(GameClock.Instance.CurrentDay);
+    }
 
     private void UpdateProgression(int currentDay)
     {
         Debug.Log($"Progression Manager: Updating for Day {currentDay}");
-        AvailableCustomers.Clear();
-        AvailableStations.Clear();
+
+        bool stationsChanged = false;
 
         foreach (var dayProgression in progressionTimeline)
         {
@@ -58,16 +69,37 @@ public class ProgressionManager : MonoBehaviour
                         AvailableCustomers.Add(customer);
                     }
                 }
+
                 foreach (var station in dayProgression.stationsToUnlock)
                 {
                     if (!AvailableStations.Contains(station))
                     {
                         AvailableStations.Add(station);
+                        stationsChanged = true;
+
+                        OnNewStationUnlocked?.Invoke(station);
                     }
                 }
             }
         }
 
-        OnAvailableStationsChanged?.Invoke();
+        if (stationsChanged)
+        {
+            OnAvailableStationsChanged?.Invoke();
+        }
+    }
+
+    public void Debug_UnlockStation(StationData stationData)
+    {
+        if (stationData != null)
+        {
+            if (!AvailableStations.Contains(stationData))
+            {
+                AvailableStations.Add(stationData);
+                OnAvailableStationsChanged?.Invoke();
+            }
+
+            OnNewStationUnlocked?.Invoke(stationData);
+        }
     }
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
+using System.Collections;
+using System.Linq;
 
 public class Customer : MonoBehaviour
 {
@@ -13,15 +15,23 @@ public class Customer : MonoBehaviour
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private GameObject dialogueTail;
 
-
     [Header("Emotion References")]
     [SerializeField] private GameObject EmotionBox;
     [SerializeField] private Image EmotionHolder;
     [SerializeField] private Sprite HappyIcon, AngryIcon;
+
+    [Header("Animation Settings")]
+    [SerializeField] private float dialogueBoxAnimDuration = 0.2f;
+    [SerializeField] private float dialogueBoxPopScale = 1.1f;
+    [SerializeField] private Color dialogueBoxHitColor = new Color(0.6f, 1f, 0.6f, 1f);
+
+    [Header("Debug")]
+    [SerializeField] private float baseMoveSpeed;
+    [SerializeField] private float moveSpeed;
+
     public event Action<float, float> OnPatienceChanged;
 
-    private float moveSpeed;
-    private float satisfiedMoveSpeedMultiplier = 2.5f;
+    private float satisfiedMoveSpeedMultiplier = 3f;
     private int cashReward;
     private bool isVip;
     private float patienceDuration;
@@ -40,31 +50,59 @@ public class Customer : MonoBehaviour
     private Dictionary<ProductData, int> itemsInFlight;
     private Dictionary<ProductData, OrderIconUI> orderIconMap;
 
+    private Image dialogueBoxImage;
+    private Vector3 dialogueBoxOriginalScale;
+    private Color dialogueBoxOriginalColor;
+    private Coroutine dialogueBoxAnimationCoroutine;
+
     private void Awake()
     {
         orderIconMap = new Dictionary<ProductData, OrderIconUI>();
         currentOrder = new Dictionary<ProductData, int>();
         itemsInFlight = new Dictionary<ProductData, int>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        if (dialogueBox != null)
+        {
+            dialogueBoxImage = dialogueBox.GetComponent<Image>();
+            if (dialogueBoxImage != null)
+            {
+                dialogueBoxOriginalScale = dialogueBox.transform.localScale;
+                dialogueBoxOriginalColor = dialogueBoxImage.color;
+            }
+        }
     }
 
     public void Initialize(CustomerData data)
     {
         characterRandomizer.RandomizeAll();
 
-        this.moveSpeed = data.MoveSpeed * DifficultyManager.Instance.SpeedMultiplier;
+        float speedMultiplier = 1f;
+        if (DifficultyManager.Instance != null)
+        {
+            speedMultiplier = DifficultyManager.Instance.SpeedMultiplier;
+        }
+
+        this.baseMoveSpeed = data.MoveSpeed;
+        this.moveSpeed = data.MoveSpeed * speedMultiplier;
         this.cashReward = data.CashReward;
         this.isVip = data.IsVip;
-        this.patienceDuration = data.PatienceDuration / DifficultyManager.Instance.SpeedMultiplier;
+        this.patienceDuration = data.PatienceDuration / speedMultiplier;
 
-        GenerateOrder(data.PotentialOrder);
+        GenerateOrder(data);
 
         if (isVip) currentPatience = patienceDuration;
 
-        CustomerManager.Instance.AddCustomer(this);
-        transform.position = PathManager.Instance.GetWaypoint(0).position;
-        nextWaypointIndex = 1;
-        SetNextWaypoint();
+        if (CustomerManager.Instance != null)
+            CustomerManager.Instance.AddCustomer(this);
+
+        if (PathManager.Instance != null && PathManager.Instance.WaypointCount > 0)
+        {
+            transform.position = PathManager.Instance.GetWaypoint(0).position;
+            nextWaypointIndex = 1;
+            SetNextWaypoint();
+        }
+
         DisplayOrderIcons();
     }
 
@@ -96,11 +134,13 @@ public class Customer : MonoBehaviour
     private void HandlePatienceDepleted()
     {
         isEnraged = true;
-        GameUIManager.Instance.HideVipPatienceMeter();
+        if (GameUIManager.Instance != null)
+            GameUIManager.Instance.HideVipPatienceMeter();
 
         animator.SetTrigger("isAngry");
-        Debug.Log("VIP has run out of patience and is enraged!");
-        AudioManager.Instance.PlaySFX("VIP_PatienceFail");
+        Debug.Log("VIP has run of patience and is enraged!");
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFX("VIP_PatienceFail");
 
         if (EmotionBox != null)
         {
@@ -124,7 +164,7 @@ public class Customer : MonoBehaviour
 
         foreach (var iconUI in orderIconMap.Values)
         {
-            if (iconUI != null) // Safety check
+            if (iconUI != null)
             {
                 Destroy(iconUI.gameObject);
             }
@@ -143,37 +183,76 @@ public class Customer : MonoBehaviour
 
         moveSpeed *= satisfiedMoveSpeedMultiplier;
 
-        int lastWaypointIndex = PathManager.Instance.WaypointCount - 1;
-        if (lastWaypointIndex >= 0)
+        if (PathManager.Instance != null)
         {
-            targetWaypointPosition = PathManager.Instance.GetWaypoint(lastWaypointIndex).position;
-            nextWaypointIndex = PathManager.Instance.WaypointCount;
-            startPosition = transform.position;
-            float distanceToExit = Vector3.Distance(startPosition, targetWaypointPosition);
-            travelTime = distanceToExit / moveSpeed;
-            lerpTimer = 0f;
+            int lastWaypointIndex = PathManager.Instance.WaypointCount - 1;
+            if (lastWaypointIndex >= 0)
+            {
+                targetWaypointPosition = PathManager.Instance.GetWaypoint(lastWaypointIndex).position;
+                nextWaypointIndex = PathManager.Instance.WaypointCount;
+                startPosition = transform.position;
+                float distanceToExit = Vector3.Distance(startPosition, targetWaypointPosition);
+                travelTime = distanceToExit / moveSpeed;
+                lerpTimer = 0f;
+            }
         }
     }
 
-    private void GenerateOrder(List<OrderItem> baseOrder)
+    private void GenerateOrder(CustomerData customerData)
     {
         currentOrder.Clear();
-        foreach (var item in baseOrder)
-        {
-            currentOrder.Add(item.product, item.quantity);
-        }
 
-        int extraItems = DifficultyManager.Instance.MaxAdditionalItems;
-        if (extraItems > 0 && baseOrder.Count > 0)
+        foreach (var item in customerData.PotentialOrder)
         {
-            for (int i = 0; i < extraItems; i++)
+            if (currentOrder.ContainsKey(item.product))
             {
-                ProductData productToAdd = baseOrder[UnityEngine.Random.Range(0, baseOrder.Count)].product;
-                currentOrder[productToAdd]++;
+                currentOrder[item.product] += item.quantity;
+            }
+            else
+            {
+                currentOrder.Add(item.product, item.quantity);
             }
         }
 
-        DisplayOrderIcons();
+        if (DailyEventManager.Instance != null)
+        {
+            DailyEventData activeEvent = DailyEventManager.Instance.ActiveEvent;
+            if (activeEvent != null && activeEvent.Type == DailyEventData.EventType.ProductCraze)
+            {
+                ProductData bonusProduct = activeEvent.BonusProduct;
+
+                if (bonusProduct != null && customerData.PotentialOrder.Count > 0)
+                {
+                    int roll = UnityEngine.Random.Range(0, 101);
+                    if (roll <= activeEvent.BonusProductChance)
+                    {
+                        if (currentOrder.ContainsKey(bonusProduct))
+                        {
+                            currentOrder[bonusProduct]++;
+                        }
+                        else
+                        {
+                            currentOrder.Add(bonusProduct, 1);
+                        }
+                    }
+                }
+            }
+        }
+
+        if (DifficultyManager.Instance != null)
+        {
+            int extraItems = DifficultyManager.Instance.MaxAdditionalItems;
+            if (extraItems > 0 && currentOrder.Count > 0)
+            {
+                List<ProductData> productsInOrder = currentOrder.Keys.ToList();
+
+                for (int i = 0; i < extraItems; i++)
+                {
+                    ProductData productToAdd = productsInOrder[UnityEngine.Random.Range(0, productsInOrder.Count)];
+                    currentOrder[productToAdd]++;
+                }
+            }
+        }
     }
 
     private void DisplayOrderIcons()
@@ -198,6 +277,16 @@ public class Customer : MonoBehaviour
 
         if (currentOrder.ContainsKey(receivedProduct))
         {
+            if (dialogueBoxAnimationCoroutine != null)
+            {
+                StopCoroutine(dialogueBoxAnimationCoroutine);
+                dialogueBox.transform.localScale = dialogueBoxOriginalScale;
+                if (dialogueBoxImage != null) dialogueBoxImage.color = dialogueBoxOriginalColor;
+            }
+            dialogueBoxAnimationCoroutine = StartCoroutine(AnimateDialogueBoxHit());
+
+            AudioManager.Instance.PlaySFX("Customer_ReceiveItem");
+
             currentOrder[receivedProduct]--;
             orderIconMap[receivedProduct].UpdateQuantity(currentOrder[receivedProduct]);
 
@@ -210,6 +299,38 @@ public class Customer : MonoBehaviour
 
             if (currentOrder.Count == 0) HandleOrderComplete();
         }
+    }
+
+    private IEnumerator AnimateDialogueBoxHit()
+    {
+        if (dialogueBox == null || dialogueBoxImage == null) yield break;
+
+        float halfDuration = dialogueBoxAnimDuration / 2f;
+        float timer = 0f;
+        Vector3 targetScale = dialogueBoxOriginalScale * dialogueBoxPopScale;
+
+        while (timer < halfDuration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / halfDuration;
+            dialogueBox.transform.localScale = Vector3.Lerp(dialogueBoxOriginalScale, targetScale, t);
+            dialogueBoxImage.color = Color.Lerp(dialogueBoxOriginalColor, dialogueBoxHitColor, t);
+            yield return null;
+        }
+
+        timer = 0f;
+        while (timer < halfDuration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / halfDuration;
+            dialogueBox.transform.localScale = Vector3.Lerp(targetScale, dialogueBoxOriginalScale, t);
+            dialogueBoxImage.color = Color.Lerp(dialogueBoxHitColor, dialogueBoxOriginalColor, t);
+            yield return null;
+        }
+
+        dialogueBox.transform.localScale = dialogueBoxOriginalScale;
+        dialogueBoxImage.color = dialogueBoxOriginalColor;
+        dialogueBoxAnimationCoroutine = null;
     }
 
     public bool DoesOrderContain(ProductData product)
@@ -241,9 +362,14 @@ public class Customer : MonoBehaviour
         }
 
         isOrderComplete = true;
+        if (MoneyDropManager.Instance != null)
+        {
+            MoneyDropManager.Instance.SpawnMoney(transform.position, cashReward);
+        }
         animator.SetTrigger("isHappy");
-        AudioManager.Instance.PlaySFX("Customer_OrderComplete");
-        VFXManager.Instance.PlayVFX("customerHappyVFX", transform.position, transform.rotation);
+
+        if (VFXManager.Instance != null)
+            VFXManager.Instance.PlayVFX("customerHappyVFX", transform.position, transform.rotation);
 
         if (dialogueBox != null)
         {
@@ -255,41 +381,70 @@ public class Customer : MonoBehaviour
             dialogueTail.SetActive(false);
         }
 
-        if (isVip)
+        if (isVip && GameUIManager.Instance != null)
         {
             GameUIManager.Instance.HideVipPatienceMeter();
         }
 
         if (spriteRenderer != null) spriteRenderer.color = new Color(0.5f, 1f, 0.5f, 0.5f);
         moveSpeed *= satisfiedMoveSpeedMultiplier;
-        int lastWaypointIndex = PathManager.Instance.WaypointCount - 1;
-        if (lastWaypointIndex >= 0)
+
+        if (PathManager.Instance != null)
         {
-            targetWaypointPosition = PathManager.Instance.GetWaypoint(lastWaypointIndex).position;
-            nextWaypointIndex = PathManager.Instance.WaypointCount;
-            startPosition = transform.position;
-            float distanceToExit = Vector3.Distance(startPosition, targetWaypointPosition);
-            travelTime = distanceToExit / moveSpeed;
-            lerpTimer = 0f;
+            int lastWaypointIndex = PathManager.Instance.WaypointCount - 1;
+            if (lastWaypointIndex >= 0)
+            {
+                targetWaypointPosition = PathManager.Instance.GetWaypoint(lastWaypointIndex).position;
+                nextWaypointIndex = PathManager.Instance.WaypointCount;
+                startPosition = transform.position;
+                float distanceToExit = Vector3.Distance(startPosition, targetWaypointPosition);
+                travelTime = distanceToExit / moveSpeed;
+                lerpTimer = 0f;
+            }
         }
     }
 
     private void SetNextWaypoint()
     {
-        if (nextWaypointIndex >= PathManager.Instance.WaypointCount) { HandleReachingExit(); return; }
-        startPosition = transform.position;
-        targetWaypointPosition = PathManager.Instance.GetWaypoint(nextWaypointIndex).position;
-        float distance = Vector3.Distance(startPosition, targetWaypointPosition);
-        if (distance > 0.01f) { travelTime = distance / moveSpeed; lerpTimer = 0f; isMoving = true; } else { travelTime = 0f; isMoving = false; }
-        nextWaypointIndex++;
+        if (PathManager.Instance == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        isMoving = false;
+
+        while (nextWaypointIndex < PathManager.Instance.WaypointCount)
+        {
+            Vector3 potentialTarget = PathManager.Instance.GetWaypoint(nextWaypointIndex).position;
+            float distance = Vector3.Distance(transform.position, potentialTarget);
+
+            if (distance > 0.01f)
+            {
+                startPosition = transform.position;
+                targetWaypointPosition = potentialTarget;
+                travelTime = distance / moveSpeed;
+                lerpTimer = 0f;
+                isMoving = true;
+                nextWaypointIndex++;
+                return;
+            }
+            nextWaypointIndex++;
+        }
+        HandleReachingExit();
     }
 
     private void HandleReachingExit()
     {
         isMoving = false;
-        if (isOrderComplete) EconomyManager.Instance.AddCash(cashReward);
-        else GameLoopManager.Instance.CustomerReachedExitUnsatisfied();
-        CustomerManager.Instance.RemoveCustomer(this);
+        if (!isOrderComplete && GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.CustomerReachedExitUnsatisfied();
+        }
+
+        if (CustomerManager.Instance != null)
+            CustomerManager.Instance.RemoveCustomer(this);
+
         Destroy(gameObject);
     }
 }

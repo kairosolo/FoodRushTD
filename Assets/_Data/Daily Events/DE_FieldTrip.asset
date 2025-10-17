@@ -15,6 +15,7 @@ MonoBehaviour:
   eventIcon: {fileID: 6215452919764744024, guid: 4713c55e361929043b3ffe430d6bce43, type: 3}
   eventName: School Field Trip
   eventDescription: A busload of kids has arrived. They're all screaming for dessert!
+  minDayToAppear: 4
   featuredCustomers:
   - {fileID: 11400000, guid: 0a9a553abe2507241a1e59de58fcb37c, type: 2}
-  featuredCustomerChance: 85
+  eventWeight: 5

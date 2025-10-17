@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using KairosoloSystems;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class SettingsManager : MonoBehaviour
     private const string FPS_CAP_KEY = "FrameRateCapIndex";
     private const string GRAPHICS_QUALITY_KEY = "GraphicsQualityIndex";
 
+    private UniversalRenderPipelineAsset renderPipelineAsset;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -24,6 +28,8 @@ public class SettingsManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
+
+        renderPipelineAsset = GraphicsSettings.currentRenderPipeline as UniversalRenderPipelineAsset;
 
         uniqueResolutions = new List<Resolution>();
         Resolution[] allResolutions = Screen.resolutions;
@@ -87,6 +93,29 @@ public class SettingsManager : MonoBehaviour
     public void SetGraphicsQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
+
+        if (renderPipelineAsset != null)
+        {
+            string qualityName = QualitySettings.names[qualityIndex];
+            switch (qualityName)
+            {
+                case "High":
+                    renderPipelineAsset.renderScale = 1.0f;
+                    renderPipelineAsset.supportsCameraOpaqueTexture = true;
+                    break;
+
+                case "Medium":
+                    renderPipelineAsset.renderScale = 1.0f;
+                    renderPipelineAsset.supportsCameraOpaqueTexture = false;
+                    break;
+
+                case "Low":
+                    renderPipelineAsset.renderScale = 0.75f;
+                    renderPipelineAsset.supportsCameraOpaqueTexture = false;
+                    break;
+            }
+        }
+
         KPlayerPrefs.SetInt(GRAPHICS_QUALITY_KEY, qualityIndex);
         KPlayerPrefs.Save();
     }

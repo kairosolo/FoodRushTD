@@ -7,7 +7,9 @@ public class PathManager : MonoBehaviour
 
     [SerializeField] private List<Transform> pathWaypoints;
 
-    public int WaypointCount => pathWaypoints.Count;
+    private bool isSimulationMode => MenuSimulationManager.Instance != null;
+
+    public int WaypointCount => isSimulationMode ? MenuSimulationManager.Instance.CustomerPathWaypoints.Count : pathWaypoints.Count;
 
     private void Awake()
     {
@@ -23,11 +25,13 @@ public class PathManager : MonoBehaviour
 
     public Transform GetWaypoint(int index)
     {
-        if (index < 0 || index >= pathWaypoints.Count)
+        List<Transform> currentWaypoints = isSimulationMode ? MenuSimulationManager.Instance.CustomerPathWaypoints : pathWaypoints;
+
+        if (index < 0 || index >= currentWaypoints.Count)
         {
             Debug.LogError($"PathManager: Invalid waypoint index {index}");
             return null;
         }
-        return pathWaypoints[index];
+        return currentWaypoints[index];
     }
 }

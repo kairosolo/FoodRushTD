@@ -6,15 +6,21 @@ public class StationInteraction : MonoBehaviour
 {
     private Camera mainCamera;
     [SerializeField] private StationPlacement stationPlacement;
+    private bool isPointerOverUI = false;
 
     private void Start()
     {
         mainCamera = Camera.main;
     }
 
+    private void Update()
+    {
+        isPointerOverUI = EventSystem.current.IsPointerOverGameObject();
+    }
+
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (isPointerOverUI)
         {
             return;
         }
@@ -48,7 +54,7 @@ public class StationInteraction : MonoBehaviour
         }
         else
         {
-            if (UpgradeUIManager.Instance.IsPanelOpen)
+            if (UpgradeUIManager.Instance.IsUpgradePanelOpen)
             {
                 UpgradeUIManager.Instance.ClosePanel();
             }

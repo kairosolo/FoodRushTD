@@ -32,5 +32,9 @@ public class SetSFXVolume : MonoBehaviour
     {
         mixer.SetFloat("SfxVolume", Mathf.Log10(sliderValue) * 20);
         KPlayerPrefs.SetFloat("SfxVolume", sliderValue);
+        if (Time.timeSinceLevelLoad > 0.1f)
+        {
+            AudioManager.Instance.PlaySFX("UI_Slider_Adjust");
+        }
     }
 }

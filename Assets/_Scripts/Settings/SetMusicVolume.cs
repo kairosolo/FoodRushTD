@@ -32,5 +32,9 @@ public class SetMusicVolume : MonoBehaviour
     {
         mixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20);
         KPlayerPrefs.SetFloat("MusicVolume", sliderValue);
+        if (Time.timeSinceLevelLoad > 0.1f)
+        {
+            AudioManager.Instance.PlaySFX("UI_Slider_Adjust");
+        }
     }
 }

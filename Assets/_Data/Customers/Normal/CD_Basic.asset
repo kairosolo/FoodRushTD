@@ -15,7 +15,7 @@ MonoBehaviour:
   customerTypeName: The Basic
   customerPrefab: {fileID: 2199783616792833757, guid: 30feb04fa3b37d140a16264e8caa13f0, type: 3}
   moveSpeed: 2
-  cashReward: 50
+  cashReward: 30
   potentialOrder:
   - product: {fileID: 11400000, guid: c2ce3a7495a19fd4295a6effdbd36024, type: 2}
     quantity: 1
