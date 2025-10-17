@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5498434471668319027}
   - component: {fileID: 2701238073239512731}
+  - component: {fileID: 7695963221569411665}
   m_Layer: 0
   m_Name: Projectile_Fries
   m_TagString: Untagged
@@ -46,8 +47,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00460628177af0048ab0e2955620dba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoodProjectile
-  travelSpeed: 10
   rotZSpeed: 999
+--- !u!114 &7695963221569411665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3775760721492486323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da02bd8e96aad141816c929171eea99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PooledProjectile
 --- !u!1 &9199584984119377168
 GameObject:
   m_ObjectHideFlags: 0

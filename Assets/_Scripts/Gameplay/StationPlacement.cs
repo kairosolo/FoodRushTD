@@ -10,8 +10,12 @@ public class StationPlacement : MonoBehaviour
     [SerializeField] private Color ghostColorValid = new Color(0.5f, 1f, 0.5f, 0.5f); // Green
     [SerializeField] private Color ghostColorInvalid = new Color(1f, 0.5f, 0.5f, 0.5f); // Red
 
+    [Header("Scaling Costs")]
+    [SerializeField] private float costIncreasePercentage = 0.15f;
+
     private Camera mainCamera;
     private StationData stationToPlace;
+    private int currentPlacementCost;
 
     private GameObject stationGhost;
     private SpriteRenderer ghostRenderer;
@@ -47,10 +51,24 @@ public class StationPlacement : MonoBehaviour
         }
     }
 
+    public int GetCurrentPlacementCost(StationData stationData)
+    {
+        if (stationData == null || StationManager.Instance == null) return 0;
+        int numOwned = StationManager.Instance.GetStationCount(stationData);
+        float multiplier = 1f + (numOwned * costIncreasePercentage);
+        return Mathf.FloorToInt(stationData.PlacementCost * multiplier);
+    }
+
     public void BeginPlacingStation(StationData stationData)
     {
         if (IsPlacing) CancelPlacement();
-        if (EconomyManager.Instance.CurrentCash < stationData.PlacementCost) return;
+
+        currentPlacementCost = GetCurrentPlacementCost(stationData);
+        if (EconomyManager.Instance.CurrentCash < currentPlacementCost)
+        {
+            AudioManager.Instance.PlaySFX("UI_Error");
+            return;
+        }
 
         IsPlacing = true;
         stationToPlace = stationData;
@@ -79,30 +97,43 @@ public class StationPlacement : MonoBehaviour
 
     public void OnCancelPlacement(InputAction.CallbackContext context)
     {
-        if (context.performed && IsPlacing) CancelPlacement();
+        if (context.performed && IsPlacing)
+        {
+            CancelPlacement();
+        }
     }
 
     private void FinishPlacing()
     {
-        if (!EconomyManager.Instance.SpendCash(stationToPlace.PlacementCost))
+        if (!EconomyManager.Instance.SpendCash(currentPlacementCost))
         {
             CancelPlacement();
             return;
         }
 
         ghostRenderer.color = Color.white;
+        Station station = stationGhost.GetComponent<Station>();
 
-        if (stationGhost.TryGetComponent<Station>(out Station station))
+        if (station != null)
         {
             station.HideRange();
             station.PartialInitialize(stationToPlace);
+            station.TotalValue = currentPlacementCost;
+
+            station.FinalizePlacement();
 
             station.TriggerPlacementEffects();
 
-            UpgradeUIManager.Instance.OpenInitialProductSelection(station);
+            if (UpgradeUIManager.Instance != null)
+            {
+                UpgradeUIManager.Instance.OpenInitialProductSelection(station);
+            }
         }
 
-        AudioManager.Instance.PlaySFX("Station_Place");
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX("Station_Place");
+        }
 
         IsPlacing = false;
         stationGhost = null;
@@ -111,7 +142,10 @@ public class StationPlacement : MonoBehaviour
 
     private void CancelPlacement()
     {
-        Destroy(stationGhost);
+        if (stationGhost != null)
+        {
+            Destroy(stationGhost);
+        }
         IsPlacing = false;
         stationGhost = null;
         stationToPlace = null;

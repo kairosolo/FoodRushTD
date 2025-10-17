@@ -112,19 +112,29 @@ public class GameLoopManager : MonoBehaviour
         }
 
         int finalScore = EconomyManager.Instance.TotalCashEarned;
-        int highScore = KPlayerPrefs.GetInt(HIGHSCORE_KEY, 0);
 
-        if (finalScore > highScore)
+        int currentHighScore = 0;
+        if (KPlayerPrefs.HasKey(HIGHSCORE_KEY))
         {
-            highScore = finalScore;
+            string rawValue = KPlayerPrefs.GetString(HIGHSCORE_KEY);
+            string[] parts = rawValue.Split('|');
+            if (parts.Length > 0 && int.TryParse(parts[0], out int score))
+            {
+                currentHighScore = score;
+            }
+        }
 
+        if (finalScore > currentHighScore)
+        {
             string dateString = DateTime.Now.ToString("yyyy-MM-dd");
-            KPlayerPrefs.SetString(HIGHSCORE_KEY, $"{highScore}|{dateString}");
-            Debug.Log($"New highscore: {highScore} set on {dateString}");
+            int daysSurvived = GameClock.Instance.CurrentDay;
+
+            KPlayerPrefs.SetString(HIGHSCORE_KEY, $"{finalScore}|{dateString}|{daysSurvived}");
+            Debug.Log($"New highscore: {finalScore} set on {dateString} after surviving {daysSurvived} days.");
         }
 
         AudioManager.Instance.PlaySFX("Game_LoseJingle");
-        gameOverUI.Show(finalScore, highScore);
+        gameOverUI.Show(finalScore, currentHighScore);
     }
 
     public void Debug_TriggerGameOver()

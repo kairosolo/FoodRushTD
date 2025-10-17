@@ -138,19 +138,22 @@ public class UpgradeUIManager : MonoBehaviour
         }
 
         stationNameText.text = currentStation.StationData.StationName;
-        float currentSpeedBonus = currentStation.SpecializationLevel * currentStation.StationData.SpecializeSpeedBonus * 100;
-        stationInfoText.text = $"Speed Bonus: +{currentSpeedBonus:F0}%";
         stationLevelText.text = $"Level {currentStation.SpecializationLevel + 1}";
+
+        float currentPrepTime = currentStation.GetPreparationTime(currentStation.SpecializationLevel);
+        stationInfoText.text = $"Prep Time: {currentPrepTime:F2}s";
 
         bool canSpecialize = currentStation.CanUpgradeSpecialization();
         specializeButton.interactable = canSpecialize;
         if (canSpecialize)
         {
-            specializeButtonText.text = $"Cooking Speed";
+            float nextPrepTime = currentStation.GetPreparationTime(currentStation.SpecializationLevel + 1);
+            specializeButtonText.text = $"Prep Time\n<size=80%>{currentPrepTime:F2}s -> {nextPrepTime:F2}s</size>";
             specializeCostText.text = $"<sprite name=\"Multi_Cash\"> {currentStation.GetSpecializeCost()}";
         }
         else
         {
+            specializeButtonText.text = "Prep Time";
             specializeCostText.text = "Max Level";
         }
 

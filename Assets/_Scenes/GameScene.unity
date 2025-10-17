@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7222dc0542a0da4419640326659e49e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EconomyManager
-  startingCash: 175
+  startingCash: 250
 --- !u!1 &30613996
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,6 +673,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &67043331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 67043332}
+  m_Layer: 0
+  m_Name: PoolContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &67043332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67043331}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1353682699}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &77925332
 GameObject:
   m_ObjectHideFlags: 0
@@ -14440,6 +14471,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349749593}
   m_CullTransparentMesh: 1
+--- !u!1 &1353682698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1353682699}
+  - component: {fileID: 1353682700}
+  m_Layer: 0
+  m_Name: ProjectilePoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1353682699
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353682698}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 67043332}
+  m_Father: {fileID: 2100356360}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1353682700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353682698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c94e97310e20f43a8e55df9aaa82ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectilePoolManager
+  poolContainer: {fileID: 67043332}
 --- !u!1 &1360399203
 GameObject:
   m_ObjectHideFlags: 0
@@ -14731,6 +14808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StationPlacement
   ghostColorValid: {r: 0.5, g: 1, b: 0.5, a: 0.5}
   ghostColorInvalid: {r: 1, g: 0.5, b: 0.5, a: 0.5}
+  costIncreasePercentage: 0.15
 --- !u!114 &1390437076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21886,14 +21964,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b9c609d8c9ee04596d7012bd2ff2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyManager
-  difficultyIncreasePerDay: 1
+  difficultyIncreasePerDay: 1.25
   dayToStartScaling: 2
   spawnRateDivisor: 1
-  maxSpawnRateDivisor: 3.5
+  maxSpawnRateDivisor: 6
   speedMultiplier: 1
-  maxSpeedMultiplier: 5
+  maxSpeedMultiplier: 3
   dayToStartAddingItems: 4
-  daysPerAdditionalItem: 3
+  daysPerAdditionalItem: 2
   maxAdditionalItems: 0
 --- !u!1 &1968992134
 GameObject:
@@ -31684,7 +31762,6 @@ MonoBehaviour:
   - day: 6
     customersToSpawn:
     - {fileID: 11400000, guid: ae2e3606aa11f374292992d99f924a0d, type: 2}
-    - {fileID: 11400000, guid: 0dd60ed3ff4f07d41b21dbf624fb66e9, type: 2}
     stationsToUnlock: []
   - day: 7
     customersToSpawn:
@@ -31720,8 +31797,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 30613997}
+  - {fileID: 26484505}
+  - {fileID: 1966074051}
+  - {fileID: 427503150}
   - {fileID: 1075219214}
   - {fileID: 1644007598}
+  - {fileID: 2093562645}
   - {fileID: 603744678}
   - {fileID: 794795480}
   - {fileID: 1348420412}
@@ -31729,19 +31811,15 @@ Transform:
   - {fileID: 1390437074}
   - {fileID: 214610794}
   - {fileID: 1910910086}
-  - {fileID: 427503150}
-  - {fileID: 26484505}
-  - {fileID: 2093562645}
   - {fileID: 836561809}
   - {fileID: 81362828}
   - {fileID: 1540608439}
   - {fileID: 1878920076}
-  - {fileID: 1966074051}
   - {fileID: 229228515}
   - {fileID: 107953960}
   - {fileID: 888550396}
   - {fileID: 1924506318}
-  - {fileID: 30613997}
+  - {fileID: 1353682699}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2115603743
@@ -31953,10 +32031,6 @@ PrefabInstance:
     - target: {fileID: 1257174727785337827, guid: f111f9ff7637b2a4d84e71bdf1bf5388, type: 3}
       propertyPath: m_Name
       value: StationButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 2906733297080917454, guid: f111f9ff7637b2a4d84e71bdf1bf5388, type: 3}
-      propertyPath: duration
-      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5368709017937486545, guid: f111f9ff7637b2a4d84e71bdf1bf5388, type: 3}
       propertyPath: m_Pivot.x

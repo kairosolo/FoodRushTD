@@ -145,6 +145,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -152,10 +165,10 @@ TextureImporter:
       name: Foods_UI_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 1769
-        width: 285
-        height: 396
+        x: 84
+        y: 1830
+        width: 191
+        height: 276
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,10 +275,10 @@ TextureImporter:
       name: Foods_UI_5
       rect:
         serializedVersion: 2
-        x: 22
-        y: 973
-        width: 285
-        height: 396
+        x: 58
+        y: 1029
+        width: 215
+        height: 340
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,10 +341,10 @@ TextureImporter:
       name: Foods_UI_8
       rect:
         serializedVersion: 2
-        x: 8
-        y: 557
-        width: 285
-        height: 396
+        x: 28
+        y: 600
+        width: 241
+        height: 353
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -417,9 +430,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 343
-        y: 183
-        width: 285
-        height: 396
+        y: 242
+        width: 275
+        height: 327
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

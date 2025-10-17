@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 4.284}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -59.9, y: 9.3}
+  m_AnchoredPosition: {x: -57.6, y: 9.5}
   m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3571551023638294968
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 138216426066323220, guid: 4e1a9356880b6a941b2b7ea4b508aceb, type: 3}
+  m_Sprite: {fileID: -6956365924691389520, guid: 1dbf7feb1c2779244970d3de3c6b1bd7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -941,6 +941,8 @@ GameObject:
   - component: {fileID: 1507666352994909064}
   - component: {fileID: 8657951177515441996}
   - component: {fileID: 8818308735723116364}
+  - component: {fileID: 5324980997211894478}
+  - component: {fileID: 3316992130719327597}
   m_Layer: 0
   m_Name: FryingStation
   m_TagString: Untagged
@@ -983,6 +985,7 @@ MonoBehaviour:
   firePoint: {fileID: 9192025820753167772}
   clickRadius: 1
   interactionDelay: 0.5
+  stationCanvas: {fileID: 7875283665652250619}
   rangeVisualizer: {fileID: 8818308735723116364}
   placementInfo: {fileID: 7922938823099511388}
   productVisualizer: {fileID: 5523507611294359750}
@@ -1265,6 +1268,31 @@ MonoBehaviour:
   segments: 50
   lineWidth: 0.1
   color: {r: 0.9529412, g: 0.6117647, b: 0.07058824, a: 0.39215687}
+--- !u!210 &5324980997211894478
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922440456857387492}
+  m_Enabled: 1
+  m_SortingLayerID: -2057674461
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+--- !u!114 &3316992130719327597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922440456857387492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3799d26b22c2343a72bdbb2d500f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DynamicSpriteSorter
+  sortingPrecision: 100
 --- !u!1 &2929507339620198754
 GameObject:
   m_ObjectHideFlags: 0
@@ -3558,7 +3586,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5004518974491128491
 RectTransform:
   m_ObjectHideFlags: 0

@@ -1041,6 +1041,8 @@ GameObject:
   - component: {fileID: 6107926151311383140}
   - component: {fileID: 259898646522824875}
   - component: {fileID: 5369884982914020582}
+  - component: {fileID: 6261937477927390267}
+  - component: {fileID: 4833787990005782157}
   m_Layer: 0
   m_Name: DessertStation
   m_TagString: Untagged
@@ -1083,6 +1085,7 @@ MonoBehaviour:
   firePoint: {fileID: 9192025820753167772}
   clickRadius: 1
   interactionDelay: 0.5
+  stationCanvas: {fileID: 1816966960842713817}
   rangeVisualizer: {fileID: 5369884982914020582}
   placementInfo: {fileID: 8387355971393237450}
   productVisualizer: {fileID: 1808852920383645988}
@@ -1365,6 +1368,31 @@ MonoBehaviour:
   segments: 50
   lineWidth: 0.1
   color: {r: 0.60784316, g: 0.34901962, b: 0.7137255, a: 0.39215687}
+--- !u!210 &6261937477927390267
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922440456857387492}
+  m_Enabled: 1
+  m_SortingLayerID: -2057674461
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+--- !u!114 &4833787990005782157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922440456857387492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3799d26b22c2343a72bdbb2d500f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DynamicSpriteSorter
+  sortingPrecision: 100
 --- !u!1 &2962568261955127576
 GameObject:
   m_ObjectHideFlags: 0
@@ -2715,7 +2743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2341691635839072205
 RectTransform:
   m_ObjectHideFlags: 0

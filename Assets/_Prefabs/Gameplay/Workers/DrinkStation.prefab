@@ -1017,6 +1017,8 @@ GameObject:
   - component: {fileID: 3415913746333338803}
   - component: {fileID: 7863064233777049543}
   - component: {fileID: 1467442158061896196}
+  - component: {fileID: 9009794865039013420}
+  - component: {fileID: 2558793487779546127}
   m_Layer: 0
   m_Name: DrinkStation
   m_TagString: Untagged
@@ -1059,6 +1061,7 @@ MonoBehaviour:
   firePoint: {fileID: 9192025820753167772}
   clickRadius: 1
   interactionDelay: 0.5
+  stationCanvas: {fileID: 3047742323092874187}
   rangeVisualizer: {fileID: 1467442158061896196}
   placementInfo: {fileID: 8519765300448987743}
   productVisualizer: {fileID: 5256889612421339480}
@@ -1341,6 +1344,31 @@ MonoBehaviour:
   segments: 50
   lineWidth: 0.1
   color: {r: 0.20392157, g: 0.59607846, b: 0.85882354, a: 0.39215687}
+--- !u!210 &9009794865039013420
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922440456857387492}
+  m_Enabled: 1
+  m_SortingLayerID: -2057674461
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+--- !u!114 &2558793487779546127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922440456857387492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3799d26b22c2343a72bdbb2d500f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DynamicSpriteSorter
+  sortingPrecision: 100
 --- !u!1 &3056464154008822582
 GameObject:
   m_ObjectHideFlags: 0
@@ -1651,7 +1679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6137181942576054874
 RectTransform:
   m_ObjectHideFlags: 0

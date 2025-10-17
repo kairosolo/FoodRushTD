@@ -30,12 +30,12 @@ RectTransform:
   m_LocalScale: {x: 0.68887, y: 0.68887, z: 0.68887}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5368709017937486545}
+  m_Father: {fileID: 1091157241222676761}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -5.1, y: -88.3}
-  m_SizeDelta: {x: 0, y: -56.885}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -5.1, y: -11.3}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4382351321895252679
 CanvasRenderer:
@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: ' <sprite name="Cash">000'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ae7f02b2a85a9d3478598296b0bfdafb, type: 2}
-  m_sharedMaterial: {fileID: 8344738814696310453, guid: ae7f02b2a85a9d3478598296b0bfdafb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4a4ece3cca31a6548b52933aa2dbf66c, type: 2}
+  m_sharedMaterial: {fileID: 8344738814696310453, guid: 4a4ece3cca31a6548b52933aa2dbf66c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -171,7 +171,6 @@ RectTransform:
   m_Children:
   - {fileID: 1091157241222676761}
   - {fileID: 8674966570209687134}
-  - {fileID: 4074406020251464948}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -273,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ButtonJuice
   squashAmount: 1.16
   stretchAmount: 1.15
-  duration: 0.2
+  duration: 0.1
 --- !u!114 &8367312583543954806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +332,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 10}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5993811375949497777
@@ -403,14 +402,15 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4074406020251464948}
   m_Father: {fileID: 5368709017937486545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.7, y: -63.9}
-  m_SizeDelta: {x: 0, y: -56.885}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 102.56, y: 25.279999}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &7963969190935708802
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -441,8 +441,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Frying Station
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ae7f02b2a85a9d3478598296b0bfdafb, type: 2}
-  m_sharedMaterial: {fileID: 8344738814696310453, guid: ae7f02b2a85a9d3478598296b0bfdafb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4a4ece3cca31a6548b52933aa2dbf66c, type: 2}
+  m_sharedMaterial: {fileID: 8344738814696310453, guid: 4a4ece3cca31a6548b52933aa2dbf66c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

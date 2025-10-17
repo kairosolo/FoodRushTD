@@ -25,6 +25,11 @@ public class StationInteraction : MonoBehaviour
             return;
         }
 
+        if (GameLoopManager.Instance != null && GameLoopManager.Instance.CurrentState == GameLoopManager.GameState.UIMode)
+        {
+            return;
+        }
+
         if (!context.performed || stationPlacement.IsPlacing)
         {
             return;

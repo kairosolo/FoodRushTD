@@ -14,36 +14,48 @@ public class StationButton : MonoBehaviour
     public void Initialize(StationData data)
     {
         stationData = data;
-
         stationIcon.sprite = stationData.StationIcon;
         stationNameText.text = stationData.StationName;
-        stationCostText.text = $"<sprite name=\"Multi_Cash\"> {stationData.PlacementCost}";
-
         button.onClick.AddListener(OnButtonClicked);
 
-        UpdateInteractableState(EconomyManager.Instance.CurrentCash);
+        ForceUpdateState();
     }
 
     private void OnEnable()
     {
-        EconomyManager.OnCashChanged += UpdateInteractableState;
+        EconomyManager.OnCashChanged += UpdateStateFromCash;
+        StationManager.OnStationCountChanged += ForceUpdateState;
     }
 
     private void OnDisable()
     {
-        EconomyManager.OnCashChanged -= UpdateInteractableState;
+        EconomyManager.OnCashChanged -= UpdateStateFromCash;
+        StationManager.OnStationCountChanged -= ForceUpdateState;
     }
 
-    private void UpdateInteractableState(int currentCash)
+    private void ForceUpdateState()
     {
-        if (stationData != null)
+        if (EconomyManager.Instance != null)
         {
-            button.interactable = currentCash >= stationData.PlacementCost;
+            UpdateStateFromCash(EconomyManager.Instance.CurrentCash);
+        }
+    }
+
+    private void UpdateStateFromCash(int currentCash)
+    {
+        if (stationData != null && StationPlacement.Instance != null)
+        {
+            int currentCost = StationPlacement.Instance.GetCurrentPlacementCost(stationData);
+            stationCostText.text = $"<sprite name=\"Multi_Cash\"> {currentCost}";
+            button.interactable = currentCash >= currentCost;
         }
     }
 
     private void OnButtonClicked()
     {
-        StationPlacement.Instance.BeginPlacingStation(stationData);
+        if (StationPlacement.Instance != null)
+        {
+            StationPlacement.Instance.BeginPlacingStation(stationData);
+        }
     }
 }

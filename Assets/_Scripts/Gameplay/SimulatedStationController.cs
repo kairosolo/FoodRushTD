@@ -5,8 +5,8 @@ using System.Linq;
 public class SimulatedStationController : MonoBehaviour
 {
     [Header("Simulation Settings")]
-    [SerializeField] private float minSwitchTime = 8f;
-    [SerializeField] private float maxSwitchTime = 15f;
+    [SerializeField] private float minSwitchTime = 15f;
+    [SerializeField] private float maxSwitchTime = 30f;
 
     private Station station;
     private float switchProductTimer;

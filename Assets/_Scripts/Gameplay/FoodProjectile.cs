@@ -22,29 +22,31 @@ public class FoodProjectile : MonoBehaviour
         targetCustomer = target;
         productData = product;
 
+        elapsedTime = 0f;
+
         movementType = productData.MovementType;
         amplitude = productData.Amplitude;
         frequency = productData.Frequency;
 
         startPosition = transform.position;
-        float distance = Vector3.Distance(startPosition, targetCustomer.transform.position);
+        float distance = Vector3.Distance(startPosition, target.transform.position);
         travelDuration = distance / productData.ProjectileSpeed;
+
+        if (travelDuration <= 0) travelDuration = 0.1f;
 
         if (movementType == ProductData.ProjectileMovementType.Lob)
         {
-            Vector3 directionToTarget = (targetCustomer.transform.position - startPosition).normalized;
+            Vector3 directionToTarget = (target.transform.position - startPosition).normalized;
             Vector3 perpendicular = new Vector3(-directionToTarget.y, directionToTarget.x, 0);
-            controlPoint = startPosition + (targetCustomer.transform.position - startPosition) / 2 + perpendicular * amplitude;
+            controlPoint = startPosition + (target.transform.position - startPosition) / 2 + perpendicular * amplitude;
         }
-
-        Destroy(gameObject, 5f);
     }
 
     private void Update()
     {
         if (targetCustomer == null)
         {
-            Destroy(gameObject);
+            ProjectilePoolManager.Instance.ReturnProjectile(gameObject);
             return;
         }
 
@@ -56,12 +58,13 @@ public class FoodProjectile : MonoBehaviour
         transform.Rotate(0f, 0f, rotZSpeed * Time.deltaTime);
 
         float distanceToTarget = Vector3.Distance(transform.position, targetCustomer.transform.position);
-        if (distanceToTarget < 0.2f)
+        if (t >= 1f || distanceToTarget < 0.2f)
         {
             targetCustomer.ReceiveFoodItem(productData);
             VFXManager.Instance.PlayVFX("projectileExplodeVFX", transform.position, transform.rotation);
             AudioManager.Instance.PlaySFX("Projectile_Impact");
-            Destroy(gameObject);
+
+            ProjectilePoolManager.Instance.ReturnProjectile(gameObject);
         }
     }
 

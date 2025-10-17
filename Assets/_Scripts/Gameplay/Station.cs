@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using System.Linq;
 
 public class Station : MonoBehaviour
 {
@@ -14,6 +13,7 @@ public class Station : MonoBehaviour
     [SerializeField] private float interactionDelay = 0.5f;
 
     [Header("References")]
+    [SerializeField] private Canvas stationCanvas;
     [SerializeField] private RangeVisualizer rangeVisualizer;
     [SerializeField] private GameObject placementInfo;
     [SerializeField] private SpriteRenderer productVisualizer;
@@ -21,7 +21,7 @@ public class Station : MonoBehaviour
     [SerializeField] private Image productIconImage;
     [SerializeField] private Image progressBarImage;
 
-    public int TotalValue { get; private set; }
+    public int TotalValue { get; set; }
 
     public StationData StationData { get; private set; }
     public ProductData CurrentProduct { get; private set; }
@@ -41,19 +41,19 @@ public class Station : MonoBehaviour
         characterRandomizer = GetComponent<CharacterRandomizer>();
     }
 
-    private void OnEnable()
-    {
-        if (StationManager.Instance != null)
-        {
-            StationManager.Instance.AddStation(this);
-        }
-    }
-
     private void OnDisable()
     {
         if (StationManager.Instance != null)
         {
             StationManager.Instance.RemoveStation(this);
+        }
+    }
+
+    public void FinalizePlacement()
+    {
+        if (StationManager.Instance != null)
+        {
+            StationManager.Instance.AddStation(this);
         }
     }
 
@@ -114,6 +114,11 @@ public class Station : MonoBehaviour
 
         this.enabled = false;
         TotalValue = StationData.PlacementCost;
+
+        if (stationCanvas != null)
+        {
+            stationCanvas.gameObject.SetActive(false);
+        }
     }
 
     public void TriggerPlacementEffects()
@@ -140,6 +145,11 @@ public class Station : MonoBehaviour
 
         if (!UnlockedProducts.Contains(initialProduct))
             UnlockedProducts.Add(initialProduct);
+
+        if (stationCanvas != null)
+        {
+            stationCanvas.gameObject.SetActive(true);
+        }
 
         SetInitialProduct(initialProduct);
 
@@ -267,20 +277,7 @@ public class Station : MonoBehaviour
 
     private float GetCurrentPreparationTime()
     {
-        if (CurrentProduct == null) return float.MaxValue;
-        float speedMultiplier = 1f + (SpecializationLevel * StationData.SpecializeSpeedBonus);
-        float baseTime = CurrentProduct.BasePreparationTime / speedMultiplier;
-
-        if (DailyEventManager.Instance != null)
-        {
-            DailyEventData activeEvent = DailyEventManager.Instance.ActiveEvent;
-            if (activeEvent != null && activeEvent.Type == DailyEventData.EventType.ChallengeModifier)
-            {
-                return baseTime * activeEvent.StationPrepTimeMultiplier;
-            }
-        }
-
-        return baseTime;
+        return GetPreparationTime(this.SpecializationLevel);
     }
 
     private void UpdateProgressBar()
@@ -343,8 +340,18 @@ public class Station : MonoBehaviour
             return;
         }
 
+        if (ProjectilePoolManager.Instance == null)
+        {
+            Debug.LogError("ProjectilePoolManager not found in the scene! Cannot serve food.");
+            return;
+        }
+
         Vector3 spawnPosition = firePoint != null ? firePoint.position : transform.position;
-        GameObject projectileObj = Instantiate(CurrentProduct.FoodProjectilePrefab, spawnPosition, Quaternion.identity);
+
+        GameObject projectileObj = ProjectilePoolManager.Instance.GetProjectile(CurrentProduct.FoodProjectilePrefab);
+        projectileObj.transform.position = spawnPosition;
+        projectileObj.transform.rotation = Quaternion.identity;
+
         if (projectileObj.TryGetComponent<FoodProjectile>(out FoodProjectile projectile))
         {
             projectile.Initialize(target, CurrentProduct);
@@ -352,5 +359,23 @@ public class Station : MonoBehaviour
                 AudioManager.Instance.PlaySFX("Projectile_Launch");
         }
         StartPreparation();
+    }
+
+    public float GetPreparationTime(int specializationLevelOverride)
+    {
+        if (CurrentProduct == null) return float.MaxValue;
+
+        float speedMultiplier = 1f + (specializationLevelOverride * StationData.SpecializeSpeedBonus);
+        float baseTime = CurrentProduct.BasePreparationTime / speedMultiplier;
+
+        if (DailyEventManager.Instance != null)
+        {
+            DailyEventData activeEvent = DailyEventManager.Instance.ActiveEvent;
+            if (activeEvent != null && activeEvent.Type == DailyEventData.EventType.ChallengeModifier)
+            {
+                return baseTime * activeEvent.StationPrepTimeMultiplier;
+            }
+        }
+        return baseTime;
     }
 }
