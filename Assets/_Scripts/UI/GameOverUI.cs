@@ -36,6 +36,7 @@ public class GameOverUI : MonoBehaviour
     public void GoToMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(0);
+        if (LevelManager.Instance != null)
+            LevelManager.Instance.GoToLevelID(2);
     }
 }

@@ -29,9 +29,13 @@ public class DifficultyManager : MonoBehaviour
     [Tooltip("The maximum number of additional items a customer can order.")]
     [SerializeField] private int maxAdditionalItems = 0;
 
+    [Tooltip("The amount of extra cash awarded for each additional item requested by a customer due to difficulty scaling.")]
+    [SerializeField] private int cashBonusPerAdditionalItem = 10;
+
     public float SpawnRateDivisor => spawnRateDivisor;
     public float SpeedMultiplier => speedMultiplier;
     public int MaxAdditionalItems => maxAdditionalItems;
+    public int CashBonusPerAdditionalItem => cashBonusPerAdditionalItem;
 
     private void Awake()
     {

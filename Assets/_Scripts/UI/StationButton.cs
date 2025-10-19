@@ -17,12 +17,12 @@ public class StationButton : MonoBehaviour
         stationIcon.sprite = stationData.StationIcon;
         stationNameText.text = stationData.StationName;
         button.onClick.AddListener(OnButtonClicked);
-
-        ForceUpdateState();
     }
 
     private void OnEnable()
     {
+        ForceUpdateState();
+
         EconomyManager.OnCashChanged += UpdateStateFromCash;
         StationManager.OnStationCountChanged += ForceUpdateState;
     }

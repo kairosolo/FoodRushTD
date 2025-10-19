@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomerData
   customerTypeName: The Drinker
   customerPrefab: {fileID: 2199783616792833757, guid: 09633f0522cea3e46a2c357015a26ff5, type: 3}
-  moveSpeed: 2.3
+  moveSpeed: 2.1
   cashReward: 40
   potentialOrder:
   - product: {fileID: 11400000, guid: d23426ceed6dab34b952d93746e734c7, type: 2}
+    quantity: 1
+  - product: {fileID: 11400000, guid: 00ca26699ed764345839d009ad6bf6b9, type: 2}
     quantity: 1
   isVip: 0
   patienceDuration: 60

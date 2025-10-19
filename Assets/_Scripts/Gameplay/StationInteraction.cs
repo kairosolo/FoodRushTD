@@ -25,7 +25,7 @@ public class StationInteraction : MonoBehaviour
             return;
         }
 
-        if (GameLoopManager.Instance != null && GameLoopManager.Instance.CurrentState == GameLoopManager.GameState.UIMode)
+        if (UpgradeUIManager.Instance != null && UpgradeUIManager.Instance.IsInitialProductSelectionOpen)
         {
             return;
         }

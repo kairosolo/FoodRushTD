@@ -16,6 +16,7 @@ public class DailyEventManager : MonoBehaviour
     [SerializeField] private int chanceForEvent = 50;
 
     public DailyEventData ActiveEvent { get; private set; }
+    private DailyEventData lastDayEvent = null;
 
     private void Awake()
     {
@@ -41,19 +42,35 @@ public class DailyEventManager : MonoBehaviour
 
     private void TryTriggerNewEvent()
     {
-        if (GameClock.Instance != null && GameClock.Instance.CurrentDay <= 1)
+        if (ActiveEvent != null)
         {
-            ActiveEvent = null;
-            OnNewDailyEvent?.Invoke(null);
-            return;
+            lastDayEvent = ActiveEvent;
         }
 
         ActiveEvent = null;
 
+        if (GameClock.Instance != null && GameClock.Instance.CurrentDay <= 1)
+        {
+            OnNewDailyEvent?.Invoke(null);
+            return;
+        }
+
         int currentDay = GameClock.Instance.CurrentDay;
+
         List<DailyEventData> validEventsForToday = allPossibleEvents
-            .Where(evt => currentDay >= evt.MinDayToAppear)
+            .Where(evt => currentDay >= evt.MinDayToAppear && evt != lastDayEvent)
             .ToList();
+
+        if (validEventsForToday.Count == 0)
+        {
+            validEventsForToday = allPossibleEvents
+                .Where(evt => currentDay >= evt.MinDayToAppear)
+                .ToList();
+            if (validEventsForToday.Count > 1 && lastDayEvent != null)
+            {
+                validEventsForToday.Remove(lastDayEvent);
+            }
+        }
 
         if (validEventsForToday.Count == 0)
         {
@@ -66,11 +83,13 @@ public class DailyEventManager : MonoBehaviour
         {
             ActiveEvent = validEventsForToday[UnityEngine.Random.Range(0, validEventsForToday.Count)];
             Debug.Log($"DAILY EVENT: {ActiveEvent.EventName} has started!");
-            AudioManager.Instance.PlaySFX("Event_Announce");
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlaySFX("Event_Announce");
         }
         else
         {
             Debug.Log("No daily event today.");
+            lastDayEvent = null;
         }
 
         OnNewDailyEvent?.Invoke(ActiveEvent);

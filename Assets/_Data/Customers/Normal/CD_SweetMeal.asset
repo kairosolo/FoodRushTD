@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9b8baf2b590d44ab22d46ef8718761, type: 3}
   m_Name: CD_SweetMeal
   m_EditorClassIdentifier: Assembly-CSharp::CustomerData
-  customerTypeName: The Thirsty
+  customerTypeName: The Sweet Meal
   customerPrefab: {fileID: 2199783616792833757, guid: 09633f0522cea3e46a2c357015a26ff5, type: 3}
   moveSpeed: 1.7
   cashReward: 75

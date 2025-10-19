@@ -22,6 +22,7 @@ public class MenuManager : MonoBehaviour
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.PlayMusic("MenuMusic");
+            AudioManager.Instance.StopLoopingSFX();
         }
         DisplayHighScore();
     }
@@ -40,40 +41,22 @@ public class MenuManager : MonoBehaviour
             string rawValue = KPlayerPrefs.GetString(HIGHSCORE_KEY);
             string[] parts = rawValue.Split('|');
 
-            if (parts.Length == 3)
-            {
-                string score = parts[0];
-                string date = parts[1];
-                string days = parts[2];
+            string score = parts[0];
+            string date = parts[1];
+            string days = parts[2];
 
-                highScoreText.text = $"High Score: ${score}";
-                highScoreDateText.text = $"Day {days} - Set on: {date}";
+            highScoreText.text = $"High Score: ${score}";
+            highScoreDateText.text = $"Day {days} - Set on: {date}";
 
-                highScoreText.gameObject.SetActive(true);
-                highScoreDateText.gameObject.SetActive(true);
-            }
-            else if (parts.Length == 2)
-            {
-                string score = parts[0];
-                string date = parts[1];
-
-                highScoreText.text = $"High Score: ${score}";
-                highScoreDateText.text = $"Set on: {date}";
-
-                highScoreText.gameObject.SetActive(true);
-                highScoreDateText.gameObject.SetActive(true);
-            }
-            else
-            {
-                highScoreText.text = $"High Score: ${rawValue}";
-                highScoreText.gameObject.SetActive(true);
-                highScoreDateText.gameObject.SetActive(false);
-            }
+            highScoreText.gameObject.SetActive(true);
+            highScoreDateText.gameObject.SetActive(true);
+            highScorePanel.gameObject.SetActive(true);
         }
         else
         {
             highScoreText.gameObject.SetActive(false);
             highScoreDateText.gameObject.SetActive(false);
+            highScorePanel.gameObject.SetActive(false);
         }
     }
 

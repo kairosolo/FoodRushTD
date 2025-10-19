@@ -17,7 +17,7 @@ MonoBehaviour:
   placementCost: 100
   stationPrefab: {fileID: 2922440456857387492, guid: 809084021de77464da71b5d9f9a1e5d9, type: 3}
   specializeBaseCost: 80
-  specializeSpeedBonus: 0.15
+  specializeSpeedBonus: 0.2
   maxSpecializeLevel: 5
   diversifyCost: 100
   availableProducts:

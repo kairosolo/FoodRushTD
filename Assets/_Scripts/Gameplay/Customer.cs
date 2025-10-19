@@ -31,6 +31,7 @@ public class Customer : MonoBehaviour
 
     public event Action<float, float> OnPatienceChanged;
 
+    private int difficultyScaledItems = 0;
     private float satisfiedMoveSpeedMultiplier = 3f;
     private int cashReward;
     private bool isVip;
@@ -77,17 +78,26 @@ public class Customer : MonoBehaviour
     {
         characterRandomizer.RandomizeAll();
 
-        float speedMultiplier = 1f;
+        float difficultySpeedMultiplier = 1f;
         if (DifficultyManager.Instance != null)
         {
-            speedMultiplier = DifficultyManager.Instance.SpeedMultiplier;
+            difficultySpeedMultiplier = DifficultyManager.Instance.SpeedMultiplier;
         }
 
-        this.baseMoveSpeed = data.MoveSpeed;
-        this.moveSpeed = data.MoveSpeed * speedMultiplier;
+        float eventSpeedMultiplier = 1f;
+        if (DailyEventManager.Instance != null && DailyEventManager.Instance.ActiveEvent != null)
+        {
+            DailyEventData activeEvent = DailyEventManager.Instance.ActiveEvent;
+            if (activeEvent.Type == DailyEventData.EventType.ChallengeModifier)
+            {
+                eventSpeedMultiplier = activeEvent.CustomerSpeedMultiplier;
+            }
+        }
+
+        this.moveSpeed = data.MoveSpeed * difficultySpeedMultiplier * eventSpeedMultiplier;
         this.cashReward = data.CashReward;
         this.isVip = data.IsVip;
-        this.patienceDuration = data.PatienceDuration / speedMultiplier;
+        this.patienceDuration = data.PatienceDuration / difficultySpeedMultiplier;
 
         GenerateOrder(data);
 
@@ -201,6 +211,7 @@ public class Customer : MonoBehaviour
     private void GenerateOrder(CustomerData customerData)
     {
         currentOrder.Clear();
+        difficultyScaledItems = 0;
 
         foreach (var item in customerData.PotentialOrder)
         {
@@ -250,6 +261,7 @@ public class Customer : MonoBehaviour
                 {
                     ProductData productToAdd = productsInOrder[UnityEngine.Random.Range(0, productsInOrder.Count)];
                     currentOrder[productToAdd]++;
+                    difficultyScaledItems++;
                 }
             }
         }
@@ -362,10 +374,28 @@ public class Customer : MonoBehaviour
         }
 
         isOrderComplete = true;
+
+        int finalCashReward = this.cashReward;
+
+        if (DifficultyManager.Instance != null && difficultyScaledItems > 0)
+        {
+            finalCashReward += difficultyScaledItems * DifficultyManager.Instance.CashBonusPerAdditionalItem;
+        }
+
+        if (DailyEventManager.Instance != null && DailyEventManager.Instance.ActiveEvent != null)
+        {
+            DailyEventData activeEvent = DailyEventManager.Instance.ActiveEvent;
+            if (activeEvent.Type == DailyEventData.EventType.Boon)
+            {
+                finalCashReward = Mathf.FloorToInt(finalCashReward * activeEvent.CashRewardMultiplier);
+            }
+        }
+
         if (MoneyDropManager.Instance != null)
         {
-            MoneyDropManager.Instance.SpawnMoney(transform.position, cashReward);
+            MoneyDropManager.Instance.SpawnMoney(transform.position, finalCashReward);
         }
+
         animator.SetTrigger("isHappy");
 
         if (VFXManager.Instance != null)
@@ -398,7 +428,14 @@ public class Customer : MonoBehaviour
                 nextWaypointIndex = PathManager.Instance.WaypointCount;
                 startPosition = transform.position;
                 float distanceToExit = Vector3.Distance(startPosition, targetWaypointPosition);
-                travelTime = distanceToExit / moveSpeed;
+                if (moveSpeed > 0)
+                {
+                    travelTime = distanceToExit / moveSpeed;
+                }
+                else
+                {
+                    travelTime = float.MaxValue;
+                }
                 lerpTimer = 0f;
             }
         }

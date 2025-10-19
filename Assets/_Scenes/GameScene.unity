@@ -5213,17 +5213,13 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CloseSettings
       objectReference: {fileID: 0}
+    - target: {fileID: 6777193049436998515, guid: 126d323374d07884f99dc0289a80de93, type: 3}
+      propertyPath: stretchAmount
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6928283438329559679, guid: 126d323374d07884f99dc0289a80de93, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7167734640301186620, guid: 126d323374d07884f99dc0289a80de93, type: 3}
-      propertyPath: squashAmount
-      value: 1.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7167734640301186620, guid: 126d323374d07884f99dc0289a80de93, type: 3}
-      propertyPath: stretchAmount
-      value: 1.11
       objectReference: {fileID: 0}
     - target: {fileID: 7847731568003117973, guid: 126d323374d07884f99dc0289a80de93, type: 3}
       propertyPath: m_AnchorMax.x
@@ -14808,7 +14804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StationPlacement
   ghostColorValid: {r: 0.5, g: 1, b: 0.5, a: 0.5}
   ghostColorInvalid: {r: 1, g: 0.5, b: 0.5, a: 0.5}
-  costIncreasePercentage: 0.15
+  costIncreasePercentage: 0.125
 --- !u!114 &1390437076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14901,6 +14897,7 @@ GameObject:
   - component: {fileID: 1398348316}
   - component: {fileID: 1398348320}
   - component: {fileID: 1398348319}
+  - component: {fileID: 1398348321}
   m_Layer: 5
   m_Name: FastForwardButton
   m_TagString: Untagged
@@ -14924,9 +14921,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -145, y: -26}
+  m_AnchoredPosition: {x: -195, y: -76}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1398348316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15058,9 +15055,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25474ab57ddcc5e418ca529355153553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonJuice
-  squashAmount: 1.12
-  stretchAmount: 1.11
+  squashAmount: 1.1
+  stretchAmount: 1.2
   duration: 0.1
+--- !u!114 &1398348321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398348314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25474ab57ddcc5e418ca529355153553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonJuice
+  squashAmount: 1.1
+  stretchAmount: 1.2
+  duration: 0.2
 --- !u!1001 &1400593288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21964,7 +21976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b9c609d8c9ee04596d7012bd2ff2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyManager
-  difficultyIncreasePerDay: 1.25
+  difficultyIncreasePerDay: 1.2
   dayToStartScaling: 2
   spawnRateDivisor: 1
   maxSpawnRateDivisor: 6
@@ -21973,6 +21985,7 @@ MonoBehaviour:
   dayToStartAddingItems: 4
   daysPerAdditionalItem: 2
   maxAdditionalItems: 0
+  cashBonusPerAdditionalItem: 10
 --- !u!1 &1968992134
 GameObject:
   m_ObjectHideFlags: 0
@@ -31744,24 +31757,23 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f0ba4021d2ec896479f9fe039953a1af, type: 2}
   - day: 3
     customersToSpawn:
-    - {fileID: 11400000, guid: d4556bfcd2e6b33449c477e0e3dc333b, type: 2}
-    - {fileID: 11400000, guid: 393b0cdf09b8bc4458fefbac3de87cc6, type: 2}
+    - {fileID: 11400000, guid: 4bdf54533514914498144326695222b4, type: 2}
     stationsToUnlock:
     - {fileID: 11400000, guid: 50d9615de4f73f740806aa2b808c5c31, type: 2}
   - day: 4
     customersToSpawn:
     - {fileID: 11400000, guid: 95b01ee5c14f16241baaae7987e27fdd, type: 2}
-    - {fileID: 11400000, guid: 4bdf54533514914498144326695222b4, type: 2}
+    - {fileID: 11400000, guid: d62065f271b43394c842162605bb6488, type: 2}
     stationsToUnlock: []
   - day: 5
     customersToSpawn:
-    - {fileID: 11400000, guid: d62065f271b43394c842162605bb6488, type: 2}
-    - {fileID: 11400000, guid: 4227ce6af3daf68409c8436327409fb7, type: 2}
     - {fileID: 11400000, guid: 2bb56b38428a10d4dabd507828f321f8, type: 2}
     stationsToUnlock: []
   - day: 6
     customersToSpawn:
     - {fileID: 11400000, guid: ae2e3606aa11f374292992d99f924a0d, type: 2}
+    - {fileID: 11400000, guid: 4227ce6af3daf68409c8436327409fb7, type: 2}
+    - {fileID: 11400000, guid: 86c691e952a63a048b678ee187dc43b9, type: 2}
     stationsToUnlock: []
   - day: 7
     customersToSpawn:

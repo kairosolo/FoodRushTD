@@ -276,7 +276,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <sprite name="Multi_Cash" > 100
+  m_text: <sprite name="Multi_Cash" > 1000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4a4ece3cca31a6548b52933aa2dbf66c, type: 2}
   m_sharedMaterial: {fileID: 8344738814696310453, guid: 4a4ece3cca31a6548b52933aa2dbf66c, type: 2}
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1813,7 +1813,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <sprite name="Multi_Cash" > 100
+  m_text: <sprite name="Multi_Cash" > 1000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4a4ece3cca31a6548b52933aa2dbf66c, type: 2}
   m_sharedMaterial: {fileID: 8344738814696310453, guid: 4a4ece3cca31a6548b52933aa2dbf66c, type: 2}
@@ -1856,7 +1856,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}

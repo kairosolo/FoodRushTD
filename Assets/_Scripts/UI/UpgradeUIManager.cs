@@ -45,6 +45,7 @@ public class UpgradeUIManager : MonoBehaviour
 
     private Station currentStation;
     public bool IsUpgradePanelOpen => upgradePanelContainer.activeSelf;
+    public bool IsInitialProductSelectionOpen => productSelectPanelContainer.activeSelf;
     public bool IsPanelOpen => IsUpgradePanelOpen || productSelectPanelContainer.activeSelf;
 
     private void Awake()

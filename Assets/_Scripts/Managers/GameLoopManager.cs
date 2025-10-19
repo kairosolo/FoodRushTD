@@ -130,6 +130,7 @@ public class GameLoopManager : MonoBehaviour
             int daysSurvived = GameClock.Instance.CurrentDay;
 
             KPlayerPrefs.SetString(HIGHSCORE_KEY, $"{finalScore}|{dateString}|{daysSurvived}");
+            KPlayerPrefs.Save();
             Debug.Log($"New highscore: {finalScore} set on {dateString} after surviving {daysSurvived} days.");
         }
 
