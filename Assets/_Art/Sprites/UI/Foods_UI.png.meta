@@ -165,10 +165,10 @@ TextureImporter:
       name: Foods_UI_0
       rect:
         serializedVersion: 2
-        x: 84
-        y: 1830
-        width: 191
-        height: 276
+        x: 73
+        y: 1820
+        width: 207
+        height: 298
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -231,10 +231,10 @@ TextureImporter:
       name: Foods_UI_3
       rect:
         serializedVersion: 2
-        x: 31
-        y: 1351
-        width: 285
-        height: 396
+        x: 65
+        y: 1436
+        width: 220
+        height: 296
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,10 +253,10 @@ TextureImporter:
       name: Foods_UI_4
       rect:
         serializedVersion: 2
-        x: 354
-        y: 1356
-        width: 285
-        height: 396
+        x: 411
+        y: 1445
+        width: 177
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -275,10 +275,10 @@ TextureImporter:
       name: Foods_UI_5
       rect:
         serializedVersion: 2
-        x: 58
-        y: 1029
-        width: 215
-        height: 340
+        x: 40
+        y: 1002
+        width: 244
+        height: 367
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -407,10 +407,10 @@ TextureImporter:
       name: Foods_UI_11
       rect:
         serializedVersion: 2
-        x: 16
-        y: 175
-        width: 285
-        height: 396
+        x: 32
+        y: 268
+        width: 229
+        height: 172
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -429,10 +429,10 @@ TextureImporter:
       name: Foods_UI_12
       rect:
         serializedVersion: 2
-        x: 343
-        y: 242
-        width: 275
-        height: 327
+        x: 323
+        y: 265
+        width: 307
+        height: 246
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

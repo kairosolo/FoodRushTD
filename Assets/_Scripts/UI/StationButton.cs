@@ -8,8 +8,19 @@ public class StationButton : MonoBehaviour
     [SerializeField] private TextMeshProUGUI stationNameText;
     [SerializeField] private TextMeshProUGUI stationCostText;
     [SerializeField] private Button button;
+    [SerializeField] private Color disabledColor = new Color(0.6f, 0.6f, 0.6f, 0.8f);
 
     private StationData stationData;
+    private Color originalIconColor;
+    private Color originalNameColor;
+    private Color originalCostColor;
+
+    private void Awake()
+    {
+        originalIconColor = stationIcon.color;
+        originalNameColor = stationNameText.color;
+        originalCostColor = stationCostText.color;
+    }
 
     public void Initialize(StationData data)
     {
@@ -19,12 +30,16 @@ public class StationButton : MonoBehaviour
         button.onClick.AddListener(OnButtonClicked);
     }
 
-    private void OnEnable()
+    private void Start()
     {
         ForceUpdateState();
+    }
 
+    private void OnEnable()
+    {
         EconomyManager.OnCashChanged += UpdateStateFromCash;
         StationManager.OnStationCountChanged += ForceUpdateState;
+        ForceUpdateState();
     }
 
     private void OnDisable()
@@ -35,7 +50,7 @@ public class StationButton : MonoBehaviour
 
     private void ForceUpdateState()
     {
-        if (EconomyManager.Instance != null)
+        if (EconomyManager.Instance != null && stationData != null)
         {
             UpdateStateFromCash(EconomyManager.Instance.CurrentCash);
         }
@@ -47,7 +62,21 @@ public class StationButton : MonoBehaviour
         {
             int currentCost = StationPlacement.Instance.GetCurrentPlacementCost(stationData);
             stationCostText.text = $"<sprite name=\"Multi_Cash\"> {currentCost}";
-            button.interactable = currentCash >= currentCost;
+            bool canAfford = currentCash >= currentCost;
+            button.interactable = canAfford;
+
+            if (canAfford)
+            {
+                stationIcon.color = originalIconColor;
+                stationNameText.color = originalNameColor;
+                stationCostText.color = originalCostColor;
+            }
+            else
+            {
+                stationIcon.color = disabledColor;
+                stationNameText.color = disabledColor;
+                stationCostText.color = disabledColor;
+            }
         }
     }
 

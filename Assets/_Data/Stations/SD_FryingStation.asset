@@ -20,6 +20,8 @@ MonoBehaviour:
   specializeSpeedBonus: 0.2
   maxSpecializeLevel: 5
   diversifyCost: 100
+  masterRecipeCost: 300
+  capacityUpgradeCost: 400
   availableProducts:
   - {fileID: 11400000, guid: c2ce3a7495a19fd4295a6effdbd36024, type: 2}
   - {fileID: 11400000, guid: bb2822edf7994534aa2ca1ace00f30f7, type: 2}

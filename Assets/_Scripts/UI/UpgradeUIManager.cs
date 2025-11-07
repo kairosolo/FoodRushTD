@@ -28,9 +28,9 @@ public class UpgradeUIManager : MonoBehaviour
     [SerializeField] private Color filledPipColor = Color.yellow;
     [SerializeField] private Color emptyPipColor = new Color(0.3f, 0.3f, 0.3f);
 
-    [Header("Product Switching")]
-    [SerializeField] private Transform productButtonContainer;
-    [SerializeField] private GameObject productButtonPrefab;
+    [Header("Product Display")]
+    [SerializeField] private GameObject unlockedProductsDisplayContainer;
+    [SerializeField] private GameObject productIconDisplayPrefab;
 
     [Header("Sell Button")]
     [SerializeField] private Button sellButton;
@@ -42,7 +42,11 @@ public class UpgradeUIManager : MonoBehaviour
     [Header("Initial Product Selection Panel")]
     [SerializeField] private GameObject productSelectPanelContainer;
     [SerializeField] private Transform initialProductButtonContainer;
+    [SerializeField] private GameObject productButtonPrefab;
 
+    [Header("Tooltip Buttons")]
+    [SerializeField] private TooltipTrigger specializeTooltipTrigger;
+    [SerializeField] private TooltipTrigger diversifyTooltipTrigger;
     private Station currentStation;
     public bool IsUpgradePanelOpen => upgradePanelContainer.activeSelf;
     public bool IsInitialProductSelectionOpen => productSelectPanelContainer.activeSelf;
@@ -58,6 +62,24 @@ public class UpgradeUIManager : MonoBehaviour
     {
         upgradePanelContainer.SetActive(false);
         productSelectPanelContainer.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        EconomyManager.OnCashChanged += HandleCashChanged;
+    }
+
+    private void OnDisable()
+    {
+        EconomyManager.OnCashChanged -= HandleCashChanged;
+    }
+
+    private void HandleCashChanged(int newCash)
+    {
+        if (IsUpgradePanelOpen && currentStation != null)
+        {
+            RefreshPanel();
+        }
     }
 
     public void OpenInitialProductSelection(Station station)
@@ -138,58 +160,109 @@ public class UpgradeUIManager : MonoBehaviour
             return;
         }
 
+        int currentCash = EconomyManager.Instance.CurrentCash;
+
         stationNameText.text = currentStation.StationData.StationName;
         stationLevelText.text = $"Level {currentStation.SpecializationLevel + 1}";
-
-        float currentPrepTime = currentStation.GetPreparationTime(currentStation.SpecializationLevel);
-        stationInfoText.text = $"Prep Time: {currentPrepTime:F2}s";
+        float speedMultiplier = 1f + (currentStation.SpecializationLevel * currentStation.StationData.SpecializeSpeedBonus);
+        stationInfoText.text = $"Speed: x{speedMultiplier:F2}";
 
         bool canSpecialize = currentStation.CanUpgradeSpecialization();
-        specializeButton.interactable = canSpecialize;
+        int specializeCost = currentStation.GetSpecializeCost();
+        specializeButton.interactable = canSpecialize && currentCash >= specializeCost;
         if (canSpecialize)
         {
-            float nextPrepTime = currentStation.GetPreparationTime(currentStation.SpecializationLevel + 1);
-            specializeButtonText.text = $"Prep Time\n<size=80%>{currentPrepTime:F2}s -> {nextPrepTime:F2}s</size>";
-            specializeCostText.text = $"<sprite name=\"Multi_Cash\"> {currentStation.GetSpecializeCost()}";
+            specializeButtonText.text = "Improve\nPrep Time";
+            specializeCostText.text = $"<sprite name=\"Multi_Cash\"> {specializeCost}";
         }
         else
         {
-            specializeButtonText.text = "Prep Time";
+            specializeButtonText.text = "Improve\nPrep Time";
             specializeCostText.text = "Max Level";
         }
 
-        bool canDiversify = currentStation.CanUpgradeDiversify();
-        diversifyButton.interactable = canDiversify;
+        if (specializeTooltipTrigger != null)
+        {
+            float bonus = currentStation.StationData.SpecializeSpeedBonus * 100;
+            specializeTooltipTrigger.SetText("Prep Time (Specialize)", $"Increases this station's cooking speed for all its recipes by {bonus}%.");
+        }
+
+        int diversifyLevel = currentStation.DiversifyLevel;
+        bool canDiversify = diversifyLevel < 5;
+        int diversifyCost = currentStation.GetNextDiversifyCost();
+        diversifyButton.interactable = canDiversify && currentCash >= diversifyCost;
+
         if (canDiversify)
         {
-            diversifyButtonText.text = $"Learn Recipe";
-            diversifyCostText.text = $"<sprite name=\"Multi_Cash\"> {currentStation.StationData.DiversifyCost}";
+            diversifyCostText.text = $"<sprite name=\"Multi_Cash\"> {diversifyCost}";
         }
         else
         {
             diversifyCostText.text = "Max Level";
         }
 
-        foreach (Transform child in productButtonContainer) Destroy(child.gameObject);
-        foreach (var product in currentStation.UnlockedProducts)
+        string diversifyTitle = "Learn Recipe";
+        string diversifyDesc = "Unlocks a new recipe for this station, allowing it to cook more types of food.";
+
+        switch (diversifyLevel)
         {
-            GameObject buttonObj = Instantiate(productButtonPrefab, productButtonContainer);
-            if (buttonObj.TryGetComponent<ProductSwitchButton>(out var buttonScript))
-            {
-                buttonScript.Initialize(product, currentStation, currentStation.CurrentProduct == product);
-            }
+            case 0:
+                diversifyButtonText.text = "Learn\nRecipe";
+                break;
+
+            case 1:
+                diversifyButtonText.text = "Master\nRecipes";
+                diversifyTitle = "Master Recipes";
+                diversifyDesc = "Unlocks a second cooking slot, allowing the station to prepare two different items simultaneously.";
+                break;
+
+            case 2:
+            case 3:
+            case 4:
+                diversifyButtonText.text = $"Increase\nCapacity {diversifyLevel - 1}";
+                diversifyTitle = $"Increase Capacity {diversifyLevel - 1}";
+                diversifyDesc = $"Increases the maximum stack size for each recipe, allowing the station to hold up to {diversifyLevel} of each item at once.";
+                break;
+
+            default:
+                diversifyButtonText.text = "Max\nCapacity";
+                break;
         }
 
+        if (diversifyTooltipTrigger != null)
+        {
+            diversifyTooltipTrigger.SetText(diversifyTitle, diversifyDesc);
+        }
+
+        UpdateProductDisplay();
         int refundAmount = Mathf.FloorToInt(currentStation.TotalValue * sellRefundPercentage);
         sellButtonText.text = $"Sell\n${refundAmount}";
+        UpdateUpgradePips(specializePipsContainer, currentStation.SpecializationLevel, currentStation.StationData.MaxSpecializeLevel);
+        UpdateUpgradePips(diversifyPipsContainer, currentStation.DiversifyLevel, 5);
+    }
 
-        UpdateUpgradePips(specializePipsContainer,
-                         currentStation.SpecializationLevel,
-                         currentStation.StationData.MaxSpecializeLevel);
+    private void UpdateProductDisplay()
+    {
+        if (unlockedProductsDisplayContainer == null) return;
 
-        int diversifyLevel = currentStation.UnlockedProducts.Count - 1;
-        int maxDiversifyLevel = currentStation.StationData.AvailableProducts.Count - 1;
-        UpdateUpgradePips(diversifyPipsContainer, diversifyLevel, maxDiversifyLevel);
+        foreach (Transform child in unlockedProductsDisplayContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        unlockedProductsDisplayContainer.SetActive(true);
+
+        foreach (ProductData product in currentStation.UnlockedProducts)
+        {
+            GameObject iconObj = Instantiate(productIconDisplayPrefab, unlockedProductsDisplayContainer.transform);
+            if (iconObj.TryGetComponent<ProductIconDisplay>(out var displayScript))
+            {
+                float prepTime = currentStation.GetPreparationTime(product, currentStation.SpecializationLevel);
+                string prepTimeString = $"{prepTime:F2}s";
+
+                displayScript.Initialize(product.ProductIconUI, prepTimeString);
+            }
+        }
     }
 
     private void UpdateUpgradePips(Transform container, int currentLevel, int maxLevel)
@@ -203,7 +276,7 @@ public class UpgradeUIManager : MonoBehaviour
 
             if (pipImage == null) continue;
 
-            if (i < maxLevel)
+            if (i <= maxLevel)
             {
                 pip.gameObject.SetActive(true);
                 pipImage.color = (i < currentLevel) ? filledPipColor : emptyPipColor;
@@ -226,9 +299,9 @@ public class UpgradeUIManager : MonoBehaviour
 
     public void OnDiversifyClicked()
     {
-        if (currentStation != null && currentStation.CanUpgradeDiversify())
+        if (currentStation != null)
         {
-            currentStation.UnlockNextProduct();
+            currentStation.UpgradeDiversifyPath();
             RefreshPanel();
         }
     }
@@ -238,14 +311,10 @@ public class UpgradeUIManager : MonoBehaviour
         if (currentStation == null) return;
 
         Station stationToSell = currentStation;
-
         int refundAmount = Mathf.FloorToInt(stationToSell.TotalValue * sellRefundPercentage);
         EconomyManager.Instance.AddCash(refundAmount);
-
         ClosePanel();
-
         AudioManager.Instance.PlaySFX("Station_Sell");
-
         if (stationToSell != null)
         {
             Destroy(stationToSell.gameObject);

@@ -1,60 +1,77 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 
 public class Station : MonoBehaviour
 {
+    private enum SlotState
+    { Idle, Preparing, Holding }
+
     [Header("Station Settings")]
     [SerializeField] private float serviceRange = 5f;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float clickRadius = 1f;
+    [SerializeField] private float switchCommitmentTime = 1.0f;
 
     [Header("Interaction Settings")]
     [SerializeField] private float interactionDelay = 0.5f;
 
-    [Header("References")]
+    [Header("Primary UI References")]
+    [SerializeField] private Image productIconImage;
+    [SerializeField] private Image progressBarImage;
+    [SerializeField] private TextMeshProUGUI primaryStackText;
+
+    [Header("Secondary UI References (For Mastery)")]
+    [SerializeField] private GameObject secondaryProductUIGroup;
+    [SerializeField] private Image secondaryProductIconImage;
+    [SerializeField] private Image secondaryProgressBarImage;
+    [SerializeField] private TextMeshProUGUI secondaryStackText;
+
+    [Header("Core References")]
     [SerializeField] private Canvas stationCanvas;
     [SerializeField] private RangeVisualizer rangeVisualizer;
     [SerializeField] private GameObject placementInfo;
-    [SerializeField] private SpriteRenderer productVisualizer;
+    [SerializeField] private GameObject primaryProductVisual;
+    [SerializeField] private GameObject secondaryProductVisual;
     [SerializeField] private Animator animator;
-    [SerializeField] private Image productIconImage;
-    [SerializeField] private Image progressBarImage;
 
     public int TotalValue { get; set; }
-
     public StationData StationData { get; private set; }
-    public ProductData CurrentProduct { get; private set; }
+    public ProductData CurrentProduct => currentProduct;
     public List<ProductData> UnlockedProducts { get; private set; }
+    public int DiversifyLevel { get; private set; }
     public int SpecializationLevel { get; private set; }
+    public bool IsMastered => DiversifyLevel >= 2;
     public float ClickRadius => clickRadius;
 
+    public int MaxStackSize => (DiversifyLevel > 2) ? (DiversifyLevel - 1) : 1;
+
+    private ProductData currentProduct;
+    private ProductData secondaryProduct;
+
+    private Dictionary<ProductData, float> prepTimers;
+    private Dictionary<ProductData, int> heldStacks;
+
+    private SlotState primarySlotState = SlotState.Idle;
+    private SlotState secondarySlotState = SlotState.Idle;
+
+    private float primaryCommitTimer;
+    private float secondaryCommitTimer;
+
     private CharacterRandomizer characterRandomizer;
-    private float preparationTimer;
-    private bool isPreparing;
-    private bool isHoldingProduct;
     private bool canInteractFlag;
     private float interactionTimer;
+    private float serveCooldownTimer;
 
     private void Awake()
     {
         characterRandomizer = GetComponent<CharacterRandomizer>();
-    }
-
-    private void OnDisable()
-    {
-        if (StationManager.Instance != null)
-        {
-            StationManager.Instance.RemoveStation(this);
-        }
-    }
-
-    public void FinalizePlacement()
-    {
-        if (StationManager.Instance != null)
-        {
-            StationManager.Instance.AddStation(this);
-        }
+        UnlockedProducts = new List<ProductData>();
+        prepTimers = new Dictionary<ProductData, float>();
+        heldStacks = new Dictionary<ProductData, int>();
+        DiversifyLevel = 0;
     }
 
     private void Update()
@@ -62,202 +79,505 @@ public class Station : MonoBehaviour
         if (!canInteractFlag)
         {
             interactionTimer -= Time.deltaTime;
-            if (interactionTimer <= 0f)
+            if (interactionTimer <= 0f) canInteractFlag = true;
+        }
+
+        if (serveCooldownTimer > 0f)
+        {
+            serveCooldownTimer -= Time.deltaTime;
+        }
+
+        if (IsMastered && serveCooldownTimer <= 0f)
+        {
+            Customer target = FindBestTargetStationCanServe();
+            if (target != null)
             {
-                canInteractFlag = true;
+                if (primarySlotState == SlotState.Holding && target.DoesOrderContain(currentProduct))
+                {
+                    ServeFood(target, currentProduct);
+                }
+                else if (secondarySlotState == SlotState.Holding && target.DoesOrderContain(secondaryProduct))
+                {
+                    ServeFood(target, secondaryProduct);
+                }
             }
         }
 
-        if (isPreparing)
+        if (IsMastered)
         {
-            preparationTimer += Time.deltaTime;
-            UpdateProgressBar();
-            float currentPrepTime = GetCurrentPreparationTime();
-            if (preparationTimer >= currentPrepTime)
+            UpdateSingleSlot(ref primarySlotState, ref currentProduct, secondaryProduct, ref primaryCommitTimer);
+            UpdateSingleSlot(ref secondarySlotState, ref secondaryProduct, currentProduct, ref secondaryCommitTimer);
+        }
+        else
+        {
+            UpdateStandardStation();
+        }
+
+        UpdateAnimationState();
+    }
+
+    private void UpdateAnimationState()
+    {
+        if (animator == null) return;
+
+        bool isPrimaryPreparing = primarySlotState == SlotState.Preparing;
+        bool isSecondaryPreparing = IsMastered && secondarySlotState == SlotState.Preparing;
+
+        animator.SetBool("isCooking", isPrimaryPreparing || isSecondaryPreparing);
+    }
+
+    private void LateUpdate()
+    {
+        UpdateAllVisuals();
+    }
+
+    private void UpdateStandardStation()
+    {
+        UpdateSingleSlot(ref primarySlotState, ref currentProduct, null, ref primaryCommitTimer);
+    }
+
+    private void UpdateSingleSlot(ref SlotState state, ref ProductData productInSlot, ProductData otherProduct, ref float commitTimer)
+    {
+        if (serveCooldownTimer <= 0f && productInSlot != null && heldStacks.ContainsKey(productInSlot) && heldStacks[productInSlot] > 0)
+        {
+            Customer target = FindBestTargetForProduct(productInSlot);
+            if (target != null)
             {
-                CompletePreparation();
+                ServeFood(target, productInSlot);
+                if (heldStacks[productInSlot] < MaxStackSize)
+                {
+                    state = SlotState.Preparing;
+                }
+                return;
             }
         }
-        else if (isHoldingProduct)
+
+        switch (state)
         {
-            FindAndServeCustomer();
+            case SlotState.Idle:
+                productInSlot = FindBestProductToPrepare(otherProduct) ?? GetNextProductInCycle(otherProduct);
+                if (productInSlot != null)
+                {
+                    state = SlotState.Preparing;
+                    commitTimer = switchCommitmentTime;
+                }
+                break;
+
+            case SlotState.Preparing:
+                if (productInSlot == null) { state = SlotState.Idle; break; }
+
+                if (heldStacks[productInSlot] >= MaxStackSize)
+                {
+                    state = SlotState.Holding;
+                    break;
+                }
+
+                commitTimer -= Time.deltaTime;
+                if (commitTimer <= 0f)
+                {
+                    ProductData bestProduct = FindBestProductToPrepare(otherProduct);
+                    if (bestProduct != null && bestProduct != productInSlot && heldStacks[productInSlot] == 0)
+                    {
+                        TransferProgress(ref productInSlot, bestProduct, false);
+                        commitTimer = switchCommitmentTime;
+                    }
+                }
+
+                prepTimers[productInSlot] += Time.deltaTime;
+                float prepTime = GetPreparationTime(productInSlot, SpecializationLevel);
+
+                if (prepTimers[productInSlot] >= prepTime)
+                {
+                    while (prepTimers[productInSlot] >= prepTime && heldStacks[productInSlot] < MaxStackSize)
+                    {
+                        heldStacks[productInSlot]++;
+                        prepTimers[productInSlot] -= prepTime;
+                        AudioManager.Instance.PlaySFX("Station_FoodReady");
+                    }
+                }
+                break;
+
+            case SlotState.Holding:
+                ProductData bestProductToSwitchTo = FindBestProductToPrepare(otherProduct);
+                if (bestProductToSwitchTo != null && bestProductToSwitchTo != productInSlot)
+                {
+                    heldStacks[productInSlot]--;
+                    TransferProgress(ref productInSlot, bestProductToSwitchTo, true);
+                    state = SlotState.Preparing;
+                    commitTimer = switchCommitmentTime;
+                    break;
+                }
+
+                if (productInSlot != null && heldStacks[productInSlot] < MaxStackSize)
+                {
+                    state = SlotState.Preparing;
+                }
+                break;
         }
     }
 
-    public bool CanInteract()
+    private Customer FindBestTargetStationCanServe()
     {
-        if (rangeVisualizer != null) rangeVisualizer.Hide();
-        return canInteractFlag;
+        if (CustomerManager.Instance == null) return null;
+
+        ProductData heldProduct1 = (primarySlotState == SlotState.Holding || heldStacks[currentProduct] > 0) ? currentProduct : null;
+        ProductData heldProduct2 = (secondarySlotState == SlotState.Holding || (secondaryProduct != null && heldStacks[secondaryProduct] > 0)) ? secondaryProduct : null;
+
+        if (heldProduct1 == null && heldProduct2 == null) return null;
+
+        return CustomerManager.Instance.GetActiveCustomers()
+            .Select(c => new { Customer = c, Distance = Vector3.Distance(transform.position, c.transform.position) })
+            .Where(x => x.Distance <= serviceRange)
+            .Where(x => (heldProduct1 != null && x.Customer.DoesOrderContain(heldProduct1)) ||
+                        (heldProduct2 != null && x.Customer.DoesOrderContain(heldProduct2)))
+            .OrderBy(x => x.Distance)
+            .FirstOrDefault()
+            ?.Customer;
     }
 
-    public void ShowRange()
+    private void TransferProgress(ref ProductData productInSlot, ProductData newProduct, bool isFullTransfer = false)
     {
-        if (rangeVisualizer != null)
+        ProductData oldProduct = productInSlot;
+        float progressToTransfer = isFullTransfer ? GetPreparationTime(oldProduct, SpecializationLevel) : prepTimers[oldProduct];
+
+        productInSlot = newProduct;
+
+        if (!prepTimers.ContainsKey(productInSlot)) prepTimers[productInSlot] = 0f;
+
+        float newTotalProgress = prepTimers[productInSlot] + progressToTransfer;
+
+        float newProductMaxTime = GetPreparationTime(productInSlot, SpecializationLevel);
+        prepTimers[productInSlot] = Mathf.Min(newTotalProgress, newProductMaxTime * 0.99f);
+
+        if (prepTimers.ContainsKey(oldProduct))
         {
-            rangeVisualizer.Show(serviceRange);
+            prepTimers[oldProduct] = 0f;
         }
     }
 
-    public void HideRange()
+    private void UpdateAllVisuals()
     {
-        if (rangeVisualizer != null)
+        if (productIconImage != null)
         {
-            rangeVisualizer.Hide();
+            bool hasProduct = primarySlotState != SlotState.Idle && currentProduct != null;
+            productIconImage.enabled = hasProduct;
+            if (hasProduct) productIconImage.sprite = currentProduct.ProductIconUI;
+        }
+        if (progressBarImage != null)
+        {
+            float progress = 0f;
+            if (primarySlotState == SlotState.Preparing && currentProduct != null)
+            {
+                progress = prepTimers[currentProduct] / GetPreparationTime(currentProduct, SpecializationLevel);
+            }
+            else if (primarySlotState == SlotState.Holding)
+            {
+                progress = 1f;
+            }
+            progressBarImage.fillAmount = Mathf.Clamp01(progress);
+        }
+        if (primaryStackText != null)
+        {
+            bool showStack = currentProduct != null && heldStacks.ContainsKey(currentProduct) && heldStacks[currentProduct] > 1;
+            primaryStackText.gameObject.SetActive(showStack);
+            if (showStack) primaryStackText.text = $"x{heldStacks[currentProduct]}";
+        }
+
+        if (IsMastered && secondaryProductUIGroup != null)
+        {
+            if (secondaryProductIconImage != null)
+            {
+                bool hasProduct = secondarySlotState != SlotState.Idle && secondaryProduct != null;
+                secondaryProductIconImage.enabled = hasProduct;
+                if (hasProduct) secondaryProductIconImage.sprite = secondaryProduct.ProductIconUI;
+            }
+            if (secondaryProgressBarImage != null)
+            {
+                float progress = 0f;
+                if (secondarySlotState == SlotState.Preparing && secondaryProduct != null)
+                    progress = prepTimers[secondaryProduct] / GetPreparationTime(secondaryProduct, SpecializationLevel);
+                else if (secondarySlotState == SlotState.Holding)
+                    progress = 1f;
+                secondaryProgressBarImage.fillAmount = progress;
+            }
+            if (secondaryStackText != null)
+            {
+                bool showStack = secondaryProduct != null && heldStacks.ContainsKey(secondaryProduct) && heldStacks[secondaryProduct] > 1;
+                secondaryStackText.gameObject.SetActive(showStack);
+                if (showStack) secondaryStackText.text = $"x{heldStacks[secondaryProduct]}";
+            }
+        }
+
+        UpdateWorldSpaceVisuals();
+    }
+
+    private void UpdateWorldSpaceVisuals()
+    {
+        bool primaryIsCooking = primarySlotState == SlotState.Preparing && currentProduct != null;
+        bool primaryIsHolding = primarySlotState == SlotState.Holding && currentProduct != null;
+
+        bool secondaryIsCooking = IsMastered && secondarySlotState == SlotState.Preparing && secondaryProduct != null;
+        bool secondaryIsHolding = IsMastered && secondarySlotState == SlotState.Holding && secondaryProduct != null;
+
+        bool isFullyIdle = IsMastered ? (primaryIsHolding && secondaryIsHolding) : primaryIsHolding;
+
+        if (primaryProductVisual != null)
+        {
+            bool showPrimaryVisual = primaryIsCooking || (primaryIsHolding && isFullyIdle);
+            primaryProductVisual.SetActive(showPrimaryVisual);
+
+            if (showPrimaryVisual)
+            {
+                SpriteRenderer primaryRenderer = primaryProductVisual.GetComponent<SpriteRenderer>();
+                if (primaryRenderer != null && currentProduct != null)
+                {
+                    primaryRenderer.sprite = currentProduct.ProductSprite;
+                }
+            }
+        }
+
+        if (secondaryProductVisual != null)
+        {
+            bool showSecondaryVisual = IsMastered && (secondaryIsCooking || (secondaryIsHolding && isFullyIdle));
+            secondaryProductVisual.SetActive(showSecondaryVisual);
+
+            if (showSecondaryVisual)
+            {
+                SpriteRenderer secondaryRenderer = secondaryProductVisual.GetComponent<SpriteRenderer>();
+                if (secondaryRenderer != null && secondaryProduct != null)
+                {
+                    secondaryRenderer.sprite = secondaryProduct.ProductSprite;
+                }
+            }
         }
     }
 
-    public void PartialInitialize(StationData data)
+    #region Core Logic Methods
+
+    private ProductData FindBestProductToPrepare(ProductData otherSlotProduct)
     {
-        StationData = data;
-        SpecializationLevel = 0;
-        UnlockedProducts = new List<ProductData>();
+        if (CustomerManager.Instance == null) return null;
 
-        this.enabled = false;
-        TotalValue = StationData.PlacementCost;
+        return CustomerManager.Instance.GetActiveCustomers()
+            .Select(c => new { Customer = c, Distance = Vector3.Distance(transform.position, c.transform.position) })
+            .Where(x => x.Distance <= serviceRange)
+            .OrderBy(x => x.Distance)
+            .SelectMany(x => UnlockedProducts.Select(p => new { Product = p, Customer = x.Customer }))
+            .FirstOrDefault(x => x.Product != otherSlotProduct && x.Customer.DoesOrderContain(x.Product))
+            ?.Product;
+    }
 
-        if (stationCanvas != null)
+    private ProductData GetNextProductInCycle(ProductData productToExclude)
+    {
+        if (UnlockedProducts.Count == 0) return null;
+        if (UnlockedProducts.Count == 1) return UnlockedProducts[0] == productToExclude ? null : UnlockedProducts[0];
+
+        int currentIndex = (currentProduct != null) ? UnlockedProducts.IndexOf(currentProduct) : -1;
+
+        for (int i = 1; i <= UnlockedProducts.Count; i++)
         {
-            stationCanvas.gameObject.SetActive(false);
+            int nextIndex = (currentIndex + i) % UnlockedProducts.Count;
+            ProductData nextProduct = UnlockedProducts[nextIndex];
+            if (nextProduct != productToExclude)
+            {
+                return nextProduct;
+            }
+        }
+        return null;
+    }
+
+    private Customer FindBestTargetForProduct(ProductData product)
+    {
+        if (product == null || CustomerManager.Instance == null) return null;
+
+        return CustomerManager.Instance.GetActiveCustomers()
+            .Where(c => c.DoesOrderContain(product))
+            .Select(c => new { Customer = c, Distance = Vector3.Distance(transform.position, c.transform.position) })
+            .Where(x => x.Distance <= serviceRange)
+            .OrderBy(x => x.Distance)
+            .FirstOrDefault()
+            ?.Customer;
+    }
+
+    private void ServeFood(Customer target, ProductData product)
+    {
+        serveCooldownTimer = 0.25f;
+
+        target.NotifyItemInFlight(product);
+        if (animator != null) animator.SetTrigger("isShooting");
+        AudioManager.Instance.PlaySFX("Projectile_Launch");
+
+        Vector3 spawnPosition = firePoint != null ? firePoint.position : transform.position;
+        GameObject projectileObj = ProjectilePoolManager.Instance.GetProjectile(product.FoodProjectilePrefab);
+        projectileObj.transform.position = spawnPosition;
+        if (projectileObj.TryGetComponent<FoodProjectile>(out var p)) p.Initialize(target, product);
+
+        heldStacks[product]--;
+    }
+
+    #endregion Core Logic Methods
+
+    #region Upgrade and Initialization Methods
+
+    public void AddUnlockedProduct(ProductData product)
+    {
+        if (product == null || UnlockedProducts.Contains(product)) return;
+
+        UnlockedProducts.Add(product);
+        if (!prepTimers.ContainsKey(product))
+        {
+            prepTimers.Add(product, 0f);
+        }
+        if (!heldStacks.ContainsKey(product))
+        {
+            heldStacks.Add(product, 0);
         }
     }
 
-    public void TriggerPlacementEffects()
+    public void UpgradeDiversifyPath()
     {
-        if (characterRandomizer != null)
+        if (DiversifyLevel >= 5 || !canInteractFlag) return;
+
+        int cost = GetNextDiversifyCost();
+        if (EconomyManager.Instance.SpendCash(cost))
         {
-            characterRandomizer.RandomizeAll();
+            TotalValue += cost;
+            DiversifyLevel++;
+
+            if (DiversifyLevel == 1)
+            {
+                ProductData productToUnlock = StationData.AvailableProducts.FirstOrDefault(p => !UnlockedProducts.Contains(p));
+                if (productToUnlock != null)
+                {
+                    AddUnlockedProduct(productToUnlock);
+                }
+            }
+            else if (DiversifyLevel == 2)
+            {
+                if (secondaryProductUIGroup != null) secondaryProductUIGroup.SetActive(true);
+            }
+
+            if (primarySlotState == SlotState.Holding)
+            {
+                primarySlotState = SlotState.Preparing;
+            }
+            if (IsMastered && secondarySlotState == SlotState.Holding)
+            {
+                secondarySlotState = SlotState.Preparing;
+            }
+
+            AudioManager.Instance.PlaySFX("Station_Upgrade");
         }
+    }
 
-        if (VFXManager.Instance != null)
-            VFXManager.Instance.PlayVFX("stationPlacementVFX", transform.position, transform.rotation);
-
-        placementInfo.SetActive(false);
-
-        if (animator != null)
+    public int GetNextDiversifyCost()
+    {
+        switch (DiversifyLevel)
         {
-            animator.SetTrigger("isPrepared");
+            case 0: return StationData.DiversifyCost;
+            case 1: return StationData.MasterRecipeCost;
+            case 2:
+            case 3:
+            case 4:
+                return StationData.CapacityUpgradeCost * (DiversifyLevel - 1);
+
+            default:
+                return 0;
         }
     }
 
     public void SetInitialProductAndActivate(ProductData initialProduct)
     {
         this.enabled = true;
-
-        if (!UnlockedProducts.Contains(initialProduct))
-            UnlockedProducts.Add(initialProduct);
-
-        if (stationCanvas != null)
-        {
-            stationCanvas.gameObject.SetActive(true);
-        }
-
-        SetInitialProduct(initialProduct);
+        AddUnlockedProduct(initialProduct);
+        stationCanvas.gameObject.SetActive(true);
+        currentProduct = initialProduct;
+        primarySlotState = SlotState.Preparing;
+        primaryCommitTimer = switchCommitmentTime;
 
         canInteractFlag = false;
         interactionTimer = interactionDelay;
+        if (secondaryProductUIGroup != null) secondaryProductUIGroup.SetActive(false);
     }
 
-    public void SwitchActiveProduct(ProductData newProduct)
+    public float GetPreparationTime(int specializationLevelOverride)
     {
-        if (!UnlockedProducts.Contains(newProduct) || CurrentProduct == newProduct)
-        {
-            return;
-        }
-
-        if (isHoldingProduct)
-        {
-            Debug.Log("Sacrificed held product to switch.");
-        }
-
-        CurrentProduct = newProduct;
-        productIconImage.sprite = CurrentProduct.ProductIconUI;
-        if (productVisualizer != null)
-        {
-            productVisualizer.sprite = CurrentProduct.ProductSprite;
-        }
-
-        if (AudioManager.Instance != null)
-            AudioManager.Instance.PlaySFX("Station_SwitchProduct");
-
-        StartPreparation();
-
-        if (UpgradeUIManager.Instance != null)
-        {
-            UpgradeUIManager.Instance.RequestRefresh();
-        }
+        ProductData productForCalc = currentProduct ?? UnlockedProducts.FirstOrDefault();
+        return GetPreparationTime(productForCalc, specializationLevelOverride);
     }
 
-    private void SetInitialProduct(ProductData newProduct)
+    public float GetPreparationTime(ProductData product, int specializationLevelOverride)
     {
-        CurrentProduct = newProduct;
-        productIconImage.sprite = CurrentProduct.ProductIconUI;
-        if (productVisualizer != null)
-        {
-            productVisualizer.sprite = CurrentProduct.ProductSprite;
-        }
+        if (product == null) return float.MaxValue;
+        float speedMultiplier = 1f + (specializationLevelOverride * StationData.SpecializeSpeedBonus);
+        float baseTime = product.BasePreparationTime / speedMultiplier;
 
-        if (animator != null)
+        if (DailyEventManager.Instance != null)
         {
-            animator.SetTrigger("isChoosing");
+            DailyEventData activeEvent = DailyEventManager.Instance.ActiveEvent;
+            if (activeEvent != null && activeEvent.Type == DailyEventData.EventType.ChallengeModifier)
+            {
+                return baseTime * activeEvent.StationPrepTimeMultiplier;
+            }
         }
-
-        StartPreparation();
-    }
-
-    public void StartPreparation()
-    {
-        preparationTimer = 0f;
-        isPreparing = true;
-        isHoldingProduct = false;
-        if (progressBarImage != null)
-        {
-            progressBarImage.fillAmount = 0;
-        }
+        return baseTime;
     }
 
     public void UpgradeSpecialization()
     {
         if (!CanUpgradeSpecialization() || !canInteractFlag) return;
-
         int cost = GetSpecializeCost();
         if (EconomyManager.Instance.SpendCash(cost))
         {
             TotalValue += cost;
             SpecializationLevel++;
-            Debug.Log($"{StationData.StationName} specialized to Level {SpecializationLevel + 1}");
             AudioManager.Instance.PlaySFX("Station_Upgrade");
         }
     }
 
-    public void UnlockNextProduct()
-    {
-        if (!CanUpgradeDiversify() || !canInteractFlag) return;
-        int cost = StationData.DiversifyCost;
-        if (EconomyManager.Instance.SpendCash(cost))
-        {
-            ProductData productToUnlock = null;
-            foreach (var potentialProduct in StationData.AvailableProducts)
-            {
-                if (!UnlockedProducts.Contains(potentialProduct))
-                {
-                    productToUnlock = potentialProduct;
-                    break;
-                }
-            }
+    #endregion Upgrade and Initialization Methods
 
-            if (productToUnlock != null)
-            {
-                TotalValue += cost;
-                UnlockedProducts.Add(productToUnlock);
-                Debug.Log($"{StationData.StationName} diversified to unlock {productToUnlock.ProductName}");
-                AudioManager.Instance.PlaySFX("Station_Upgrade");
-            }
-            else
-            {
-                Debug.LogWarning("Tried to diversify, but no new product was found. Refunding cost.");
-                EconomyManager.Instance.AddCash(cost);
-            }
-        }
+    #region Boilerplate Methods
+
+    public void FinalizePlacement()
+    {
+        if (StationManager.Instance != null) StationManager.Instance.AddStation(this);
+    }
+
+    private void OnDisable()
+    {
+        if (StationManager.Instance != null) StationManager.Instance.RemoveStation(this);
+    }
+
+    public bool CanInteract()
+    {
+        return canInteractFlag;
+    }
+
+    public void ShowRange()
+    {
+        if (rangeVisualizer != null) rangeVisualizer.Show(serviceRange);
+    }
+
+    public void HideRange()
+    {
+        if (rangeVisualizer != null) rangeVisualizer.Hide();
+    }
+
+    public void PartialInitialize(StationData data)
+    {
+        StationData = data;
+        TotalValue = StationData.PlacementCost;
+        this.enabled = false;
+        stationCanvas.gameObject.SetActive(false);
+    }
+
+    public void TriggerPlacementEffects()
+    {
+        if (characterRandomizer != null) characterRandomizer.RandomizeAll();
+        if (VFXManager.Instance != null) VFXManager.Instance.PlayVFX("stationPlacementVFX", transform.position, transform.rotation);
+        placementInfo.SetActive(false);
+        if (animator != null) animator.SetTrigger("isPrepared");
     }
 
     public int GetSpecializeCost()
@@ -275,107 +595,5 @@ public class Station : MonoBehaviour
         return UnlockedProducts.Count < StationData.AvailableProducts.Count;
     }
 
-    private float GetCurrentPreparationTime()
-    {
-        return GetPreparationTime(this.SpecializationLevel);
-    }
-
-    private void UpdateProgressBar()
-    {
-        if (CurrentProduct == null || progressBarImage == null) return;
-        float progress = preparationTimer / GetCurrentPreparationTime();
-        progressBarImage.fillAmount = Mathf.Clamp01(progress);
-    }
-
-    private void CompletePreparation()
-    {
-        isPreparing = false;
-        isHoldingProduct = true;
-        progressBarImage.fillAmount = 1;
-        if (animator != null) animator.SetTrigger("isCooked");
-        if (AudioManager.Instance != null)
-            AudioManager.Instance.PlaySFX("Station_FoodReady");
-    }
-
-    private void FindAndServeCustomer()
-    {
-        Customer targetCustomer = FindCustomerInRange();
-        if (targetCustomer != null)
-        {
-            ServeFoodToCustomer(targetCustomer);
-            isHoldingProduct = false;
-            StartPreparation();
-        }
-    }
-
-    private Customer FindCustomerInRange()
-    {
-        if (CustomerManager.Instance == null) return null;
-
-        Customer nearestCustomer = null;
-        float shortestDistance = float.MaxValue;
-        foreach (Customer customer in CustomerManager.Instance.GetActiveCustomers())
-        {
-            if (customer.DoesOrderContain(CurrentProduct))
-            {
-                float distance = Vector3.Distance(transform.position, customer.transform.position);
-                if (distance <= serviceRange && distance < shortestDistance)
-                {
-                    shortestDistance = distance;
-                    nearestCustomer = customer;
-                }
-            }
-        }
-        return nearestCustomer;
-    }
-
-    private void ServeFoodToCustomer(Customer target)
-    {
-        target.NotifyItemInFlight(CurrentProduct);
-        if (animator != null) animator.SetTrigger("isShooting");
-
-        if (CurrentProduct.FoodProjectilePrefab == null)
-        {
-            Debug.LogError($"No projectile prefab assigned for {CurrentProduct.ProductName}!");
-            return;
-        }
-
-        if (ProjectilePoolManager.Instance == null)
-        {
-            Debug.LogError("ProjectilePoolManager not found in the scene! Cannot serve food.");
-            return;
-        }
-
-        Vector3 spawnPosition = firePoint != null ? firePoint.position : transform.position;
-
-        GameObject projectileObj = ProjectilePoolManager.Instance.GetProjectile(CurrentProduct.FoodProjectilePrefab);
-        projectileObj.transform.position = spawnPosition;
-        projectileObj.transform.rotation = Quaternion.identity;
-
-        if (projectileObj.TryGetComponent<FoodProjectile>(out FoodProjectile projectile))
-        {
-            projectile.Initialize(target, CurrentProduct);
-            if (AudioManager.Instance != null)
-                AudioManager.Instance.PlaySFX("Projectile_Launch");
-        }
-        StartPreparation();
-    }
-
-    public float GetPreparationTime(int specializationLevelOverride)
-    {
-        if (CurrentProduct == null) return float.MaxValue;
-
-        float speedMultiplier = 1f + (specializationLevelOverride * StationData.SpecializeSpeedBonus);
-        float baseTime = CurrentProduct.BasePreparationTime / speedMultiplier;
-
-        if (DailyEventManager.Instance != null)
-        {
-            DailyEventData activeEvent = DailyEventManager.Instance.ActiveEvent;
-            if (activeEvent != null && activeEvent.Type == DailyEventData.EventType.ChallengeModifier)
-            {
-                return baseTime * activeEvent.StationPrepTimeMultiplier;
-            }
-        }
-        return baseTime;
-    }
+    #endregion Boilerplate Methods
 }

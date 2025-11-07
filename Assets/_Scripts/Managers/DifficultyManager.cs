@@ -59,7 +59,7 @@ public class DifficultyManager : MonoBehaviour
         spawnRateDivisor = 1.0f + (difficultyLevel * 0.1f);
         spawnRateDivisor = Mathf.Min(spawnRateDivisor, maxSpawnRateDivisor);
 
-        speedMultiplier = 1.0f + (difficultyLevel * 0.05f);
+        speedMultiplier = 1.0f + (difficultyLevel * 0.03f);
         speedMultiplier = Mathf.Min(speedMultiplier, maxSpeedMultiplier);
 
         if (currentDay >= dayToStartAddingItems)

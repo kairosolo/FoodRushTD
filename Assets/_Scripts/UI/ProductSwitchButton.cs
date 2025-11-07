@@ -28,7 +28,5 @@ public class ProductSwitchButton : MonoBehaviour
             currentStation.SetInitialProductAndActivate(productData);
             UpgradeUIManager.Instance.CloseInitialProductSelection();
         }
-        else
-            currentStation.SwitchActiveProduct(productData);
     }
 }

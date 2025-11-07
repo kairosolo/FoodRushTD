@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StationData
   stationIcon: {fileID: 907778037391653554, guid: f2c184ef969514f42a5e48a5c8800a5c, type: 3}
   stationName: Dessert Station
-  placementCost: 175
+  placementCost: 150
   stationPrefab: {fileID: 2922440456857387492, guid: d65baadf9bf9a4a48a2e47f1859f45d0, type: 3}
-  specializeBaseCost: 120
+  specializeBaseCost: 100
   specializeSpeedBonus: 0.2
   maxSpecializeLevel: 5
-  diversifyCost: 150
+  diversifyCost: 125
+  masterRecipeCost: 325
+  capacityUpgradeCost: 450
   availableProducts:
   - {fileID: 11400000, guid: 740af49200ec88d41a1ba22baa92c562, type: 2}
   - {fileID: 11400000, guid: 1d75e22d4bb64b14188670becf034ffb, type: 2}

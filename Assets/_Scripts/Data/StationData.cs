@@ -17,6 +17,8 @@ public class StationData : ScriptableObject
 
     [Header("Upgrade Path B: Diversify")]
     [SerializeField] private int diversifyCost = 200;
+    [SerializeField] private int masterRecipeCost = 500;
+    [SerializeField] private int capacityUpgradeCost = 300;
 
     [Header("Available Products")]
     [SerializeField] private List<ProductData> availableProducts;
@@ -30,4 +32,6 @@ public class StationData : ScriptableObject
     public float SpecializeSpeedBonus => specializeSpeedBonus;
     public int MaxSpecializeLevel => maxSpecializeLevel;
     public int DiversifyCost => diversifyCost;
+    public int MasterRecipeCost => masterRecipeCost;
+    public int CapacityUpgradeCost => capacityUpgradeCost;
 }

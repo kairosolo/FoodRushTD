@@ -23,7 +23,10 @@ public class SimulatedStationController : MonoBehaviour
             return;
         }
 
-        station.UnlockedProducts.AddRange(station.StationData.AvailableProducts);
+        foreach (var product in station.StationData.AvailableProducts)
+        {
+            station.AddUnlockedProduct(product);
+        }
 
         ProductData initialProduct = station.StationData.AvailableProducts[Random.Range(0, station.StationData.AvailableProducts.Count)];
         station.SetInitialProductAndActivate(initialProduct);
@@ -55,7 +58,7 @@ public class SimulatedStationController : MonoBehaviour
         if (possibleNewProducts.Count > 0)
         {
             ProductData newProduct = possibleNewProducts[Random.Range(0, possibleNewProducts.Count)];
-            station.SwitchActiveProduct(newProduct);
+            station.SetInitialProductAndActivate(newProduct);
         }
     }
 

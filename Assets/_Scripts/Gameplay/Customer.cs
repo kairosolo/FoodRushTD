@@ -94,6 +94,7 @@ public class Customer : MonoBehaviour
             }
         }
 
+        this.baseMoveSpeed = data.MoveSpeed;
         this.moveSpeed = data.MoveSpeed * difficultySpeedMultiplier * eventSpeedMultiplier;
         this.cashReward = data.CashReward;
         this.isVip = data.IsVip;

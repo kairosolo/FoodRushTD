@@ -371,7 +371,6 @@ GameObject:
   - component: {fileID: 9107948568813503393}
   - component: {fileID: 8203257113158740413}
   - component: {fileID: 5879354180253312379}
-  - component: {fileID: 307547270761596758}
   m_Layer: 0
   m_Name: Customer_ROOT
   m_TagString: Untagged
@@ -436,19 +435,6 @@ SortingGroup:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_SortAtRoot: 0
---- !u!114 &307547270761596758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5535837887839996375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3799d26b22c2343a72bdbb2d500f3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DynamicSpriteSorter
-  sortingPrecision: 100
 --- !u!1 &6212306271802858304
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +538,7 @@ GameObject:
   - component: {fileID: 73243106528807825}
   - component: {fileID: 1887254570778227307}
   - component: {fileID: 6044613192973526914}
+  - component: {fileID: 7922961187862926141}
   m_Layer: 0
   m_Name: EmotionCanvas
   m_TagString: Untagged
@@ -644,6 +631,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7922961187862926141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6507748933773289257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69c5e2e6142f5f2468a76eeacab8a4c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DynamicCanvasSorter
+  sortingPrecision: 100
 --- !u!1 &8776408747294548505
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,6 +656,7 @@ GameObject:
   - component: {fileID: 381562063725863350}
   - component: {fileID: 3417981186218307892}
   - component: {fileID: 5527528474380601709}
+  - component: {fileID: 8550847777341136141}
   m_Layer: 0
   m_Name: 'FoodCanvas '
   m_TagString: Untagged
@@ -748,6 +749,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8550847777341136141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8776408747294548505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69c5e2e6142f5f2468a76eeacab8a4c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DynamicCanvasSorter
+  sortingPrecision: 100
 --- !u!1 &9133881059797406885
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,11 +808,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3437786279024823928, guid: f79894478eaa27b47af179ba3b1cbf0b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.22
+      value: 1.233
       objectReference: {fileID: 0}
     - target: {fileID: 3437786279024823928, guid: f79894478eaa27b47af179ba3b1cbf0b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.408
+      value: 0.597
       objectReference: {fileID: 0}
     - target: {fileID: 3437786279024823928, guid: f79894478eaa27b47af179ba3b1cbf0b, type: 3}
       propertyPath: m_LocalPosition.z
